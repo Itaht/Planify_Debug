@@ -1,0 +1,76 @@
+/* Sidebar styles */
+#sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 20%; /* 1/5 of the screen width */
+    height: 100vh; /* Full height of the screen */
+    background-color: #1C2025;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    border-right: 1px solid #474E55; /* Right edge line color */
+    overflow-y: auto; /* Allows scrolling if content overflows */
+    z-index: 1;
+  }
+
+  #logo {
+    position: fixed;
+    top: 0vh;
+    left: 0;
+    width: 20%; /* 1/5 of the screen width */
+    height: 5vh; /* Full height of the screen */
+    background-color: #1C2025;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    border-right: 1px solid #474E55; /* Right edge line color */
+    border-bottom: 1px solid #474E55; /* Right edge line color */
+    z-index: 2;
+}
+
+#projectbox {
+    position: fixed;
+    top: 11vh;
+    left: 0;
+    width: 20%; /* 1/5 of the screen width */
+    height: 5vh; /* Full height of the screen */
+    background-color: #1C2025;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    border-right: 1px solid #474E55; /* Right edge line color */
+    border-top: 1px solid #474E55; /* Right edge line color */
+    border-bottom: 1px solid #474E55; /* Right edge line color */
+    z-index: 2;
+}
+
+#userbox {
+    position: fixed;
+    top: 87vh;
+    left: 0;
+    width: 20%; /* 1/5 of the screen width */
+    height: 5vh; /* Full height of the screen */
+    background-color: #1C2025;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    border-right: 1px solid #474E55; /* Right edge line color */
+    border-top: 1px solid #474E55; /* Right edge line color */
+    z-index: 2;
+}
+
+#userbox img {
+    position: fixed;
+    top: 90.5vh;
+    width: 6.5vh;
+    height: 6.5vh;
+    border-radius: 50%;
+    left: 8vh;
+  }
+  
+  #userbox span {
+    position: fixed;
+    top: 91.3vh;
+    left: 19vh;
+    color: white;
+    font-size: calc(1.1vw + 0.5vh); /* Dynamically adjusts font size */
+}
+
+  
