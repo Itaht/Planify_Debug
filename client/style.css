@@ -46,16 +46,17 @@ h1 {
   text-align: left;
 }
 
-
 .logo {
   height: 6em;
   padding: 1.5em;
   will-change: filter;
   transition: filter 300ms;
 }
+
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
+
 .logo.vanilla:hover {
   filter: drop-shadow(0 0 2em #f7df1eaa);
 }
@@ -71,9 +72,11 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
 }
+
 button:hover {
   border-color: #646cff;
 }
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
@@ -90,4 +93,35 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+/* Initial state: no background color */
+.checkbox-container {
+  position: absolute;
+  top: 30px;
+  right: 130px;
+  border-radius: 12px;
+  padding: 10px 20px;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Background color appears on hover */
+.checkbox-container:hover {
+  background-color: #32353A;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.checkbox-label {
+  font-size: calc(1vw + 0.5vh);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+#task-checkbox {
+  margin-right: 10px;
+  accent-color: #949AA0;
+  height: 3vh;
+  width: 3vh;
 }

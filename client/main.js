@@ -64,6 +64,12 @@ function renderApp() {
   document.querySelector("#app").innerHTML = `
     ${Sidebar(user)}
     <div id="main-content">
+      <div class="checkbox-container">
+        <label for="task-checkbox" class="checkbox-label">
+          <input type="checkbox" id="task-checkbox">
+          tasks assigned to me
+        </label>
+      </div>
     </div>
   `;
 }
