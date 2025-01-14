@@ -12,7 +12,6 @@ async function setupDiscordSdk() {
   await discordSdk.ready();
   console.log("Discord SDK is ready");
 
-  // Authorize with Discord Client
   const { code } = await discordSdk.commands.authorize({
     client_id: import.meta.env.VITE_DISCORD_CLIENT_ID,
     response_type: "code",
@@ -33,16 +32,12 @@ async function setupDiscordSdk() {
 
   await discordSdk.commands.authenticate({ access_token });
 
-  console.log("Authentication successful");
-
-  // Fetch user profile data from Discord API
   const userProfile = await fetchUserProfile(access_token);
   user = {
     username: userProfile.username,
     avatarUrl: `https://cdn.discordapp.com/avatars/${userProfile.id}/${userProfile.avatar}.png`,
   };
 
-  // Render the sidebar with user profile data
   renderApp();
 }
 
@@ -61,17 +56,57 @@ async function fetchUserProfile(token) {
 }
 
 function renderApp() {
-  document.querySelector("#app").innerHTML = `
-    ${Sidebar(user)}
-    <div id="main-content">
-      <div class="checkbox-container">
-        <label for="task-checkbox" class="checkbox-label">
-          <input type="checkbox" id="task-checkbox">
-          tasks assigned to me
-        </label>
-      </div>
-    </div>
-  `;
+  document.querySelector("#app").innerHTML = Sidebar(user);
+
+  // Main Popup Elements
+  const createBoardButton = document.getElementById("create-board-button");
+  const popupOverlay = document.getElementById("popup-overlay");
+  const closePopupButton = document.getElementById("close-popup-button");
+  const cancelButton = document.getElementById("cancel-button");
+
+  // Confirmation Popup Elements
+  const confirmationPopup = document.getElementById("confirmation-popup");
+  const cancelDiscardButton = document.getElementById("cancel-discard-button");
+  const discardButton = document.getElementById("discard-button");
+
+  // Show the main popup
+  createBoardButton.addEventListener("click", () => {
+    popupOverlay.classList.remove("hidden");
+  });
+
+  // Close the main popup when clicking outside the popup area
+  popupOverlay.addEventListener("click", (e) => {
+    if (e.target === popupOverlay) {
+      popupOverlay.classList.add("hidden");
+    }
+  });
+
+  // Show confirmation popup when cancel or close buttons are clicked
+  closePopupButton.addEventListener("click", () => {
+    confirmationPopup.classList.remove("hidden");
+  });
+
+  cancelButton.addEventListener("click", () => {
+    confirmationPopup.classList.remove("hidden");
+  });
+
+  // Close confirmation popup when clicking the cancel button inside it
+  cancelDiscardButton.addEventListener("click", () => {
+    confirmationPopup.classList.add("hidden");
+  });
+
+  // Close both popups when clicking the discard button inside the confirmation popup
+  discardButton.addEventListener("click", () => {
+    confirmationPopup.classList.add("hidden");
+    popupOverlay.classList.add("hidden");
+  });
+
+  // Close the confirmation popup when clicking outside it
+  confirmationPopup.addEventListener("click", (e) => {
+    if (e.target === confirmationPopup) {
+      confirmationPopup.classList.add("hidden");
+    }
+  });
 }
 
 setupDiscordSdk().catch(console.error);
