@@ -371,3 +371,62 @@ form textarea {
 #discard-button:hover {
   background-color: #2D3137;
 }
+
+#project-section {
+  position: fixed;
+  top: 22vh;
+  left: 0;
+  width: 20%;
+  height: 5vh;
+  background-color: #1C2025;
+  padding: 20px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  border-right: 1px solid #474E55;
+  border-top: 1px solid #474E55;
+  display: none;
+  z-index: 2;
+}
+
+#project-text {
+  position: relative;
+  left: 3.3vh;
+  font-size: calc(1.3vw);
+  color: white;
+  letter-spacing: 1px;
+}
+
+#create-project-button {
+  position: relative;
+  top: -4.2vh;
+  left: 16.5vh;
+  background-color: transparent;
+  color: #2594E3;
+  border: 1.5px solid #2594E3;
+  border-radius: 8px;
+  padding: 4px 12px;
+  font-size: calc(1vw);
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+
+#tasks-checkbox {
+  position: fixed;
+  top: 10px;
+  right: 20px;
+  background-color: transparent;
+  padding: 10px 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  font-size: 14px;
+  color: #fff;
+  cursor: pointer;
+}
+
+#tasks-checkbox:hover {
+  background-color: #32353A;
+}
+
+#tasks-checkbox input {
+  margin-right: 8px;
+  cursor: pointer;
+}

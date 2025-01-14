@@ -58,16 +58,41 @@ async function fetchUserProfile(token) {
 function renderApp() {
   document.querySelector("#app").innerHTML = Sidebar(user);
 
+  // Elements
+  const projectBox = document.getElementById("projectbox");
+  const boardSection = document.getElementById("board-section");
+  const projectSection = document.getElementById("project-section");
+
+  // Initially hide the project-section
+  projectSection.style.display = "none";
+
+  // Toggle visibility between board-section and project-section
+  projectBox.addEventListener("click", () => {
+    if (boardSection.style.display === "none") {
+      boardSection.style.display = "block";
+      projectSection.style.display = "none";
+    } else {
+      boardSection.style.display = "none";
+      projectSection.style.display = "block";
+    }
+  });
+
   // Main Popup Elements
   const createBoardButton = document.getElementById("create-board-button");
   const popupOverlay = document.getElementById("popup-overlay");
   const closePopupButton = document.getElementById("close-popup-button");
   const cancelButton = document.getElementById("cancel-button");
+  const createBoardForm = document.getElementById("create-board-form");
 
   // Confirmation Popup Elements
   const confirmationPopup = document.getElementById("confirmation-popup");
   const cancelDiscardButton = document.getElementById("cancel-discard-button");
   const discardButton = document.getElementById("discard-button");
+
+  // Function to clear all input fields in the form
+  function clearFormFields() {
+    createBoardForm.reset();
+  }
 
   // Show the main popup
   createBoardButton.addEventListener("click", () => {
@@ -78,6 +103,7 @@ function renderApp() {
   popupOverlay.addEventListener("click", (e) => {
     if (e.target === popupOverlay) {
       popupOverlay.classList.add("hidden");
+      clearFormFields();
     }
   });
 
@@ -99,6 +125,7 @@ function renderApp() {
   discardButton.addEventListener("click", () => {
     confirmationPopup.classList.add("hidden");
     popupOverlay.classList.add("hidden");
+    clearFormFields();
   });
 
   // Close the confirmation popup when clicking outside it

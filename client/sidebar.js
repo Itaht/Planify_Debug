@@ -7,10 +7,27 @@ export function Sidebar(user) {
         <span id="username">${user.username}</span>
       </div>
       <div id="projectbox" class="clickable">Projects</div>
+
+      <!-- Board Section -->
       <div id="board-section">
         <span id="board-text">Boards</span>
         <button id="create-board-button">+ Create New Board</button>
       </div>
+
+      <!-- Project Section -->
+      <div id="project-section">
+        <span id="project-text">Projects</span>
+        <button id="create-project-button">+ Create New Project</button>
+      </div>
+    </div>
+
+    <!-- Checkbox for Tasks -->
+    <div id="tasks-checkbox">
+      <label id="tasks-checkbox">
+  <input type="checkbox" id="tasks-checkbox-input">
+  Tasks Assigned to Me
+</label>
+
     </div>
 
     <!-- Main Popup and Overlay -->
@@ -21,15 +38,15 @@ export function Sidebar(user) {
           <button id="close-popup-button">✖</button>
         </div>
         <form id="create-board-form">
-          <label for="board-name">board name</label>
-          <input type="text" id="board-name" placeholder="Enter board name" required>
+          <label for="board-name">Board Name</label>
+          <input type="text" id="board-name" placeholder="Enter board name" required />
 
-          <label for="board-description">board description (optional)</label>
+          <label for="board-description">Board Description (optional)</label>
           <textarea id="board-description" placeholder="Enter board description"></textarea>
 
           <div class="popup-buttons">
-            <button type="button" id="cancel-button">cancel</button>
-            <button type="submit" id="create-board-button-form">create board</button>
+            <button type="button" id="cancel-button">Cancel</button>
+            <button type="submit" id="create-board-button-form">Create Board</button>
           </div>
         </form>
       </div>
@@ -41,8 +58,8 @@ export function Sidebar(user) {
         <h3>Discard changes?</h3>
         <p>If you go back now, you will lose any changes you’ve made.</p>
         <div class="confirmation-buttons">
-          <button id="cancel-discard-button">cancel</button>
-          <button id="discard-button" class="discard">discard</button>
+          <button id="cancel-discard-button">Cancel</button>
+          <button id="discard-button" class="discard">Discard</button>
         </div>
       </div>
     </div>
