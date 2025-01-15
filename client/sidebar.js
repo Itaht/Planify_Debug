@@ -8,7 +8,15 @@ export function Sidebar(user) {
       </div>
 
       <!-- Project Box -->
-      <div id="projectbox" class="clickable">Projects</div>
+      <div id="projectbox" class="clickable">
+        <div id="projectmain">Project 1</div>
+      </div>
+
+      <!-- Settings Icon -->
+<div id="settings-icon" onclick="toggleSettingsPopup()">
+  <img src="assets/setting.svg" alt="Settings">
+</div>
+
 
       <!-- Board Section -->
       <div id="board-section">
