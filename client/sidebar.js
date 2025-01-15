@@ -18,7 +18,7 @@ export function Sidebar(user) {
 
       <!-- Project Section -->
       <div id="project-section">
-        <button id="create-project-button">+ Create New Project</button>
+        <button id="create-project-button">+ create new project</button>
         <div id="line-under-button"></div>
       </div>
 
@@ -34,17 +34,17 @@ export function Sidebar(user) {
       <div id="popup-overlay" class="hidden">
         <div id="popup-content">
           <div class="popup-header">
-            <h2>Create New Board</h2>
+            <h2>Create new board</h2>
             <button id="close-popup-button">✖</button>
           </div>
           <form id="create-board-form">
-            <label for="board-name">Board Name</label>
+            <label for="board-name">board name</label>
             <input type="text" id="board-name" placeholder="Enter board name" required>
-            <label for="board-description">Board Description (optional)</label>
+            <label for="board-description">board description (optional)</label>
             <textarea id="board-description" placeholder="Enter board description"></textarea>
             <div class="popup-buttons">
-              <button type="button" id="cancel-button">Cancel</button>
-              <button type="submit" id="create-board-button-form">Create Board</button>
+              <button type="button" id="cancel-button">cancel</button>
+              <button type="submit" id="create-board-button-form">create board</button>
             </div>
           </form>
         </div>
@@ -63,8 +63,8 @@ export function Sidebar(user) {
             <label for="project-description">project description (optional)</label>
             <textarea id="project-description" placeholder="Enter project description"></textarea>
             <div class="popup-buttons">
-              <button type="button" id="cancel-project-button">Cancel</button>
-              <button type="submit" id="create-project-button-form">Create Project</button>
+              <button type="button" id="cancel-project-button">cancel</button>
+              <button type="submit" id="create-project-button-form">create project</button>
             </div>
           </form>
         </div>
