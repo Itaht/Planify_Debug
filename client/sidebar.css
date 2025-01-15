@@ -24,7 +24,7 @@
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
     border-right: 1px solid #474E55; /* Right edge line color */
     border-bottom: 1px solid #474E55; /* Right edge line color */
-    z-index: 2;
+    z-index: 4;
 }
 
 #projectbox {
@@ -37,9 +37,8 @@
     padding: 20px;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
     border-right: 1px solid #474E55; /* Right edge line color */
-    border-top: 1px solid #474E55; /* Right edge line color */
     border-bottom: 1px solid #474E55; /* Right edge line color */
-    z-index: 2;
+    z-index: 3;
     font-size: calc(1.3vw);
 }
 
@@ -58,7 +57,6 @@
     padding: 20px;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
     border-right: 1px solid #474E55; /* Right edge line color */
-    border-top: 1px solid #474E55; /* Right edge line color */
     z-index: 2;
 }
 
@@ -143,46 +141,6 @@
 
 #popup-overlay:not(.hidden) {
   display: flex;
-}
-
-#popup-content {
-  background-color: #33363B;
-  padding: 30px 50px;
-  border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  width: 650px;
-  position: relative;
-  color: #fff;
-  font-family: 'Inter', sans-serif;
-}
-
-.popup-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-.popup-header h2 {
-  margin: 0;
-  font-weight: normal;
-  letter-spacing: 1px;
-}
-
-#close-popup-button {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background: none;
-  border: none;
-  color: #949AA0;
-  font-size: 16px;
-  cursor: pointer;
-  outline: none;
-}
-
-#close-popup-button:hover {
-  color: white;
 }
 
 
@@ -280,40 +238,6 @@ form textarea {
   border: 1.5px solid #2594E3;
 }
 
-#confirmation-popup {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.7);
-  display: none;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-}
-
-#confirmation-popup:not(.hidden) {
-  display: flex;
-}
-
-#confirmation-content {
-  background-color: #33363B;
-  border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  width: 320px;
-  height: 180px;
-  text-align: center;
-  color: #fff;
-  font-family: 'Inter', sans-serif;
-
-  /* Centering the content inside */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
 #confirmation-content h3 {
   font-size: 20px;
   font-weight: normal;
@@ -382,7 +306,6 @@ form textarea {
   padding: 20px;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
   border-right: 1px solid #474E55;
-  border-top: 1px solid #474E55;
   display: none;
   z-index: 2;
 }
@@ -395,19 +318,40 @@ form textarea {
   letter-spacing: 1px;
 }
 
+/* Create Project Button Styling */
 #create-project-button {
   position: relative;
-  top: -4.2vh;
-  left: 16.5vh;
+  top: -1vh;
+  left: 1vh;
   background-color: transparent;
-  color: #2594E3;
-  border: 1.5px solid #2594E3;
-  border-radius: 8px;
-  padding: 4px 12px;
-  font-size: calc(1vw);
+  color: white;
+  border: 1.5px solid transparent;
+  border-radius: 6px;
+  padding: 1vh 6vh;
+  font-size: calc(1.3vw);
   letter-spacing: 1px;
   cursor: pointer;
+  text-align: center;
+  outline: none;
+  margin-bottom: 1vh;
+  transition: background-color 0.3s ease;
 }
+
+/* Hover effect for the button */
+#create-project-button:hover {
+  background-color: #2594E3;
+  color: white;
+}
+
+/* Line below the button */
+#line-under-button {
+  width: 100%;
+  height: 1px;  
+  background-color: #474E55;
+  margin: -0.5vh auto 0 auto; /* 1vh gap and centered line */
+}
+
+
 
 #tasks-checkbox {
   position: fixed;
@@ -461,4 +405,97 @@ form textarea {
   color: white;
   font-size: 12px;
   font-weight: bold;
+}
+
+/* Project Popup Overlay */
+#project-popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1001;
+}
+
+#project-popup-overlay:not(.hidden) {
+  display: flex;
+}
+
+/* Main and Project Popup Content */
+#popup-content {
+  background-color: #33363B;
+  padding: 30px 50px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  width: 650px;
+  position: relative;
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+}
+
+.popup-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.popup-header h2 {
+  margin: 0;
+  font-weight: normal;
+  letter-spacing: 1px;
+}
+
+/* Close Button Styling */
+#close-project-popup-button,
+#close-popup-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  color: #949AA0;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+#close-project-popup-button:hover,
+#close-popup-button:hover {
+  color: white;
+}
+
+/* Confirmation Popup */
+#confirmation-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1002;
+}
+
+#confirmation-popup:not(.hidden) {
+  display: flex;
+}
+
+#confirmation-content {
+  background-color: #33363B;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  width: 320px;
+  height: 180px;
+  text-align: center;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }

@@ -62,6 +62,11 @@ function renderApp() {
   const projectBox = document.getElementById("projectbox");
   const boardSection = document.getElementById("board-section");
   const projectSection = document.getElementById("project-section");
+  const createProjectButton = document.getElementById("create-project-button");
+
+  // Popup Elements for Projects
+  const projectPopupOverlay = document.getElementById("project-popup-overlay");
+  const closeProjectPopupButton = document.getElementById("close-project-popup-button");
 
   // Initially hide the project-section
   projectSection.style.display = "none";
@@ -77,6 +82,25 @@ function renderApp() {
     }
   });
 
+  // Show the project popup when the button is clicked
+  createProjectButton.addEventListener("click", () => {
+    projectPopupOverlay.classList.remove("hidden");
+  });
+
+  // Close the project popup when clicking outside the popup area
+  projectPopupOverlay.addEventListener("click", (e) => {
+    if (e.target === projectPopupOverlay) {
+      projectPopupOverlay.classList.add("hidden");
+      clearProjectFormFields();
+    }
+  });
+
+  // Close the project popup when clicking the close button
+  closeProjectPopupButton.addEventListener("click", () => {
+    projectPopupOverlay.classList.add("hidden");
+    clearProjectFormFields();
+  });
+
   // Main Popup Elements
   const createBoardButton = document.getElementById("create-board-button");
   const popupOverlay = document.getElementById("popup-overlay");
@@ -89,9 +113,17 @@ function renderApp() {
   const cancelDiscardButton = document.getElementById("cancel-discard-button");
   const discardButton = document.getElementById("discard-button");
 
-  // Function to clear all input fields in the form
-  function clearFormFields() {
+  // Function to clear all input fields in the board form
+  function clearBoardFormFields() {
     createBoardForm.reset();
+  }
+
+  // Function to clear all input fields in the project form
+  function clearProjectFormFields() {
+    const projectForm = document.getElementById("create-project-form");
+    if (projectForm) {
+      projectForm.reset();
+    }
   }
 
   // Show the main popup
@@ -103,7 +135,7 @@ function renderApp() {
   popupOverlay.addEventListener("click", (e) => {
     if (e.target === popupOverlay) {
       popupOverlay.classList.add("hidden");
-      clearFormFields();
+      clearBoardFormFields();
     }
   });
 
@@ -125,7 +157,7 @@ function renderApp() {
   discardButton.addEventListener("click", () => {
     confirmationPopup.classList.add("hidden");
     popupOverlay.classList.add("hidden");
-    clearFormFields();
+    clearBoardFormFields();
   });
 
   // Close the confirmation popup when clicking outside it
