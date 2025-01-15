@@ -25,7 +25,7 @@ export function Sidebar(user) {
     <div id="tasks-checkbox">
       <label id="tasks-checkbox">
   <input type="checkbox" id="tasks-checkbox-input">
-  Tasks Assigned to Me
+  tasks assigned to me
 </label>
 
     </div>

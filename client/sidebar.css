@@ -411,22 +411,54 @@ form textarea {
 
 #tasks-checkbox {
   position: fixed;
-  top: 10px;
-  right: 20px;
+  top: 5vh;
+  right: 18vh;
   background-color: transparent;
   padding: 10px 15px;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
   font-size: 14px;
   color: #fff;
   cursor: pointer;
+  letter-spacing: 1px;
+  /* Flexbox to center content */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 #tasks-checkbox:hover {
   background-color: #32353A;
 }
 
-#tasks-checkbox input {
-  margin-right: 8px;
+/* Customize the checkbox */
+#tasks-checkbox input[type="checkbox"] {
+  width: 18px;
+  height: 17px;
+  border: 1px solid white;
+  border-radius: 3px;
+  background-color: transparent;
   cursor: pointer;
+  margin-right: 15px;
+  /* Remove default styles and ensure white tick */
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+#tasks-checkbox input[type="checkbox"]:checked {
+  background-color: #949AA0;
+  border-color: #949AA0;
+  color: white;
+  position: relative;
+}
+
+/* Create a white tick */
+#tasks-checkbox input[type="checkbox"]:checked::before {
+  content: "✔";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
 }
