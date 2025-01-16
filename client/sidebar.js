@@ -17,6 +17,14 @@ export function Sidebar(user) {
   <img src="assets/setting.svg" alt="Settings">
 </div>
 
+<!-- Settings Popup -->
+<div id="settings-popup">
+  <p id="edit-board">edit board</p>
+  <p id="delete-board" class="delete">delete board</p>
+</div>
+
+
+
 
       <!-- Board Section -->
       <div id="board-section">

@@ -515,10 +515,10 @@ align-items: center;
 
 #settings-icon {
   position: fixed;
-  top: 6vh;
+  top: 5.3vh;
   right: 7.5vh;
-  width: 40px;
-  height: 40px;
+  width: 42px;
+  height: 42px;
   border-radius: 6px;
   cursor: pointer;
   display: flex;
@@ -533,4 +533,36 @@ align-items: center;
 
 #settings-icon:hover {
   background-color: #32353A;
+}
+
+#settings-popup {
+  position: fixed;
+  top: 14vh;
+  right: 7.5vh;
+  width: 180px;
+  background-color: #11161C;
+  padding: 10px 0;
+  border-radius: 8px;
+  z-index: 1000;
+  display: none;
+  flex-direction: column;
+  padding: 5px;
+}
+
+#settings-popup p {
+  margin: 0;
+  padding: 4px 28px;
+  font-size: 14px;
+  cursor: pointer;
+  color: white;
+}
+
+#settings-popup p:hover {
+  background-color: #1C2025;
+  border-radius: 6px;
+}
+
+#settings-popup p.delete {
+  margin-top: 10px;
+  color: #D51A1A; /* Red for the delete option */
 }
