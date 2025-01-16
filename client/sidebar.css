@@ -384,7 +384,7 @@ margin: -0.5vh auto 0 auto; /* 1vh gap and centered line */
   align-items: center;
   justify-content: center;
   gap: 15px;
-  font-size: 16px;
+  font-size: calc(1.1vw);
   cursor: pointer;
   margin: 0;
 }
@@ -565,4 +565,25 @@ align-items: center;
 #settings-popup p.delete {
   margin-top: 10px;
   color: #D51A1A; /* Red for the delete option */
+}
+
+#board-topic {
+  position: fixed;
+  top: 3.5vh; /* Align with the top */
+  left: 27vw; /* Positioned 20vh to the right of the logo */
+  font-size: calc(1.9vw);
+  color: white;
+  font-weight: bold;
+  line-height: 5vh; /* Same height as the logo */
+  letter-spacing: 1px;
+}
+
+#board-description {
+  position: fixed;
+  top: 9vh; /* Align with the top */
+  left: 28.5vw; /* Positioned 20vh to the right of the logo */
+  font-size: calc(1.1vw);
+  color:  #BEBEBE;
+  line-height: 5vh; /* Same height as the logo */
+  letter-spacing: 1px;
 }

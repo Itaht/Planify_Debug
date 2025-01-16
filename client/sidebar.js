@@ -2,6 +2,8 @@ export function Sidebar(user) {
   return `
     <div id="sidebar">
       <div id="logo"></div>
+      <div id="board-topic">board 1</div>
+      <div id="board-description">board description</div>
       <div id="userbox">
         <img src="${user.avatarUrl}" alt="Profile Picture" id="profile-pic">
         <span id="username">${user.username}</span>
@@ -23,9 +25,6 @@ export function Sidebar(user) {
   <p id="delete-board" class="delete">delete board</p>
 </div>
 
-
-
-
       <!-- Board Section -->
       <div id="board-section">
         <span id="board-text">Boards</span>
@@ -44,8 +43,6 @@ export function Sidebar(user) {
   <label id="tasks-checkbox-label">tasks assigned to me</label>
 </div>
 
-
-
       <!-- Main Popup and Overlay -->
       <div id="popup-overlay" class="hidden">
         <div id="popup-content">
@@ -57,7 +54,7 @@ export function Sidebar(user) {
             <label for="board-name">board name</label>
             <input type="text" id="board-name" placeholder="Enter board name" required>
             <label for="board-description">board description (optional)</label>
-            <textarea id="board-description" placeholder="Enter board description"></textarea>
+            <textarea id="input-board-description" placeholder="Enter board description"></textarea>
             <div class="popup-buttons">
               <button type="button" id="cancel-button">cancel</button>
               <button type="submit" id="create-board-button-form">create board</button>
