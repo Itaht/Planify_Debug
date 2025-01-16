@@ -30,13 +30,13 @@ export function Sidebar(user) {
         <div id="line-under-button"></div>
       </div>
 
-      <!-- Checkbox for Tasks -->
-      <div id="tasks-checkbox">
-        <label id="tasks-checkbox-label">
-          <input type="checkbox" id="tasks-checkbox-input">
-          tasks assigned to me
-        </label>
-      </div>
+     <!-- Checkbox for Tasks -->
+<div id="tasks-checkbox">
+  <input type="checkbox" id="tasks-checkbox-input">
+  <label id="tasks-checkbox-label">tasks assigned to me</label>
+</div>
+
+
 
       <!-- Main Popup and Overlay -->
       <div id="popup-overlay" class="hidden">

@@ -77,6 +77,20 @@ function renderApp() {
   const cancelDiscardButton = document.getElementById("cancel-discard-button");
   const discardButton = document.getElementById("discard-button");
 
+  // Make the entire hover area of #tasks-checkbox clickable
+  const tasksCheckbox = document.getElementById("tasks-checkbox");
+  const tasksCheckboxInput = document.getElementById("tasks-checkbox-input");
+
+  tasksCheckbox.addEventListener("click", (event) => {
+    // Toggle the checkbox state
+    tasksCheckboxInput.checked = !tasksCheckboxInput.checked;
+  });
+
+  // Prevent the default behavior of the input itself
+  tasksCheckboxInput.addEventListener("click", (event) => {
+    event.stopPropagation();
+  });
+
   // Functions to show/hide confirmation popup
   function showConfirmationPopup() {
     confirmationPopup.classList.remove("hidden");

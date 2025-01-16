@@ -359,63 +359,65 @@ margin: -0.5vh auto 0 auto; /* 1vh gap and centered line */
 }
 
 #tasks-checkbox {
-position: fixed;
-top: 5vh;
-right: 18vh;
-background-color: transparent;
-padding: 10px 15px;
-border-radius: 10px;
-font-size: 14px;
-color: #fff;
-cursor: pointer;
-letter-spacing: 1px;
-display: flex;
-align-items: center;
-justify-content: center;
+  position: fixed;
+  top: 5vh;
+  right: 18vh;
+  background-color: transparent;
+  padding: 10px 15px;
+  border-radius: 10px;
+  font-size: 14px;
+  color: #fff;
+  cursor: pointer;
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 #tasks-checkbox:hover {
-background-color: #32353A;
+  background-color: #32353A;
 }
 
 /* Customize the label to center the text */
 #tasks-checkbox-label {
-display: flex;
-align-items: center;
-justify-content: center;
-gap: 15px;
-font-size: 16px;
-cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  font-size: 16px;
+  cursor: pointer;
+  margin: 0;
 }
 
 /* Customize the checkbox */
 #tasks-checkbox input[type="checkbox"] {
-width: 18px;
-height: 18px;
-border: 1px solid white;
-border-radius: 3px;
-background-color: transparent;
-appearance: none;
--webkit-appearance: none;
-margin: 0;
-cursor: pointer;
+  width: 18px;
+  height: 18px;
+  border: 1px solid white;
+  border-radius: 3px;
+  background-color: transparent;
+  appearance: none;
+  -webkit-appearance: none;
+  margin-right: 2.5vh;
+  cursor: pointer;
 }
 
 /* When checked, change background and add tick */
 #tasks-checkbox input[type="checkbox"]:checked {
-background-color: #949AA0;
-border-color: #949AA0;
+  background-color: #949AA0;
+  border-color: #949AA0;
 }
 
 #tasks-checkbox input[type="checkbox"]:checked::before {
-content: "✔";
-position: absolute;
-top: 28%;
-left: 8.5%;
-color: white;
-font-size: 13px;
-font-weight: bold;
+  content: "✔";
+  position: absolute;
+  top: 28%;
+  left: 10%;
+  color: white;
+  font-size: 13px;
+  font-weight: bold;
 }
+
 
 
 /* Project Popup Overlay */
@@ -515,8 +517,8 @@ align-items: center;
   position: fixed;
   top: 6vh;
   right: 7.5vh;
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
   border-radius: 6px;
   cursor: pointer;
   display: flex;
