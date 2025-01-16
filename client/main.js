@@ -6,6 +6,9 @@ import "./sidebar.css";
 const discordSdk = new DiscordSDK(import.meta.env.VITE_DISCORD_CLIENT_ID);
 
 let user = {};
+let listCount = 0; // Track the number of lists
+const initialPosition = 52.5; // Starting position in vw
+const offset = 25.65; // Offset for each list in vw
 
 // Setup the Discord SDK
 async function setupDiscordSdk() {
@@ -74,6 +77,59 @@ function renderApp() {
     }
   });
 
+  // Add List Button Logic
+  const addListButton = document.getElementById("add-list-button");
+  const listContainer = document.getElementById("list-container");
+
+  addListButton.style.left = `${initialPosition}vw`; // Set initial position
+
+  addListButton.addEventListener("click", () => {
+    // Increment list count and adjust button position
+    listCount++;
+    addListButton.style.left = `calc(${initialPosition}vw + ${listCount * offset}vw)`;
+
+    // Add a new list to the container
+    const newList = {
+      id: Date.now(), // Unique ID for the new list
+      title: `List ${listCount}`,
+    };
+
+    renderList(newList, listContainer); // Add the new list to the container
+  });
+
+  // Function to render an individual list
+  function renderList(listData, container) {
+    const list = document.createElement("div");
+    list.classList.add("list"); // Ensure the list gets styled correctly
+    list.setAttribute("data-list-id", listData.id);
+
+    // Add list title
+    const title = document.createElement("span");
+    title.classList.add("list-title");
+    title.textContent = listData.title;
+    list.appendChild(title);
+
+    // Add "Add Task" button
+    const addTaskButton = document.createElement("button");
+    addTaskButton.classList.add("add-task-button");
+    addTaskButton.textContent = "+ Add Task";
+    list.appendChild(addTaskButton);
+
+    // Add delete button to remove the list
+    const deleteButton = document.createElement("button");
+    deleteButton.textContent = "Delete List";
+    deleteButton.classList.add("delete-list-button");
+    deleteButton.addEventListener("click", () => {
+      list.remove();
+      listCount--;
+      addListButton.style.left = `calc(${initialPosition}vw + ${listCount * offset}vw)`;
+    });
+    list.appendChild(deleteButton);
+
+    // Append the list to the container
+    container.appendChild(list);
+  }
+
   // Handle edit and delete actions in the settings popup
   const editBoard = document.getElementById("edit-board");
   const deleteBoard = document.getElementById("delete-board");
@@ -86,17 +142,17 @@ function renderApp() {
     alert("Delete board functionality coming soon!");
   });
 
-  // Tasks Checkbox Logic
-  const tasksCheckbox = document.getElementById("tasks-checkbox");
-  const tasksCheckboxInput = document.getElementById("tasks-checkbox-input");
-
-  tasksCheckbox.addEventListener("click", () => {
-    tasksCheckboxInput.checked = !tasksCheckboxInput.checked;
-  });
-
-  tasksCheckboxInput.addEventListener("click", (event) => {
-    event.stopPropagation();
-  });
+    // Tasks Checkbox Logic
+    const tasksCheckbox = document.getElementById("tasks-checkbox");
+    const tasksCheckboxInput = document.getElementById("tasks-checkbox-input");
+  
+    tasksCheckbox.addEventListener("click", () => {
+      tasksCheckboxInput.checked = !tasksCheckboxInput.checked;
+    });
+  
+    tasksCheckboxInput.addEventListener("click", (event) => {
+      event.stopPropagation();
+    });
 
   // Main Popup Logic
   const createBoardButton = document.getElementById("create-board-button");
@@ -161,20 +217,20 @@ function renderApp() {
 
   cancelDiscardButton.addEventListener("click", hideConfirmationPopup);
 
-  // Toggle visibility between board-section and project-section
-  const projectBox = document.getElementById("projectbox");
-  const boardSection = document.getElementById("board-section");
-  const projectSection = document.getElementById("project-section");
+ // Toggle visibility between board-section and project-section
+ const projectBox = document.getElementById("projectbox");
+ const boardSection = document.getElementById("board-section");
+ const projectSection = document.getElementById("project-section");
 
-  projectBox.addEventListener("click", () => {
-    if (boardSection.style.display === "none") {
-      boardSection.style.display = "block";
-      projectSection.style.display = "none";
-    } else {
-      boardSection.style.display = "none";
-      projectSection.style.display = "block";
-    }
-  });
+ projectBox.addEventListener("click", () => {
+   if (boardSection.style.display === "none") {
+     boardSection.style.display = "block";
+     projectSection.style.display = "none";
+   } else {
+     boardSection.style.display = "none";
+     projectSection.style.display = "block";
+   }
+ });
 
   // Utility functions
   function clearBoardFormFields() {

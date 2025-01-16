@@ -587,3 +587,170 @@ align-items: center;
   line-height: 5vh; /* Same height as the logo */
   letter-spacing: 1px;
 }
+
+/* Container for all lists */
+#list-container {
+  position: absolute;
+  top: 19vh;
+  left: 27vw;
+  display: flex; /* Enable horizontal alignment */
+  flex-wrap: nowrap; /* Prevent wrapping to the next row */
+  gap: 32px; /* Gap between lists */
+  overflow-x: auto; /* Enable horizontal scrolling */
+  overflow-y: hidden; /* Prevent vertical scrolling */
+  white-space: nowrap; /* Ensure content stays in one line */
+  align-items: flex-start; /* Align items to the top */
+}
+
+/* Individual list styling */
+.list {
+  background-color: #33363B; /* Dark gray */
+  width: 250px; /* Fixed width */
+  padding: 16px; /* Inner padding */
+  border-radius: 12px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex-shrink: 0; /* Prevent shrinking */
+}
+
+
+/* List title styling */
+.list-title {
+  color: white; /* White text color */
+  font-size: 18px; /* Font size for the title */
+  font-weight: bold; /* Bold text */
+  margin-bottom: 8px; /* Space below the title */
+}
+
+/* Task card inside the list */
+.task-card {
+  background-color: #484E55; /* Slightly lighter gray for task background */
+  border-radius: 8px; /* Rounded corners for task cards */
+  padding: 12px; /* Inner padding */
+  display: flex; /* Use flexbox for layout within the task */
+  flex-direction: column; /* Stack content vertically */
+  gap: 8px; /* Space between task elements */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+  cursor: pointer; /* Pointer cursor on hover for interactivity */
+  transition: background-color 0.3s ease; /* Smooth hover effect */
+}
+
+/* Hover effect for task cards */
+.task-card:hover {
+  background-color: #474E55; /* Slightly darker background on hover */
+}
+
+/* Header section of the task card */
+.task-header {
+  display: flex;
+  justify-content: space-between; /* Space out title and status indicator */
+  align-items: center; /* Align vertically */
+}
+
+/* Task title styling */
+.task-title {
+  color: white; /* White text color */
+  font-size: 14px; /* Font size */
+  font-weight: bold; /* Bold font */
+}
+
+/* Task status indicator (colored dots) */
+.task-status {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%; /* Make it circular */
+}
+
+/* Status colors */
+.task-status-blue {
+  background-color: #2594E3; /* Blue for ongoing tasks */
+}
+
+.task-status-red {
+  background-color: #F34141; /* Red for critical tasks */
+}
+
+/* Task details section */
+.task-details {
+  display: flex;
+  justify-content: space-between; /* Space out task details and options */
+  align-items: center; /* Center align */
+  color: #BEBEBE; /* Light gray text color */
+  font-size: 12px; /* Font size */
+}
+
+/* Options section in task details */
+.task-options {
+  display: flex; /* Use flexbox for alignment */
+  gap: 8px; /* Space between options */
+}
+
+/* Task checkbox for marking progress */
+.task-checkbox {
+  width: 16px;
+  height: 16px;
+  background-color: #474E55; /* Gray background */
+  border-radius: 50%; /* Circular shape */
+  cursor: pointer; /* Pointer cursor for interactivity */
+}
+
+/* Add Task button inside the list */
+#add-task-button {
+  background-color: #33363B; /* Gray background */
+  color: white; /* White text color */
+  border: none; /* Remove border */
+  border-radius: 8px; /* Rounded corners */
+  padding: 8px 0; /* Vertical padding */
+  font-size: 14px; /* Font size */
+  cursor: pointer; /* Pointer cursor */
+  text-align: center; /* Center-align text */
+  transition: background-color 0.3s ease; /* Smooth hover effect */
+}
+
+/* Hover effect for Add Task button */
+#add-task-button:hover {
+  background-color: #565B63; /* Slightly darker background on hover */
+}
+
+/* Add List Button */
+#add-list-button {
+  position: absolute; /* Allow dynamic positioning */
+  top: 19vh; /* Align vertically */
+  left: 53vw; /* Default horizontal alignment */
+  width: 250px; 
+  background-color: #33363B; /* Gray background */
+  color: white; /* White text color */
+  font-size: 18px; /* Font size for the title */
+  font-weight: bold;
+  border: none;
+  border-radius: 12px; /* Rounded corners */
+  padding: 12px 16px; /* Button padding */
+  font-size: 14px; /* Text size */
+  cursor: pointer; /* Pointer cursor */
+  transition: background-color 0.3s ease; /* Smooth hover effect */
+}
+
+#add-list-button:hover {
+  background-color: #565B63; /* Slightly darker on hover */
+}
+
+/* Responsive behavior */
+@media (max-width: 768px) {
+  #list-container {
+    top: 10vh; /* Adjust position for smaller screens */
+    left: 5vw; /* Reduce left margin */
+    gap: 12px; /* Decrease gap between lists */
+  }
+
+  .list {
+    width: 250px; /* Reduce list width */
+  }
+
+  #add-list-button {
+    top: 85vh; /* Adjust button position */
+    left: 5vw; /* Align with list container */
+    font-size: 12px; /* Smaller font size */
+  }
+}

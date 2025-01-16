@@ -1,5 +1,49 @@
 export function Sidebar(user) {
   return `
+  <!-- List Container -->
+      <div id="list-container">
+        <!-- Example Static List -->
+        <div id="list1" class="list">
+          <span class="list-title">To Do</span>
+          <!-- Task A -->
+          <div class="task-card clickable" data-task-id="1">
+            <div class="task-header">
+              <span class="task-title">Task A</span>
+              <span class="task-status task-status-blue"></span>
+            </div>
+            <div class="task-details">
+              <span class="task-date">Jan 1 - Jan 3</span>
+              <div class="task-options">
+                <div class="task-checkbox"></div>
+                <div class="task-checkbox"></div>
+              </div>
+            </div>
+          </div>
+          <!-- Task B -->
+          <div class="task-card clickable" data-task-id="2">
+            <div class="task-header">
+              <span class="task-title">Task B</span>
+              <span class="task-status task-status-red"></span>
+            </div>
+            <div class="task-details">
+              <span class="task-date">Jan 4</span>
+              <div class="task-options">
+                <div class="task-checkbox"></div>
+              </div>
+            </div>
+          </div>
+          <!-- Add Task Button -->
+          <button class="add-task-button">+ Add a Task</button>
+        </div>
+      </div>
+
+      <!-- Add List Button -->
+      <button id="add-list-button">+ add a list</button>
+    </div>
+
+
+  <!-- Sidebar -->
+
     <div id="sidebar">
       <div id="logo"></div>
       <div id="board-topic">board 1</div>
@@ -15,15 +59,15 @@ export function Sidebar(user) {
       </div>
 
       <!-- Settings Icon -->
-<div id="settings-icon" onclick="toggleSettingsPopup()">
-  <img src="assets/setting.svg" alt="Settings">
-</div>
+      <div id="settings-icon" onclick="toggleSettingsPopup()">
+        <img src="assets/setting.svg" alt="Settings">
+      </div>
 
-<!-- Settings Popup -->
-<div id="settings-popup">
-  <p id="edit-board">edit board</p>
-  <p id="delete-board" class="delete">delete board</p>
-</div>
+      <!-- Settings Popup -->
+      <div id="settings-popup">
+        <p id="edit-board">edit board</p>
+        <p id="delete-board" class="delete">delete board</p>
+      </div>
 
       <!-- Board Section -->
       <div id="board-section">
@@ -37,11 +81,11 @@ export function Sidebar(user) {
         <div id="line-under-button"></div>
       </div>
 
-     <!-- Checkbox for Tasks -->
-<div id="tasks-checkbox">
-  <input type="checkbox" id="tasks-checkbox-input">
-  <label id="tasks-checkbox-label">tasks assigned to me</label>
-</div>
+      <!-- Checkbox for Tasks -->
+      <div id="tasks-checkbox">
+        <input type="checkbox" id="tasks-checkbox-input">
+        <label id="tasks-checkbox-label">tasks assigned to me</label>
+      </div>
 
       <!-- Main Popup and Overlay -->
       <div id="popup-overlay" class="hidden">
