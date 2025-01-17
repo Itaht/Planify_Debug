@@ -33,7 +33,7 @@ export function Sidebar(user) {
             </div>
           </div>
           <!-- Add Task Button -->
-          <button class="add-task-button">+ Add a Task</button>
+          <button class="add-task-button">+ add a Task</button>
         </div>
       </div>
 

@@ -112,7 +112,7 @@ function renderApp() {
     // Add "Add Task" button
     const addTaskButton = document.createElement("button");
     addTaskButton.classList.add("add-task-button");
-    addTaskButton.textContent = "+ Add Task";
+    addTaskButton.textContent = "+ add a task";
     list.appendChild(addTaskButton);
 
     // Add delete button to remove the list

@@ -697,7 +697,7 @@ align-items: center;
 }
 
 /* Add Task button inside the list */
-#add-task-button {
+.add-task-button {
   background-color: #33363B; /* Gray background */
   color: white; /* White text color */
   border: none; /* Remove border */
@@ -710,9 +710,10 @@ align-items: center;
 }
 
 /* Hover effect for Add Task button */
-#add-task-button:hover {
-  background-color: #565B63; /* Slightly darker background on hover */
+.add-task-button:hover {
+  background-color: #44484F; /* Keep the same color on hover */
 }
+
 
 /* Add List Button */
 #add-list-button {
