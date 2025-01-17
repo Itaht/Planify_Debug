@@ -393,7 +393,7 @@ margin: -0.5vh auto 0 auto; /* 1vh gap and centered line */
 #tasks-checkbox input[type="checkbox"] {
   width: 18px;
   height: 18px;
-  border: 1px solid white;
+  border: 1px solid #949AA0;
   border-radius: 3px;
   background-color: transparent;
   appearance: none;
@@ -474,6 +474,7 @@ border: none;
 color: #949AA0;
 font-size: 16px;
 cursor: pointer;
+outline: none;
 }
 
 #close-project-popup-button:hover,
@@ -706,7 +707,8 @@ align-items: center;
   font-size: 14px; /* Font size */
   cursor: pointer; /* Pointer cursor */
   text-align: center; /* Center-align text */
-  transition: background-color 0.3s ease; /* Smooth hover effect */
+  outline: none;
+  letter-spacing: 1px;
 }
 
 /* Hover effect for Add Task button */
@@ -719,22 +721,22 @@ align-items: center;
 #add-list-button {
   position: absolute; /* Allow dynamic positioning */
   top: 19vh; /* Align vertically */
-  left: 53vw; /* Default horizontal alignment */
   width: 250px; 
   background-color: #33363B; /* Gray background */
-  color: white; /* White text color */
-  font-size: 18px; /* Font size for the title */
-  font-weight: bold;
+  color: #949AA0; /* White text color */
+  font-size: 22px; /* Font size for the title */
+  letter-spacing: 1px;
   border: none;
   border-radius: 12px; /* Rounded corners */
-  padding: 12px 16px; /* Button padding */
-  font-size: 14px; /* Text size */
+  padding: 14px 16px; /* Button padding */
+  font-size: 16px; /* Text size */
   cursor: pointer; /* Pointer cursor */
-  transition: background-color 0.3s ease; /* Smooth hover effect */
+  outline: none;
 }
 
 #add-list-button:hover {
   background-color: #565B63; /* Slightly darker on hover */
+  color: white;
 }
 
 /* Responsive behavior */

@@ -7,8 +7,8 @@ const discordSdk = new DiscordSDK(import.meta.env.VITE_DISCORD_CLIENT_ID);
 
 let user = {};
 let listCount = 0; // Track the number of lists
-const initialPosition = 52.5; // Starting position in vw
-const offset = 25.65; // Offset for each list in vw
+const initialPosition = 27; // Starting position in vw
+const offset = 314; // Offset for each list in vw
 
 // Setup the Discord SDK
 async function setupDiscordSdk() {
@@ -86,7 +86,7 @@ function renderApp() {
   addListButton.addEventListener("click", () => {
     // Increment list count and adjust button position
     listCount++;
-    addListButton.style.left = `calc(${initialPosition}vw + ${listCount * offset}vw)`;
+    addListButton.style.left = `calc(${initialPosition}vw + ${listCount * offset}px)`;
 
     // Add a new list to the container
     const newList = {
@@ -109,12 +109,6 @@ function renderApp() {
     title.textContent = listData.title;
     list.appendChild(title);
 
-    // Add "Add Task" button
-    const addTaskButton = document.createElement("button");
-    addTaskButton.classList.add("add-task-button");
-    addTaskButton.textContent = "+ add a task";
-    list.appendChild(addTaskButton);
-
     // Add delete button to remove the list
     const deleteButton = document.createElement("button");
     deleteButton.textContent = "Delete List";
@@ -122,9 +116,15 @@ function renderApp() {
     deleteButton.addEventListener("click", () => {
       list.remove();
       listCount--;
-      addListButton.style.left = `calc(${initialPosition}vw + ${listCount * offset}vw)`;
+      addListButton.style.left = `calc(${initialPosition}vw + ${listCount * offset}px)`;
     });
     list.appendChild(deleteButton);
+
+    // Add "Add Task" button
+    const addTaskButton = document.createElement("button");
+    addTaskButton.classList.add("add-task-button");
+    addTaskButton.textContent = "+ add a task";
+    list.appendChild(addTaskButton);
 
     // Append the list to the container
     container.appendChild(list);
