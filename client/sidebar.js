@@ -111,7 +111,7 @@ export function Sidebar(user) {
         <label for="task-details">task description (optional)</label>
         <textarea id="task-details" placeholder="Enter task description"></textarea>
         <label for="attached-file">attached file</label>
-        <button type="button">+ add file</button>
+        <button id="add-file-button" type="button">+ add file</button>
         <div class="date-inputs">
           <div>
             <label for="start-date">start date</label>

@@ -172,8 +172,9 @@ font-size: 14px;
 
 /* Fixed height for textarea */
 form textarea {
-height: 120px;
+height: 110px;
 resize: none; /* Prevent textarea resizing */
+margin-bottom: 25px;
 }
 
 /* Ensure 30px gap between input and the next label */
@@ -813,6 +814,7 @@ align-items: center;
   color: #fff;
   font-family: 'Inter', sans-serif;
   overflow: hidden; /* Prevent popup overflow */  
+  letter-spacing: 1px;
 }
 
 /* Popup Body (Scrollable) */
@@ -913,30 +915,85 @@ align-items: center;
   background-color: #474b51;
 }
 
-.date-group {
+/* Date Inputs */
+.date-inputs {
   display: flex;
   justify-content: space-between;
+  gap: 20px;
 }
 
-.date-group div {
-  width: 48%;
+.date-inputs div {
+  width: 48%; /* Half of the container width */
 }
 
-.label-group {
+.date-inputs label {
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+
+/* Additional Options */
+.additional-options {
   display: flex;
   justify-content: space-between;
+  gap: 20px;
+  margin-top: 20px; /* Add space above */
 }
 
-.label-group div {
+.additional-options button {
   width: 48%;
+  padding: 10px;
+  border: 1px solid #6D7276;
+  border-radius: 8px;
+  background-color: transparent;
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
 }
 
-.reminder-group {
+.additional-options button:hover {
+  background-color: #474B51;
+}
+
+/* Reminder Section */
+.reminder {
+  margin-top: 20px;
+}
+
+.reminder label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+.reminder div {
   display: flex;
   align-items: center;
   gap: 5px;
 }
 
-.reminder-group input {
+.reminder input {
   width: 50px;
+  text-align: center;
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #6D7276;
+  background-color: #3A3E42;
+  color: white;
 }
+
+#add-file-button {
+  position: relative;
+  background-color: transparent;
+  color: #949AA0;
+  border: 1.5px solid #949AA0;
+  border-radius: 12px;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-size: 14px;
+  left: 20px;
+  margin-bottom: 25px;
+}
+
+
+/*----------------------------------------------------------------*/
+
