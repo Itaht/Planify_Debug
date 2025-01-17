@@ -177,7 +177,7 @@ resize: none; /* Prevent textarea resizing */
 }
 
 /* Ensure 30px gap between input and the next label */
-#board-name , #project-name {
+#board-name , #project-name ,#task-name{
 margin-bottom: 30px;
 }
 
@@ -190,20 +190,25 @@ cursor: pointer;
 font-size: 14px;
 }
 
-#create-board-form ,#create-project-form {
+#create-board-form ,#create-project-form ,#add-task-form{
 position: relative;
 left: 30px; /* Move the form 25px to the right */
 letter-spacing: 1px;
 }
 
 .popup-buttons {
-margin-top: 20px;
+background-color: #33363B;
 display: flex;
-justify-content: flex-end; /* Keep buttons aligned to the right */
-align-items: center; /* Ensure vertical alignment */
+justify-content: flex-end;
+position: sticky;
+bottom: 15px;
+padding-right: 40px;
+z-index: 1;
 }
 
-#cancel-button ,#cancel-project-button {
+#cancel-button ,
+#cancel-project-button ,
+#cancel-task-button {
 background-color: transparent;
 color: white;
 border: 1.5px solid transparent;
@@ -219,13 +224,17 @@ box-sizing: border-box;
 margin-right: -1px;
 }
 
-#cancel-button:hover ,#cancel-project-button:hover {
+#cancel-button:hover ,
+#cancel-project-button:hover ,
+#cancel-task-button:hover {
 background-color: #474B51;
 color: white;
 border: 1.5px solid #474B51;
 }
 
-#create-board-button-form ,#create-project-button-form{
+#create-board-button-form ,
+#create-project-button-form ,
+#add-task-button-submit{
 background-color: transparent;
 color: #2594E3;
 border: 1.5px solid #2594E3;
@@ -240,7 +249,9 @@ position: relative;
 margin-left: 12px;
 }
 
-#create-board-button-form:hover ,#create-project-button-form:hover {
+#create-board-button-form:hover ,
+#create-project-button-form:hover ,
+#add-task-button-submit:hover{
 background-color: #2594E3;
 color: white;
 border: 1.5px solid #2594E3;
@@ -440,32 +451,38 @@ display: flex;
 
 /* Main and Project Popup Content */
 #popup-content {
-background-color: #33363B;
-padding: 30px 50px;
-border-radius: 12px;
-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-width: 650px;
-position: relative;
-color: #fff;
-font-family: 'Inter', sans-serif;
+  background-color: #33363B;
+  padding: 0; /* Remove padding to align header and buttons */
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  width: 750px;
+  max-height: 75vh; /* Set a maximum height */
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+  overflow: hidden; /* Prevent popup overflow */  
 }
 
 .popup-header {
-display: flex;
-justify-content: space-between;
-align-items: center;
-margin-bottom: 20px;
+  background-color: #33363B;
+  font-size: 15px;
+  font-weight: bold;
+  position: sticky;
+  top: 7px;
+  z-index: 1;
 }
 
 .popup-header h2 {
-margin: 0;
-font-weight: normal;
-letter-spacing: 1px;
+  margin-left: 50px;
+  font-weight: 500;
+  letter-spacing: 1px;
 }
 
 /* Close Button Styling */
 #close-project-popup-button,
-#close-popup-button {
+#close-popup-button,
+#close-task-popup-button {
 position: absolute;
 top: 20px;
 right: 20px;
@@ -478,7 +495,8 @@ outline: none;
 }
 
 #close-project-popup-button:hover,
-#close-popup-button:hover {
+#close-popup-button:hover,
+#close-task-popup-button:hover {
 color: white;
 }
 
@@ -711,6 +729,11 @@ align-items: center;
   letter-spacing: 1px;
 }
 
+/* Remove focus outline */
+.add-task-button:focus {
+  outline: none; /* Ensure no border appears on focus */
+}
+
 /* Hover effect for Add Task button */
 .add-task-button:hover {
   background-color: #44484F; /* Keep the same color on hover */
@@ -756,4 +779,164 @@ align-items: center;
     left: 5vw; /* Align with list container */
     font-size: 12px; /* Smaller font size */
   }
+}
+
+
+/* Task Popup Overlay */
+#task-popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black */
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000; /* Above all other elements */
+}
+
+#task-popup-overlay:not(.hidden) {
+  display: flex;
+}
+
+/* Task Popup Content */
+#task-popup-content {
+  background-color: #33363B;
+  padding: 0; /* Remove padding to align header and buttons */
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  width: 750px;
+  max-height: 75vh; /* Set a maximum height */
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+  overflow: hidden; /* Prevent popup overflow */  
+}
+
+/* Popup Body (Scrollable) */
+#popup-body {
+  position: relative;
+  flex: 1;
+  top: -30px;
+  padding: 40px;
+  overflow-y: auto; /* Allow vertical scrolling */
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+#popup-body::-webkit-scrollbar {
+  width: 8px; /* Optional scrollbar width */
+}
+
+#popup-body::-webkit-scrollbar-thumb {
+  background-color: #6D7276; /* Scrollbar thumb color */
+  border-radius: 4px;
+}
+
+#popup-body::-webkit-scrollbar-track {
+  background-color: #3A3E42; /* Scrollbar track color */
+}
+
+/* Popup Body (Scrollable) */
+#popup-body-main {
+  position: relative;
+  flex: 1;
+  top: -30px;
+  padding: 40px;
+  overflow-y: hidden; /* Allow vertical scrolling */
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+#popup-body-main::-webkit-scrollbar {
+  width: 8px; /* Optional scrollbar width */
+}
+
+#popup-body-main::-webkit-scrollbar-thumb {
+  background-color: #6D7276; /* Scrollbar thumb color */
+  border-radius: 4px;
+}
+
+#popup-body-main::-webkit-scrollbar-track {
+  background-color: #3A3E42; /* Scrollbar track color */
+}
+
+
+/*------------------------------------------------------------------------------------*/
+
+
+.popup-header button {
+  background: none;
+  border: none;
+  color: #949aa0;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.popup-header button:hover {
+  color: white;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group button {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #6d7276;
+  border-radius: 8px;
+  background-color: #3a3e42;
+  color: white;
+}
+
+.form-group textarea {
+  height: 100px;
+  resize: none;
+}
+
+.form-group button {
+  background-color: transparent;
+  cursor: pointer;
+  border: 1px solid #6d7276;
+}
+
+.form-group button:hover {
+  background-color: #474b51;
+}
+
+.date-group {
+  display: flex;
+  justify-content: space-between;
+}
+
+.date-group div {
+  width: 48%;
+}
+
+.label-group {
+  display: flex;
+  justify-content: space-between;
+}
+
+.label-group div {
+  width: 48%;
+}
+
+.reminder-group {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.reminder-group input {
+  width: 50px;
 }

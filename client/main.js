@@ -97,38 +97,40 @@ function renderApp() {
     renderList(newList, listContainer); // Add the new list to the container
   });
 
-  // Function to render an individual list
-  function renderList(listData, container) {
-    const list = document.createElement("div");
-    list.classList.add("list"); // Ensure the list gets styled correctly
-    list.setAttribute("data-list-id", listData.id);
+// Function to render an individual list
+function renderList(listData, container) {
+  const list = document.createElement("div");
+  list.classList.add("list"); // Ensure the list gets styled correctly
+  list.setAttribute("data-list-id", listData.id);
 
-    // Add list title
-    const title = document.createElement("span");
-    title.classList.add("list-title");
-    title.textContent = listData.title;
-    list.appendChild(title);
+  // Add list title
+  const title = document.createElement("span");
+  title.classList.add("list-title");
+  title.textContent = listData.title;
+  list.appendChild(title);
 
-    // Add delete button to remove the list
-    const deleteButton = document.createElement("button");
-    deleteButton.textContent = "Delete List";
-    deleteButton.classList.add("delete-list-button");
-    deleteButton.addEventListener("click", () => {
-      list.remove();
-      listCount--;
-      addListButton.style.left = `calc(${initialPosition}vw + ${listCount * offset}px)`;
-    });
-    list.appendChild(deleteButton);
+  // Add delete button to remove the list
+  const deleteButton = document.createElement("button");
+  deleteButton.textContent = "Delete List";
+  deleteButton.classList.add("delete-list-button");
+  deleteButton.addEventListener("click", () => {
+    list.remove();
+    listCount--;
+    addListButton.style.left = `calc(${initialPosition}vw + ${listCount * offset}px)`;
+  });
+  list.appendChild(deleteButton);
 
-    // Add "Add Task" button
-    const addTaskButton = document.createElement("button");
-    addTaskButton.classList.add("add-task-button");
-    addTaskButton.textContent = "+ add a task";
-    list.appendChild(addTaskButton);
+  // Add "Add Task" button
+  const addTaskButton1 = document.createElement("button");
+  addTaskButton1.classList.add("add-task-button");
+  addTaskButton1.textContent = "+ add a task";
+  addTaskButton1.addEventListener("click", () => showTaskPopup(listData.id));
+  list.appendChild(addTaskButton1);
 
-    // Append the list to the container
-    container.appendChild(list);
-  }
+  // Append the list to the container
+  container.appendChild(list);
+  attachTaskPopupLogic();
+}
 
   // Handle edit and delete actions in the settings popup
   const editBoard = document.getElementById("edit-board");
@@ -142,7 +144,7 @@ function renderApp() {
     alert("Delete board functionality coming soon!");
   });
 
-    // Tasks Checkbox Logic
+    // Tasks Checkbox Logic 
     const tasksCheckbox = document.getElementById("tasks-checkbox");
     const tasksCheckboxInput = document.getElementById("tasks-checkbox-input");
   
@@ -196,28 +198,107 @@ function renderApp() {
     }
   });
 
-  // Confirmation Popup Logic
-  const confirmationPopup = document.getElementById("confirmation-popup");
-  const cancelDiscardButton = document.getElementById("cancel-discard-button");
-  const discardButton = document.getElementById("discard-button");
+  function attachTaskPopupLogic() {
+    const taskPopupOverlay = document.getElementById("task-popup-overlay");
+    const closeTaskPopupButton = document.getElementById("close-task-popup-button");
+    const cancelTaskButton = document.getElementById("cancel-task-button");
+    const addTaskForm = document.getElementById("add-task-form");
+    const confirmationPopup = document.getElementById("confirmation-popup");
+  
+    // Show Task Popup
+    document.addEventListener("click", (e) => {
+      if (e.target && e.target.classList.contains("add-task-button")) {
+        taskPopupOverlay.classList.remove("hidden");
+      }
+    });
+  
+    // Show Confirmation Popup on Close or Cancel Button Click
+    closeTaskPopupButton.addEventListener("click", () => {
+      showConfirmationPopup();
+    });
+  
+    cancelTaskButton.addEventListener("click", () => {
+      showConfirmationPopup();
+    });
+  
+    // Close Task Popup by Clicking on Overlay
+    taskPopupOverlay.addEventListener("click", (e) => {
+      if (e.target === taskPopupOverlay) {
+        taskPopupOverlay.classList.add("hidden");
+        clearTaskFormFields();
+      }
+    });
+  
+    // Discard Task Popup Changes
+    const discardButton = document.getElementById("discard-button");
+    discardButton.addEventListener("click", () => {
+      hideConfirmationPopup();
+      taskPopupOverlay.classList.add("hidden");
+      clearTaskFormFields();
+    });
+  
+    // Cancel Discard
+    const cancelDiscardButton = document.getElementById("cancel-discard-button");
+    cancelDiscardButton.addEventListener("click", hideConfirmationPopup);
+  
+    // Clear Task Form Fields
+    function clearTaskFormFields() {
+      addTaskForm.reset();
+    }
+  
+    // Show Confirmation Popup
+    function showConfirmationPopup() {
+      confirmationPopup.classList.remove("hidden");
+    }
+  
+    // Hide Confirmation Popup
+    function hideConfirmationPopup() {
+      confirmationPopup.classList.add("hidden");
+    }
+  }
+  
+  
 
-  discardButton.addEventListener("click", () => {
+// Confirmation Popup Logic
+const confirmationPopup = document.getElementById("confirmation-popup");
+const cancelDiscardButton = document.getElementById("cancel-discard-button");
+const discardButton = document.getElementById("discard-button");
+
+// Close Confirmation Popup when clicking the overlay
+confirmationPopup.addEventListener("click", (e) => {
+  if (e.target === confirmationPopup) {
     hideConfirmationPopup();
+  }
+});
 
-    if (!popupOverlay.classList.contains("hidden")) {
-      popupOverlay.classList.add("hidden");
-      clearBoardFormFields();
-    }
+// Discard Changes
+discardButton.addEventListener("click", () => {
+  hideConfirmationPopup();
 
-    if (!projectPopupOverlay.classList.contains("hidden")) {
-      projectPopupOverlay.classList.add("hidden");
-      clearProjectFormFields();
-    }
-  });
+  if (!popupOverlay.classList.contains("hidden")) {
+    popupOverlay.classList.add("hidden");
+    clearBoardFormFields();
+  }
 
-  cancelDiscardButton.addEventListener("click", hideConfirmationPopup);
+  if (!projectPopupOverlay.classList.contains("hidden")) {
+    projectPopupOverlay.classList.add("hidden");
+    clearProjectFormFields();
+  }
 
- // Toggle visibility between board-section and project-section
+  if (!taskPopupOverlay.classList.contains("hidden")) {
+    taskPopupOverlay.classList.add("hidden");
+    clearTaskFormFields();
+  }
+});
+
+// Cancel Discard
+cancelDiscardButton.addEventListener("click", hideConfirmationPopup);
+
+// Utility Function to Hide Confirmation Popup
+function hideConfirmationPopup() {
+  confirmationPopup.classList.add("hidden");
+}
+
  const projectBox = document.getElementById("projectbox");
  const boardSection = document.getElementById("board-section");
  const projectSection = document.getElementById("project-section");
@@ -239,6 +320,10 @@ function renderApp() {
 
   function clearProjectFormFields() {
     createProjectForm.reset();
+  }
+
+  function clearTaskFormFields() {
+    addTaskForm.reset();
   }
 
   function showConfirmationPopup() {

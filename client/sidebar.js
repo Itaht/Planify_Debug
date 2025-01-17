@@ -61,16 +61,18 @@ export function Sidebar(user) {
             <h2>Create new board</h2>
             <button id="close-popup-button">✖</button>
           </div>
-          <form id="create-board-form">
-            <label for="board-name">board name</label>
-            <input type="text" id="board-name" placeholder="Enter board name" required>
-            <label for="board-description">board description (optional)</label>
-            <textarea id="input-board-description" placeholder="Enter board description"></textarea>
-            <div class="popup-buttons">
-              <button type="button" id="cancel-button">cancel</button>
-              <button type="submit" id="create-board-button-form">create board</button>
-            </div>
-          </form>
+          <div id="popup-body-main">
+            <form id="create-board-form">
+              <label for="board-name">board name</label>
+              <input type="text" id="board-name" placeholder="Enter board name" required>
+              <label for="board-description">board description (optional)</label>
+              <textarea id="input-board-description" placeholder="Enter board description"></textarea>
+            </form>
+          </div>
+          <div class="popup-buttons">
+                <button type="button" id="cancel-button">cancel</button>
+                <button type="submit" id="create-board-button-form">create board</button>
+              </div>
         </div>
       </div>
 
@@ -81,18 +83,67 @@ export function Sidebar(user) {
             <h2>Create new project</h2>
             <button id="close-project-popup-button">✖</button>
           </div>
-          <form id="create-project-form">
-            <label for="project-name">project name</label>
-            <input type="text" id="project-name" placeholder="Enter project name" required>
-            <label for="project-description">project description (optional)</label>
-            <textarea id="project-description" placeholder="Enter project description"></textarea>
-            <div class="popup-buttons">
-              <button type="button" id="cancel-project-button">cancel</button>
-              <button type="submit" id="create-project-button-form">create project</button>
-            </div>
-          </form>
+          <div id="popup-body-main">
+            <form id="create-project-form">
+              <label for="project-name">project name</label>
+              <input type="text" id="project-name" placeholder="Enter project name" required>
+              <label for="project-description">project description (optional)</label>
+              <textarea id="project-description" placeholder="Enter project description"></textarea>
+            </form>
+          </div>
+          <div class="popup-buttons">
+                <button type="button" id="cancel-project-button">cancel</button>
+                <button type="submit" id="create-project-button-form">create project</button>
+          </div>
         </div>
       </div>
+
+<div id="task-popup-overlay" class="hidden">
+  <div id="task-popup-content">
+    <div class="popup-header">
+      <h2 id="task-list-title">Add Task</h2>
+      <button id="close-task-popup-button">✖</button>
+    </div>
+    <div id="popup-body">
+      <form id="add-task-form">
+        <label for="task-name">task name</label>
+        <input type="text" id="task-name" placeholder="Enter task name" required>
+        <label for="task-details">task description (optional)</label>
+        <textarea id="task-details" placeholder="Enter task description"></textarea>
+        <label for="attached-file">attached file</label>
+        <button type="button">+ add file</button>
+        <div class="date-inputs">
+          <div>
+            <label for="start-date">start date</label>
+            <input type="text" id="start-date" placeholder="dd/mm/yy">
+          </div>
+          <div>
+            <label for="due-date">due date</label>
+            <input type="text" id="due-date" placeholder="dd/mm/yy">
+          </div>
+        </div>
+        <div class="additional-options">
+          <button type="button">set label</button>
+          <button type="button">+ add member</button>
+        </div>
+        <div class="reminder">
+          <label for="reminder">set reminder</label>
+          <div>
+            <span>remind every</span>
+            <input type="text" id="reminder" placeholder="dd">
+            <span>day</span>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="popup-buttons">
+      <button type="button" id="cancel-task-button">cancel</button>
+      <button type="submit" id="add-task-button-submit">add a task</button>
+    </div>
+  </div>
+</div>
+
+
 
       <!-- Confirmation Popup -->
       <div id="confirmation-popup" class="hidden">
