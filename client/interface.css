@@ -1,4 +1,11 @@
 /* Sidebar styles */
+* {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+
+
 #sidebar {
   position: fixed;
   top: 0;
@@ -49,6 +56,7 @@ background-color: #25282D;
 #projectmain {
   position: fixed;
   top: 13.5vh;
+  color: white;
   left: 12vh;
   z-index: 4;
   font-size: calc(1.3vw); 
@@ -1065,6 +1073,7 @@ align-items: center;
   border: none;
   letter-spacing: 1px;
   margin-top: 12px;
+  color: white;
 }
 
 .add-list-input::placeholder {
