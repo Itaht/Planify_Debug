@@ -650,6 +650,11 @@ align-items: center;
   font-size: 18px; /* Font size for the title */
   font-weight: bold; /* Bold text */
   margin-bottom: 8px; /* Space below the title */
+  white-space: nowrap; /* Prevents text from wrapping */
+  overflow: hidden; /* Clips overflowing content */
+  text-overflow: ellipsis; /* Adds ellipsis (...) for overflowing text */
+  width: 100%; /* Ensures the title fits within the container */
+  display: block; /* Ensures it behaves like a block-level element */
 }
 
 /* Task card inside the list */
