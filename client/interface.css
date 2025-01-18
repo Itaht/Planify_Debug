@@ -1044,3 +1044,75 @@ align-items: center;
 
 /*----------------------------------------------------------------*/
 
+.create-new-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #33363B; /* Matches list background */
+  width: 250px;
+  height: auto;
+  padding: 10px;
+  border-radius: 12px;
+  gap: 12px; /* Space between elements */
+}
+
+.add-list-input {
+  width: 90%;
+  padding: 0px 10px;
+  font-size: 18px;
+  outline: none;
+  background-color: transparent;
+  border: none;
+  letter-spacing: 1px;
+  margin-top: 12px;
+}
+
+.add-list-input::placeholder {
+  color: #949AA0;
+  letter-spacing: 1px;
+}
+
+/* Wrap both buttons in a container */
+.button-row {
+  display: flex;
+  justify-content: space-between; /* Spread buttons evenly */
+  width: 100%; /* Make sure the buttons fill the available width */
+  margin-top: 10px; /* Add space between input and buttons */
+}
+
+/* Styles for buttons */
+.cancel-list-button,
+.confirm-list-button {
+  background-color: transparent;
+  padding: 2px;
+  width: 115px;
+  border: none;
+  border-radius: 9px;
+  cursor: pointer;
+  font-size: 16px;
+  letter-spacing: 1px;
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.cancel-list-button {
+  color: white;
+}
+
+.confirm-list-button {
+  color: #2594E3;
+  border: #2594E3 solid 1px;
+}
+
+.cancel-list-button:hover {
+  background-color: #474B51;
+}
+
+.confirm-list-button:hover {
+  background-color: #2594E3;
+  color: white;
+  outline: none;
+}

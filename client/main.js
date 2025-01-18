@@ -6,9 +6,6 @@ import "./interface.css";
 const discordSdk = new DiscordSDK(import.meta.env.VITE_DISCORD_CLIENT_ID);
 
 let user = {};
-let listCount = 0; // Track the number of lists
-const initialPosition = 27; // Starting position in vw
-const offset = 314; // Offset for each list in vw
 
 // Setup the Discord SDK
 async function setupDiscordSdk() {
@@ -77,30 +74,88 @@ function renderApp() {
     }
   });
 
-  // Add List Button Logic
-  const addListButton = document.getElementById("add-list-button");
-  const listContainer = document.getElementById("list-container");
+// Add List Button Logic
+const addListButton = document.getElementById("add-list-button");
+const listContainer = document.getElementById("list-container");
 
-  addListButton.style.left = `${initialPosition}vw`; // Set initial position
+let listCount = 0; // Keeps track of the number of lists
+const initialPosition = 27; // Initial position of the 'add-list-button' (in vw)
+const offset = 314; // Offset for positioning lists (in px)
 
-  addListButton.addEventListener("click", () => {
-    // Increment list count and adjust button position
-    listCount++;
-    addListButton.style.left = `calc(${initialPosition}vw + ${listCount * offset}px)`;
+// Function to update the position of the 'add-list-button'
+function updateAddListButtonPosition() {
+  addListButton.style.left = `calc(${initialPosition}vw + ${listCount * offset}px)`;
+}
 
-    // Add a new list to the container
-    const newList = {
-      id: Date.now(), // Unique ID for the new list
-      title: `List ${listCount}`,
-    };
+// Function to handle replacing 'add-list-button' with 'create-new-list'
+addListButton.addEventListener("click", () => {
+  // Hide the 'add-list-button'
+  addListButton.style.display = "none";
 
-    renderList(newList, listContainer); // Add the new list to the container
+  // Create the 'create-new-list' box
+  const createNewListBox = document.createElement("div");
+  createNewListBox.classList.add("create-new-list");
+
+  // Input field for list name
+  const listInput = document.createElement("input");
+  listInput.type = "text";
+  listInput.placeholder = "Enter list name...";
+  listInput.classList.add("add-list-input");
+
+  // Button container for cancel and confirm buttons
+  const buttonRow = document.createElement("div");
+  buttonRow.classList.add("button-row");
+
+  // Cancel button
+  const cancelButton = document.createElement("button");
+  cancelButton.textContent = "cancel";
+  cancelButton.classList.add("cancel-list-button");
+  cancelButton.addEventListener("click", () => {
+    // Remove the 'create-new-list' box
+    createNewListBox.remove();
+    // Show the 'add-list-button'
+    addListButton.style.display = "block";
   });
 
-// Function to render an individual list
+  // Confirm button
+  const confirmButton = document.createElement("button");
+  confirmButton.textContent = "confirm";
+  confirmButton.classList.add("confirm-list-button");
+  confirmButton.addEventListener("click", () => {
+    const listName = listInput.value.trim(); // Get the entered name
+    if (listName) {
+      // Create a new list with the entered name
+      const newList = { id: Date.now(), title: listName };
+      renderList(newList, listContainer);
+
+      // Update the list count and button position
+      listCount++;
+      updateAddListButtonPosition();
+
+      // Remove the 'create-new-list' box
+      createNewListBox.remove();
+      // Show the 'add-list-button'
+      addListButton.style.display = "block";
+    }
+  });
+
+  // Append buttons to the button row container
+  buttonRow.appendChild(cancelButton);
+  buttonRow.appendChild(confirmButton);
+
+  // Append input and button row to the 'create-new-list' box
+  createNewListBox.appendChild(listInput);
+  createNewListBox.appendChild(buttonRow);
+
+  // Insert the 'create-new-list' box into the container
+  listContainer.appendChild(createNewListBox);
+});
+
+
+// Function to render a new list
 function renderList(listData, container) {
   const list = document.createElement("div");
-  list.classList.add("list"); // Ensure the list gets styled correctly
+  list.classList.add("list");
   list.setAttribute("data-list-id", listData.id);
 
   // Add list title
@@ -116,21 +171,27 @@ function renderList(listData, container) {
   deleteButton.addEventListener("click", () => {
     list.remove();
     listCount--;
-    addListButton.style.left = `calc(${initialPosition}vw + ${listCount * offset}px)`;
+    updateAddListButtonPosition(); // Adjust position of the 'add-list-button'
   });
   list.appendChild(deleteButton);
 
-  // Add "Add Task" button
-  const addTaskButton1 = document.createElement("button");
-  addTaskButton1.classList.add("add-task-button");
-  addTaskButton1.textContent = "+ add a task";
-  addTaskButton1.addEventListener("click", () => showTaskPopup(listData.id));
-  list.appendChild(addTaskButton1);
+  // Add "Add Task" button to the list
+  const addTaskButton = document.createElement("button");
+  addTaskButton.classList.add("add-task-button");
+  addTaskButton.textContent = "+ Add Task";
+  addTaskButton.addEventListener("click", () => {
+    alert(`Add Task to List: ${listData.title}`); // Example functionality
+  });
+  list.appendChild(addTaskButton);
 
-  // Append the list to the container
+  // Append the new list to the container
   container.appendChild(list);
   attachTaskPopupLogic();
 }
+
+// Ensure the 'add-list-button' starts in the correct position
+updateAddListButtonPosition();
+
 
   // Handle edit and delete actions in the settings popup
   const editBoard = document.getElementById("edit-board");
