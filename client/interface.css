@@ -920,6 +920,7 @@ align-items: center;
   display: flex;
   justify-content: space-between;
   gap: 20px;
+  letter-spacing: 1px;
 }
 
 .date-inputs div {
@@ -927,38 +928,25 @@ align-items: center;
 }
 
 .date-inputs label {
-  margin-bottom: 5px;
+  margin-bottom: 15px;
   font-size: 14px;
 }
 
-/* Additional Options */
-.additional-options {
-  display: flex;
-  justify-content: space-between;
-  gap: 20px;
-  margin-top: 20px; /* Add space above */
+.date-inputs input {
+  margin-bottom: 25px;
+  width: 30%;
+  height: 15px;
+  margin-left: 20px;
+  border: transparent;
 }
 
-.additional-options button {
-  width: 48%;
-  padding: 10px;
-  border: 1px solid #6D7276;
-  border-radius: 8px;
-  background-color: transparent;
-  color: white;
-  cursor: pointer;
-  font-size: 14px;
-}
-
-.additional-options button:hover {
-  background-color: #474B51;
+.date-inputs input::placeholder {
+  color: #949AA0;
+  text-align: center;
+  letter-spacing: 1px;
 }
 
 /* Reminder Section */
-.reminder {
-  margin-top: 20px;
-}
-
 .reminder label {
   display: block;
   margin-bottom: 10px;
@@ -971,14 +959,32 @@ align-items: center;
   gap: 5px;
 }
 
+.reminder span {
+  position: relative;
+  font-size: 14px;
+  color: #949AA0;
+  margin-left:90px;
+  right: 40px;
+  letter-spacing: 1px;
+}
+
 .reminder input {
   width: 50px;
   text-align: center;
   padding: 8px;
   border-radius: 8px;
-  border: 1px solid #6D7276;
+  border: 1px solid transparent;
   background-color: #3A3E42;
   color: white;
+  position: absolute;
+  left: 157px;
+}
+
+
+.reminder input::placeholder {
+  color: #949AA0;
+  text-align: center;
+  letter-spacing: 1px;
 }
 
 #add-file-button {
@@ -992,6 +998,47 @@ align-items: center;
   font-size: 14px;
   left: 20px;
   margin-bottom: 25px;
+}
+
+.label-task {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  letter-spacing: 1px;
+}
+
+.label-task div {
+  width: 48%; /* Half of the container width */
+}
+
+.label-task label {
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+
+.label-task button {
+  position: relative;
+  background-color: transparent;
+  color: #949AA0;
+  border: 1.5px solid #949AA0;
+  border-radius: 12px;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-size: 14px;
+  left: 20px;
+  margin-bottom: 25px;
+}
+
+/* Task Assigned To and Add Member Button */
+.label-task div:nth-child(2) { /* Targets the second div inside .label-task */
+  position: relative;
+  left: -130px; /* Move 130px to the left */
+}
+
+/* Due Date Input */
+.date-inputs div:nth-child(2) { /* Targets the second div inside .date-inputs */
+  position: relative;
+  left: -130px; /* Move 130px to the left */
 }
 
 

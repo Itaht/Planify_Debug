@@ -1,7 +1,7 @@
 import { DiscordSDK } from "@discord/embedded-app-sdk";
-import { Sidebar } from "./sidebar.js";
+import { Interface } from "./interface.js";
 import "./style.css";
-import "./sidebar.css";
+import "./interface.css";
 
 const discordSdk = new DiscordSDK(import.meta.env.VITE_DISCORD_CLIENT_ID);
 
@@ -59,7 +59,7 @@ async function fetchUserProfile(token) {
 }
 
 function renderApp() {
-  document.querySelector("#app").innerHTML = Sidebar(user);
+  document.querySelector("#app").innerHTML = Interface(user);
 
   // Settings Popup Logic
   const settingsIcon = document.getElementById("settings-icon");

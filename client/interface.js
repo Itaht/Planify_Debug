@@ -1,4 +1,4 @@
-export function Sidebar(user) {
+export function Interface(user) {
   return `
     <!-- List Container -->
       <div id="list-container">
@@ -122,13 +122,19 @@ export function Sidebar(user) {
             <input type="text" id="due-date" placeholder="dd/mm/yy">
           </div>
         </div>
-        <div class="additional-options">
-          <button type="button">set label</button>
-          <button type="button">+ add member</button>
+        <div class="label-task">
+          <div>
+            <label for="label">label</label>
+            <button id="set-label-button" type="button">set label</button>
+          </div>
+          <div>
+            <label for="task-assigned-to">task assigned to</label>
+            <button id="add-member-button" type="button">+ add member</button>
+          </div>
         </div>
         <div class="reminder">
           <label for="reminder">set reminder</label>
-          <div>
+          <div class="reminder-inputs">
             <span>remind every</span>
             <input type="text" id="reminder" placeholder="dd">
             <span>day</span>
