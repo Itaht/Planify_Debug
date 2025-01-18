@@ -1130,3 +1130,41 @@ align-items: center;
   color: white;
   outline: none;
 }
+
+.file-display {
+  position: relative;
+  background-color: #3A3E42;
+  color: #949AA0;
+  border: 1.5px solid transparent;
+  border-radius: 10px;
+  padding: 6px 16px;
+  cursor: pointer;
+  font-size: 14px;
+  left: 20px;
+  margin-bottom: 25px;
+  max-width: 120px;
+  white-space: nowrap; /* Prevent text from wrapping */
+  overflow: hidden; /* Hide overflowed text */
+  text-overflow: ellipsis; /* Add "..." for overflowing text */
+}
+
+.file-name {
+  display: inline-block; /* Allow for ellipsis to work correctly */
+  max-width: calc(100% - 40px); /* Reserve space for the button and 4px gap */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.remove-file-button {
+  position: absolute;
+  right: -4px; /* 4px gap from the right edge of the container */
+  top: 50%;
+  transform: translateY(-50%); /* Center vertically */
+  background-color: transparent;
+  color: white;
+  border: none;
+  font-size: 12px;
+  cursor: pointer;
+  z-index: 1; /* Ensure it stays above the file name */
+}

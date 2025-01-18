@@ -58,6 +58,50 @@ async function fetchUserProfile(token) {
 function renderApp() {
   document.querySelector("#app").innerHTML = Interface(user);
 
+  // Add File Button Logic
+  const addFileButton = document.getElementById("add-file-button");
+
+  // Create a hidden file input
+  const fileInput = document.createElement("input");
+  fileInput.type = "file";
+  fileInput.style.display = "none"; // Hide the file input
+
+  // Add event listener to the button
+  addFileButton.addEventListener("click", () => {
+    fileInput.click(); // Trigger the file input dialog
+  });
+
+  // Handle file selection
+  fileInput.addEventListener("change", (event) => {
+    const file = event.target.files[0]; // Get the selected file
+    if (file) {
+      console.log("Selected file:", file.name);
+
+      // Create a file display container
+      const fileDisplay = document.createElement("div");
+      fileDisplay.classList.add("file-display");
+      fileDisplay.textContent = file.name;
+
+      // Create a remove button (X)
+      const removeButton = document.createElement("button");
+      removeButton.textContent = "X";
+      removeButton.classList.add("remove-file-button");
+      removeButton.addEventListener("click", () => {
+        // Restore the 'add-file-button'
+        fileDisplay.replaceWith(addFileButton);
+      });
+
+      // Append the remove button to the file display
+      fileDisplay.appendChild(removeButton);
+
+      // Replace the button with the file display
+      addFileButton.replaceWith(fileDisplay);
+    }
+  });
+
+  // Append the file input to the document
+  document.body.appendChild(fileInput);
+  
   // Settings Popup Logic
   const settingsIcon = document.getElementById("settings-icon");
   const settingsPopup = document.getElementById("settings-popup");

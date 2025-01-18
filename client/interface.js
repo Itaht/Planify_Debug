@@ -8,7 +8,11 @@ export function Interface(user) {
       <button id="add-list-button">+ add a list</button>
     </div>
 
-
+    <div class="file-display">
+      <span class="file-name">very_long_file_name_example.txt</span>
+      <button class="remove-file-button">X</button>
+    </div>
+    
   <!-- Sidebar -->
 
     <div id="sidebar">
