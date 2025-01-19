@@ -78,9 +78,8 @@ position: fixed;
 
 #board-text {
 position: relative;
-top: -0.5vh;
 left: 2vw;
-font-size: calc(1.3vw)  ;
+font-size: calc(1.4vw)  ;
 color: white;
 letter-spacing: 1px;
 }
@@ -1173,143 +1172,70 @@ align-items: center;
   z-index: 1; /* Ensure it stays above the file name */
 }
 
-/* Ensure parent containers do not clip the calendar */
-.container {
-  overflow: visible;
+.hidden {
+  display: none;
 }
 
-.pika-single.is-hidden {
-  display: none; 
-}
-
-.pika-single {
+#calendar-container {
   position: fixed;
-  top: 50%; 
-  left: 50%;
-  background-color: #1C2025;
-  color: #F6F6F6;
-  border: 1px solid #484E55;
+  top: 50%; /* Center vertically */
+  left: 50%; /* Center horizontally */
+  transform: translate(-50%, -50%); /* Adjust positioning from the center */
+  background: #484E55;
+  border: 1px solid #949AA0;
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
-  z-index: 10000;
-  padding: 10px; /* Reduced padding */
-  font-family: 'Inter', sans-serif;
-  max-width: 300px; /* Reduced width */
-  display: grid;
-  grid-template-rows: auto auto 1fr;
-  gap: 20px; /* Reduced gap between rows */
+  z-index: 1000;
+  padding: 10px;
 }
 
-/* Calendar Header */
-.pika-title {
+
+#calendar {
+  width: 300px;
+  text-align: center;
+}
+
+.calendar-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #484E55;
-  color: #F6F6F6;
-  font-size: 12px; /* Smaller font size */
-  font-weight: bold;
-  padding: 6px; /* Reduced padding */
-  border-radius: 8px;
-  text-transform: uppercase;
-  max-width: 290px; /* Reduced width */
+  margin-bottom: 10px;
 }
 
-/* Navigation Arrows */
-.pika-prev, .pika-next {
-  color: #F6F6F6;
-  font-size: 10px; /* Reduced font size */
-  cursor: pointer;
-  transition: color 0.2s ease;
+.calendar-header button {
   background-color: #33363B;
-  padding: 2px 6px; /* Reduced padding */
-}
-
-.pika-prev:hover, .pika-next:hover {
-  color: #949AA0;
-}
-
-/* Weekdays Row */
-.pika-label {
-  text-align: center;
-  max-width: 300px; /* Reduced width */
-  font-size: 10px; /* Smaller font size */
-  color: #949AA0;
-  font-weight: bold;
-  text-transform: uppercase;
-  line-height: 30px; /* Adjusted vertical alignment */
-}
-
-/* Weekday Grid Layout */
-.pika-table {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr); 
-  gap: 4px; /* Smaller gap */
-  max-width: 290px; /* Reduced width */
-}
-
-/* Days */
-.pika-day {
-  width: 100%; 
-  aspect-ratio: 1; 
+  padding: 4px 14px;
+  outline: none;
   display: flex;
-  justify-content: center;
   align-items: center;
-  font-size: 12px; /* Reduced font size */
-  background-color: #484E55;
-  color: white;
-  border-radius: 4px; /* Reduced rounding */
-  cursor: pointer;
-  transition: background-color 0.2s ease, color 0.2s ease;
+  justify-content: center;
+  text-align: center;
 }
 
-/* Hover Effect for Days */
-.pika-day:hover {
-  background-color: #949AA0;
-  color: #33363B;
-}
-
-/* Selected Day */
-.is-selected {
-  background-color: #F6F6F6 !important;
-  color: #33363B !important;
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
   font-weight: bold;
-  border-radius: 4PX  ;
-  border: 1px solid #949AA0; /* Reduced border size */
 }
 
-/* Today Highlight */
-.is-today {
-  background-color: #33363B;
-  color: #33363B;
-  font-weight: bold;
+.calendar-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
+}
+
+.day {
+  padding: 10px;
   border-radius: 4px;
-  border: 1px solid #33363B;
+  cursor: pointer;
 }
 
-/* Empty Cells */
-.pika-day.is-empty {
-  visibility: hidden;
+.day:hover {
+  background-color: #949AA0;
+  color: white;
 }
 
-/* Disabled Days */
-.is-disabled, .is-outside-current-month {
-  color: #484E55;
-  pointer-events: none;
-}
-
-/* Animation Effects */
-.pika-single {
-  animation: fadeIn 0.2s ease-in-out;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: scale(0.9); /* Slightly smaller initial size */
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+.selected {
+  background-color: #1C2025;
+  color: white;
 }

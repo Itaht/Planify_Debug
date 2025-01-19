@@ -12,7 +12,28 @@ export function Interface(user) {
       <span class="file-name">very_long_file_name_example.txt</span>
       <button class="remove-file-button">X</button>
     </div>
-    
+
+    <div id="calendar-container" class="hidden">
+      <div id="calendar">
+        <div class="calendar-header">
+          <button id="prev-month-button">←</button>
+          <span id="month-year-display"></span>
+          <button id="next-month-button">→</button>
+        </div>
+        <div class="calendar-grid">
+          <div class="weekday">Sun</div>
+          <div class="weekday">Mon</div>
+          <div class="weekday">Tue</div>
+          <div class="weekday">Wed</div>
+          <div class="weekday">Thu</div>
+          <div class="weekday">Fri</div>
+          <div class="weekday">Sat</div>
+        </div>
+        <div class="calendar-days"></div>
+      </div>
+    </div>
+
+
   <!-- Sidebar -->
 
     <div id="sidebar">

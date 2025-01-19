@@ -58,66 +58,116 @@ async function fetchUserProfile(token) {
 
 function renderApp() {
   document.querySelector("#app").innerHTML = Interface(user);
+  // Call the function to set up the date pickers
 
-  function setupDatePickers() {
-    const startDateButton = document.getElementById("start-date-button");
-    const dueDateButton = document.getElementById("due-date-button");
-  
-    const createDayLabels = () => {
-      const labels = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-      return labels.map(label => `<div class="pika-day-label">${label}</div>`).join('');
-    };
-  
-    // Initialize Start Date Picker
-    const startDatePicker = new Pikaday({
-      field: startDateButton,
-      format: 'DD/MM/YYYY',
-      firstDay: 0, // Start week on Sunday
-      bound: true,
-      showDaysInMonth: true,
-      onOpen: function () {
-        const dayLabels = createDayLabels();
-        const calendar = this.el.querySelector('.pika-lendar');
-        if (!calendar.querySelector('.pika-day-labels')) {
-          const dayRow = document.createElement('div');
-          dayRow.className = 'pika-day-labels';
-          dayRow.innerHTML = dayLabels;
-          calendar.prepend(dayRow);
-        }
-      },
-      onSelect: function (date) {
-        startDateButton.textContent = this.toString(); // Update button text
-        this.hide();
-      },
-    });
-  
-    // Initialize Due Date Picker
-    const dueDatePicker = new Pikaday({
-      field: dueDateButton,
-      format: 'DD/MM/YYYY',
-      firstDay: 0, // Start week on Sunday
-      bound: true,
-      showDaysInMonth: true,
-      onOpen: function () {
-        const dayLabels = createDayLabels();
-        const calendar = this.el.querySelector('.pika-lendar');
-        if (!calendar.querySelector('.pika-day-labels')) {
-          const dayRow = document.createElement('div');
-          dayRow.className = 'pika-day-labels';
-          dayRow.innerHTML = dayLabels;
-          calendar.prepend(dayRow);
-        }
-      },
-      onSelect: function (date) {
-        dueDateButton.textContent = this.toString(); // Update button text
-        this.hide();
-      },
-    });
+// Global variables
+const today = new Date(); // Fixed today's date
+let displayedMonth = today.getMonth(); // Start with today's month
+let displayedYear = today.getFullYear(); // Start with today's year
+let selectedButton = null; // Track the button that was clicked
+
+function renderCalendar(month, year) {
+  const calendarDays = document.querySelector(".calendar-days");
+  const monthYearDisplay = document.getElementById("month-year-display");
+
+  // Clear existing days
+  calendarDays.innerHTML = "";
+
+  // Update month and year display
+  const monthNames = [
+    "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+  ];
+  monthYearDisplay.textContent = `${monthNames[month]} ${year}`;
+
+  // Get first day of the month and the total number of days
+  const firstDay = new Date(year, month, 1).getDay();
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+  // Add empty cells for days before the first day of the month
+  for (let i = 0; i < firstDay; i++) {
+    const emptyCell = document.createElement("div");
+    emptyCell.classList.add("day", "empty");
+    calendarDays.appendChild(emptyCell);
   }
-  
-  setupDatePickers();  
 
-  
+  // Add days of the month
+  for (let day = 1; day <= daysInMonth; day++) {
+    const dayCell = document.createElement("div");
+    dayCell.classList.add("day");
+    dayCell.textContent = day;
+
+    // Highlight today's date only if it matches the displayed month and year
+    if (
+      day === today.getDate() && // Matches today's date
+      month === today.getMonth() && // Matches today's month
+      year === today.getFullYear() // Matches today's year
+    ) {
+      dayCell.classList.add("selected");
+    }
+
+    // Add click event to select a date
+    dayCell.addEventListener("click", () => {
+      // Clear the `.selected` class from all days
+      document.querySelectorAll(".day").forEach(d => d.classList.remove("selected"));
+      dayCell.classList.add("selected");
+
+      // Update the button with the selected date
+      const selectedDate = new Date(year, month, day);
+      selectedButton.textContent = selectedDate.toLocaleDateString();
+
+      // Hide the calendar
+      document.getElementById("calendar-container").classList.add("hidden");
+    });
+
+    calendarDays.appendChild(dayCell);
+  }
+}
+
+// Event listeners for navigation
+document.getElementById("prev-month-button").addEventListener("click", () => {
+  displayedMonth--;
+  if (displayedMonth < 0) {
+    displayedMonth = 11;
+    displayedYear--;
+  }
+  renderCalendar(displayedMonth, displayedYear);
+});
+
+document.getElementById("next-month-button").addEventListener("click", () => {
+  displayedMonth++;
+  if (displayedMonth > 11) {
+    displayedMonth = 0;
+    displayedYear++;
+  }
+  renderCalendar(displayedMonth, displayedYear);
+});
+
+// Show calendar when a button is clicked
+document.getElementById("start-date-button").addEventListener("click", (e) => {
+  selectedButton = e.target;
+  document.getElementById("calendar-container").classList.remove("hidden");
+  renderCalendar(displayedMonth, displayedYear);
+});
+
+document.getElementById("due-date-button").addEventListener("click", (e) => {
+  selectedButton = e.target;
+  document.getElementById("calendar-container").classList.remove("hidden");
+  renderCalendar(displayedMonth, displayedYear);
+});
+
+// Close calendar if clicked outside
+document.addEventListener("click", (e) => {
+  const calendarContainer = document.getElementById("calendar-container");
+  if (!calendarContainer.contains(e.target) && e.target.id !== "start-date-button" && e.target.id !== "due-date-button") {
+    calendarContainer.classList.add("hidden");
+  }
+});
+
+// Render the calendar initially
+renderCalendar(displayedMonth, displayedYear);
+
+
 // Add File Button Logic
 const addFileButton = document.getElementById("add-file-button");
 
