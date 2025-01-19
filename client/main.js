@@ -1,11 +1,9 @@
 import { DiscordSDK } from "@discord/embedded-app-sdk";
 import { Interface } from "./interface.js";
-import Pikaday from 'pikaday';
 import "./style.css";
 import "./interface.css";
 
 const discordSdk = new DiscordSDK(import.meta.env.VITE_DISCORD_CLIENT_ID);
-
 let user = {};
 
 // Setup the Discord SDK
@@ -59,6 +57,88 @@ async function fetchUserProfile(token) {
 function renderApp() {
   document.querySelector("#app").innerHTML = Interface(user);
   // Call the function to set up the date pickers
+
+  // Restrict reminder input to numbers only
+  const reminderInput = document.getElementById("reminder");
+
+  if (reminderInput) {
+    reminderInput.addEventListener("input", () => {
+      // Remove any non-numeric characters
+      reminderInput.value = reminderInput.value.replace(/\D/g, "");
+    });
+  }
+
+
+// Your existing `label-popup` logic
+const setLabelButton = document.getElementById("set-label-button");
+const labelPopup = document.getElementById("label-popup");
+
+// Show or hide the label popup when the "set-label-button" is clicked
+setLabelButton.addEventListener("click", (event) => {
+  event.stopPropagation(); // Prevent click propagation
+  if (labelPopup.style.display === "none" || labelPopup.style.display === "") {
+    labelPopup.style.display = "block"; // Show the popup
+  } else {
+    labelPopup.style.display = "none"; // Hide the popup
+  }
+});
+
+// Hide the label popup when clicking outside of it
+document.addEventListener("click", (event) => {
+  if (!labelPopup.contains(event.target) && event.target.id !== "set-label-button") {
+    labelPopup.style.display = "none";
+  }
+});
+
+// Enhance label selection logic
+const labelOptions = document.querySelectorAll(".label-option");
+let selectedColorButton = null; // Track the currently selected button
+
+labelOptions.forEach((button) => {
+  button.addEventListener("click", () => {
+    // Remove the checkmark from the previously selected button
+    if (selectedColorButton) {
+      selectedColorButton.innerHTML = ""; // Clear previous selection
+    }
+
+    // Set the clicked button as the selected one and add a checkmark
+    selectedColorButton = button;
+    button.innerHTML = "✓"; // Add the checkmark symbol
+
+    // Optional: log the selected color
+    const selectedColor = button.getAttribute("data-color");
+    console.log("Selected color:", selectedColor);
+  });
+});
+
+// "Done" button functionality
+const doneLabelButton = document.getElementById("done-label-button");
+
+doneLabelButton.addEventListener("click", () => {
+  if (selectedColorButton) {
+    const selectedColor = selectedColorButton.getAttribute("data-color");
+
+    // Update the "set-label-button" with the selected color
+    setLabelButton.style.backgroundColor = selectedColor;
+    setLabelButton.style.border = "none"; // Remove border for a clean look
+    setLabelButton.textContent = ""; // Clear any existing text
+
+    // Optionally add a checkmark or other text to the button
+    // setLabelButton.innerHTML = `<span style="color: white;">✓</span>`;
+
+    // Ensure the button retains its original size
+    setLabelButton.style.width = "27%"; // Adjust width as needed
+    setLabelButton.style.height = "35%";
+    setLabelButton.style.borderRadius = "12px"; // Optional: add rounded corners
+    setLabelButton.style.border = "1px solid #949AA0"; // Optional: add border to the button
+
+    // Hide the popup
+    labelPopup.style.display = "none";
+  } else {
+    alert("Please select a color before clicking 'Done'.");
+  }
+});
+
 
 // Global variables
 const today = new Date(); // Fixed today's date
@@ -414,6 +494,96 @@ updateAddListButtonPosition();
       clearProjectFormFields();
     }
   });
+  
+  
+  function resetTaskPopupInputs() {
+    // Reset task form inputs
+    const addTaskForm = document.getElementById("add-task-form");
+    if (addTaskForm) addTaskForm.reset();
+  
+    // Reset the file container to the initial "Add File" button
+    const fileContainer = document.getElementById("file-container");
+    if (fileContainer) {
+      fileContainer.innerHTML = ""; // Clear the container
+  
+      // Recreate the "Add File" button
+      const addFileButton = document.createElement("button");
+      addFileButton.id = "add-file-button";
+      addFileButton.textContent = "+ add file";
+  
+      // Create a hidden file input
+      const fileInput = document.createElement("input");
+      fileInput.type = "file";
+      fileInput.style.display = "none";
+  
+      // Add event listeners to the "Add File" button
+      addFileButton.addEventListener("click", () => {
+        fileInput.value = ""; // Reset input value
+        fileInput.click(); // Trigger file input dialog
+      });
+  
+      // Handle file selection
+      fileInput.addEventListener("change", (event) => {
+        const file = event.target.files[0];
+        if (file) {
+          console.log("Selected file:", file.name);
+  
+          // Replace the "Add File" button with a file display
+          const fileDisplay = document.createElement("div");
+          fileDisplay.classList.add("file-display");
+          fileDisplay.innerHTML = `
+            <span class="file-name">${file.name}</span>
+            <button class="remove-file-button">X</button>
+          `;
+  
+          // Add event listener to remove button
+          fileDisplay.querySelector(".remove-file-button").addEventListener("click", () => {
+            resetTaskPopupInputs(); // Reset to the "Add File" button
+          });
+  
+          // Replace the contents of the file container
+          fileContainer.innerHTML = ""; // Clear container
+          fileContainer.appendChild(fileDisplay);
+        }
+      });
+  
+      // Append the "Add File" button and file input to the container
+      fileContainer.appendChild(addFileButton);
+      fileContainer.appendChild(fileInput);
+    }
+  
+    // Reset other inputs
+    const startDateButton = document.getElementById("start-date-button");
+    if (startDateButton) {
+      startDateButton.textContent = "dd/mm/yy";
+      startDateButton.style.backgroundColor = "";
+      startDateButton.style.color = "#949AA0";
+    }
+  
+    const dueDateButton = document.getElementById("due-date-button");
+    if (dueDateButton) {
+      dueDateButton.textContent = "dd/mm/yy";
+      dueDateButton.style.backgroundColor = "";
+      dueDateButton.style.color = "#949AA0";
+    }
+  
+    const setLabelButton = document.getElementById("set-label-button");
+    if (setLabelButton) {
+      setLabelButton.textContent = "set label";
+      setLabelButton.style.backgroundColor = "";
+      setLabelButton.style.color = "#949AA0";
+    }
+  
+    const labelOptions = document.querySelectorAll(".label-option");
+    if (labelOptions) {
+      labelOptions.forEach((button) => (button.innerHTML = ""));
+    }
+  
+    selectedColorButton = null;
+  
+    console.log("Task popup inputs reset successfully.");
+  }
+  
 
   function attachTaskPopupLogic() {
     const taskPopupOverlay = document.getElementById("task-popup-overlay");
@@ -421,7 +591,8 @@ updateAddListButtonPosition();
     const cancelTaskButton = document.getElementById("cancel-task-button");
     const addTaskForm = document.getElementById("add-task-form");
     const confirmationPopup = document.getElementById("confirmation-popup");
-  
+    const discardButton = document.getElementById("discard-button");
+
     // Show Task Popup
     document.addEventListener("click", (e) => {
       if (e.target && e.target.classList.contains("add-task-button")) {
@@ -437,22 +608,38 @@ updateAddListButtonPosition();
     cancelTaskButton.addEventListener("click", () => {
       showConfirmationPopup();
     });
+    
+    taskPopupOverlay.addEventListener("click", (e) => {
+      if (e.target === taskPopupOverlay || e.target === discardButton) {
+        taskPopupOverlay.classList.add("hidden");
+        resetTaskPopupInputs(); // Reset inputs
+      }
+    });
+    
   
     // Close Task Popup by Clicking on Overlay
     taskPopupOverlay.addEventListener("click", (e) => {
-      if (e.target === taskPopupOverlay) {
+      if (e.target === taskPopupOverlay || e.target === discardButton) {
         taskPopupOverlay.classList.add("hidden");
         clearTaskFormFields();
       }
     });
+
+/*------------------------------------------------------------------------------------------------------------------*/
   
     // Discard Task Popup Changes
-    const discardButton = document.getElementById("discard-button");
     discardButton.addEventListener("click", () => {
       hideConfirmationPopup();
-      taskPopupOverlay.classList.add("hidden");
       clearTaskFormFields();
+      resetTaskPopupInputs();
+      clearBoardFormFields();
+      clearProjectFormFields();
+      projectPopupOverlay.classList.add("hidden");
+      popupOverlay.classList.add("hidden");
+      taskPopupOverlay.classList.add("hidden");
     });
+
+/*------------------------------------------------------------------------------------------------------------------*/
   
     // Cancel Discard
     const cancelDiscardButton = document.getElementById("cancel-discard-button");
@@ -491,6 +678,11 @@ confirmationPopup.addEventListener("click", (e) => {
 // Discard Changes
 discardButton.addEventListener("click", () => {
   hideConfirmationPopup();
+  
+  if (!taskPopupOverlay.classList.contains("hidden")) {
+    taskPopupOverlay.classList.add("hidden");
+    resetTaskPopupInputs(); // Reset inputs
+  }
 
   if (!popupOverlay.classList.contains("hidden")) {
     popupOverlay.classList.add("hidden");

@@ -136,7 +136,9 @@ export function Interface(user) {
         <label for="task-details">task description (optional)</label>
         <textarea id="task-details" placeholder="Enter task description"></textarea>
         <label for="attached-file">attached file</label>
-        <button id="add-file-button" type="button">+ add file</button>
+        <div id="file-container">
+          <button id="add-file-button" type="button">+ add file</button>
+        </div>
         <div class="date-inputs">
           <div>
             <label for="start-date">start date</label>
@@ -171,6 +173,22 @@ export function Interface(user) {
       <button type="button" id="cancel-task-button">cancel</button>
       <button type="submit" id="add-task-button-submit">add a task</button>
     </div>
+  </div>
+</div>
+
+
+<div id="label-popup" class="hidden">
+  <div class="popup-content">
+    <div class="label-options">
+      <button class="label-option" style="background-color: #A259FF;" data-color="#A259FF"></button>
+      <button class="label-option" style="background-color: #FFD93D;" data-color="#FFD93D"></button>
+      <button class="label-option" style="background-color: #53D1F0;" data-color="#53D1F0"></button>
+      <button class="label-option" style="background-color: #FF773D;" data-color="#FF773D"></button>
+      <button class="label-option" style="background-color: #3D8BFF;" data-color="#3D8BFF"></button>
+      <button class="label-option" style="background-color: #FF3D71;" data-color="#FF3D71"></button>
+      <button class="label-option" style="background-color: #3DFF77;" data-color="#3DFF77"></button>
+      <button id="done-label-button" class="done-button">done</button>
+      </div>
   </div>
 </div>
 
