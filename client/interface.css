@@ -78,8 +78,8 @@ position: fixed;
 
 #board-text {
 position: relative;
-left: 2vw;
-font-size: calc(1.4vw)  ;
+left: 1vw;
+font-size: calc(1.4vw);
 color: white;
 letter-spacing: 1px;
 }
@@ -87,12 +87,12 @@ letter-spacing: 1px;
 #create-board-button {
 position: relative;
 top: -3.7vh;
-left: 8.5vw;
+left: 8vw;
 background-color: transparent;
 color: #949AA0;
 border: 1.5px solid #949AA0;
 border-radius: 8px;
-padding: 4px 12px;
+padding: 4px 14px;
 font-size: calc(0.9vw);
 letter-spacing: 1px;
 cursor: pointer;
@@ -121,7 +121,7 @@ border-color: #949AA0;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
   border-right: 1px solid #474E55; /* Right edge line color */
   border-top: 1px solid #474E55; /* Right edge line color */
-  z-index: 2;
+  z-index: 10;
 }
 
 #userbox img {
@@ -1325,4 +1325,54 @@ align-items: center;
 
 .label-option:focus {
   outline: 2px solid #000; /* Optional for accessibility */
+}
+
+
+/*-------------------------------------------------------------------------------*/
+
+
+#board-list-container {
+  max-height: 54.8vh; /* Adjust as needed */
+  overflow-y: auto; /* Allow scrolling if content exceeds container height */
+  position: relative; /* Ensure the container's position can be adjusted */
+  top: -1.5vh; /* Moves the container 1vh higher */
+}
+
+.board-button {
+  display: block;
+  width: 100%;
+  padding: 10px 15px;
+  margin: 4px 0;
+  background-color: transparent;
+  border: none;
+  border-radius: 4px;
+  text-align: left;
+  font-size: calc(1.3vw);
+  color: #f3f3f3;
+  cursor: pointer;
+  text-indent: 2.5vw; /* Moves text 3vw to the left */
+  margin-bottom: 1.5vh;
+}
+
+.board-button:hover {
+  background-color: #25282D;
+}
+
+.board-button.active {
+  background-color: #1C2B41;
+  color: #3C90E2;
+}
+
+#board-list-container::-webkit-scrollbar {
+  width: 6px; /* Optional scrollbar width */
+  border-radius: 4px;
+}
+
+#board-list-container::-webkit-scrollbar-thumb {
+  background-color: #33363B; /* Scrollbar thumb color */
+  border-radius: 4px;
+}
+
+#board-list-container::-webkit-scrollbar-track {
+  background-color: #25282D; /* Scrollbar track color */
 }

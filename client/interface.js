@@ -64,7 +64,10 @@ export function Interface(user) {
       <!-- Board Section -->
       <div id="board-section">
         <span id="board-text">Boards</span>
-        <button id="create-board-button">+ Create New Board</button>
+        <div id="create-board-container">
+          <button id="create-board-button">+ Create New Board</button>
+        </div>
+        <div id="board-list-container"></div> <!-- Separate container for boards -->
       </div>
 
       <!-- Project Section -->

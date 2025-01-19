@@ -56,7 +56,44 @@ async function fetchUserProfile(token) {
 
 function renderApp() {
   document.querySelector("#app").innerHTML = Interface(user);
-  // Call the function to set up the date pickers
+  
+  // Get references to the board list container and create board form
+  const createBoardButtonForm = document.getElementById("create-board-button-form");
+  const popupOverlay = document.getElementById("popup-overlay");
+  const boardListContainer = document.getElementById("board-list-container");
+
+  // Handle creating a new board
+  createBoardButtonForm.addEventListener("click", (event) => {
+    event.preventDefault(); // Prevent form submission
+
+    const boardNameInput = document.getElementById("board-name");
+    const boardName = boardNameInput.value.trim();
+
+    if (boardName) {
+      // Create a new board button
+      const newBoardButton = document.createElement("button");
+      newBoardButton.className = "board-button";
+      newBoardButton.textContent = boardName;
+
+      // Add click event to toggle active class
+      newBoardButton.addEventListener("click", () => {
+        // Remove active class from all buttons
+        document.querySelectorAll(".board-button").forEach((btn) => btn.classList.remove("active"));
+
+        // Add active class to the clicked button
+        newBoardButton.classList.add("active");
+      });
+
+      // Append the new board button to the board list container
+      boardListContainer.appendChild(newBoardButton);
+
+      // Clear input and hide popup
+      boardNameInput.value = "";
+      popupOverlay.classList.add("hidden");
+    } else {
+      alert("Please enter a board name.");
+    }
+  });
 
   // Restrict reminder input to numbers only
   const reminderInput = document.getElementById("reminder");
@@ -455,7 +492,6 @@ updateAddListButtonPosition();
 
   // Main Popup Logic
   const createBoardButton = document.getElementById("create-board-button");
-  const popupOverlay = document.getElementById("popup-overlay");
   const closePopupButton = document.getElementById("close-popup-button");
   const cancelButton = document.getElementById("cancel-button");
   const createBoardForm = document.getElementById("create-board-form");
@@ -708,19 +744,20 @@ function hideConfirmationPopup() {
   confirmationPopup.classList.add("hidden");
 }
 
- const projectBox = document.getElementById("projectbox");
- const boardSection = document.getElementById("board-section");
- const projectSection = document.getElementById("project-section");
+const projectBox = document.getElementById("projectbox");
+const boardSection = document.getElementById("board-section");
+const projectSection = document.getElementById("project-section");
 
- projectBox.addEventListener("click", () => {
-   if (boardSection.style.display === "none") {
-     boardSection.style.display = "block";
-     projectSection.style.display = "none";
-   } else {
-     boardSection.style.display = "none";
-     projectSection.style.display = "block";
-   }
- });
+projectBox.addEventListener("click", () => {
+  if (boardSection.style.display === "none") {
+    boardSection.style.display = "block";
+    projectSection.style.display = "none";
+  } else {
+    boardSection.style.display = "none";
+    projectSection.style.display = "block";
+  }
+});
+
 
   // Utility functions
   function clearBoardFormFields() {
