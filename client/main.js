@@ -236,7 +236,7 @@ const listContainer = document.getElementById("list-container");
 
 let listCount = 0; // Keeps track of the number of lists
 const initialPosition = 27; // Initial position of the 'add-list-button' (in vw)
-const offset = 314; // Offset for positioning lists (in px)
+const offset = 302; // Offset for positioning lists (in px)
 
 // Function to update the position of the 'add-list-button'
 function updateAddListButtonPosition() {

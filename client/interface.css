@@ -625,22 +625,25 @@ align-items: center;
 .list {
   background-color: #33363B; /* Dark gray */
   width: 250px; /* Fixed width */
-  padding: 16px; /* Inner padding */
+  padding: 10px; /* Inner padding */
   border-radius: 12px; /* Rounded corners */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
   display: flex;
   flex-direction: column;
   gap: 12px;
   flex-shrink: 0; /* Prevent shrinking */
+  overflow-x: hidden;
 }
 
 
 /* List title styling */
 .list-title {
   color: white; /* White text color */
-  font-size: 18px; /* Font size for the title */
-  font-weight: bold; /* Bold text */
-  margin-bottom: 8px; /* Space below the title */
+  font-size: 19px; /* Font size for the title */
+  margin-bottom: 3px; /* Space below the title */
+  margin-top: 6px;
+  margin-left: 12px;
+  letter-spacing: 1px;
   white-space: nowrap; /* Prevents text from wrapping */
   overflow: hidden; /* Clips overflowing content */
   text-overflow: ellipsis; /* Adds ellipsis (...) for overflowing text */
@@ -678,6 +681,7 @@ align-items: center;
   color: white; /* White text color */
   font-size: 14px; /* Font size */
   font-weight: bold; /* Bold font */
+  margin-left: 10px; /* Move title to the right by 10px */
 }
 
 /* Task status indicator (colored dots) */
@@ -747,9 +751,10 @@ align-items: center;
 
 /* Add List Button */
 #add-list-button {
-  position: absolute; /* Allow dynamic positioning */
+  position: absolute; /* Allow precise positioning */
   top: 19vh; /* Align vertically */
-  width: 250px; 
+  margin-right: 30px; /* Ensure 30px gap from the right edge */
+  width: 270px;
   background-color: #33363B; /* Gray background */
   color: #949AA0; /* White text color */
   font-size: 22px; /* Font size for the title */
@@ -761,6 +766,7 @@ align-items: center;
   cursor: pointer; /* Pointer cursor */
   outline: none;
 }
+
 
 #add-list-button:hover {
   background-color: #565B63; /* Slightly darker on hover */
@@ -1073,14 +1079,14 @@ align-items: center;
 }
 
 .add-list-input {
-  width: 90%;
-  padding: 0px 10px;
+  width: 89%;
+  padding: 4px 6px;
   font-size: 18px;
   outline: none;
   background-color: transparent;
   border: none;
   letter-spacing: 1px;
-  margin-top: 12px;
+  margin-top: 10px;
   color: white;
 }
 
