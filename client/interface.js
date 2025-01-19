@@ -1,13 +1,6 @@
 export function Interface(user) {
   return `
-    <!-- List Container -->
-      <div id="list-container">
-      </div>
-
-      <!-- Add List Button -->
-      <button id="add-list-button">+ add a list</button>
-    </div>
-
+  
     <div class="file-display">
       <span class="file-name">very_long_file_name_example.txt</span>
       <button class="remove-file-button">X</button>
@@ -34,12 +27,33 @@ export function Interface(user) {
     </div>
 
 
-  <!-- Sidebar -->
+    <!-- Add List Button -->
+    <button id="add-list-button">+ add a list</button>
+      <!-- List Container -->
+    <div id="list-container"></div>
+    <div id="board-page">
+      <!-- Board Topic -->
+      <div id="board-topic">board 1</div>
+      
+      <!-- Board Description -->
+      <div id="board-description">board description</div>
+      
+      <!-- Settings Icon -->
+      <div id="settings-icon" onclick="toggleSettingsPopup()">
+        <img src="assets/setting.svg" alt="Settings">
+      </div>
+      
+      <!-- Tasks Checkbox -->
+      <div id="tasks-checkbox">
+        <input type="checkbox" id="tasks-checkbox-input">
+        <label id="tasks-checkbox-label">tasks assigned to me</label>
+      </div>
+
+    </div>
+
 
     <div id="sidebar">
       <div id="logo"></div>
-      <div id="board-topic">board 1</div>
-      <div id="board-description">board description</div>
       <div id="userbox">
         <img src="${user.avatarUrl}" alt="Profile Picture" id="profile-pic">
         <span id="username">${user.username}</span>
@@ -50,10 +64,6 @@ export function Interface(user) {
         <div id="projectmain">Project 1</div>
       </div>
 
-      <!-- Settings Icon -->
-      <div id="settings-icon" onclick="toggleSettingsPopup()">
-        <img src="assets/setting.svg" alt="Settings">
-      </div>
 
       <!-- Settings Popup -->
       <div id="settings-popup">
@@ -74,12 +84,6 @@ export function Interface(user) {
       <div id="project-section">
         <button id="create-project-button">+ create new project</button>
         <div id="line-under-button"></div>
-      </div>
-
-      <!-- Checkbox for Tasks -->
-      <div id="tasks-checkbox">
-        <input type="checkbox" id="tasks-checkbox-input">
-        <label id="tasks-checkbox-label">tasks assigned to me</label>
       </div>
 
       <!-- Main Popup and Overlay -->

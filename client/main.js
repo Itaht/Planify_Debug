@@ -386,7 +386,7 @@ addListButton.addEventListener("click", () => {
   cancelButton.addEventListener("click", () => {
     // Remove the 'create-new-list' box
     createNewListBox.remove();
-    // Show the 'add-list-button'
+    // Show the 'add-list-button' 
     addListButton.style.display = "block";
   });
 
@@ -757,7 +757,6 @@ projectBox.addEventListener("click", () => {
     projectSection.style.display = "block";
   }
 });
-
 
   // Utility functions
   function clearBoardFormFields() {
