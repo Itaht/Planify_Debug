@@ -119,11 +119,11 @@ export function Interface(user) {
         <div class="date-inputs">
           <div>
             <label for="start-date">start date</label>
-            <input type="text" id="start-date" placeholder="dd/mm/yy">
+            <button id="start-date-button" type="button">dd/mm/yy</button>
           </div>
           <div>
             <label for="due-date">due date</label>
-            <input type="text" id="due-date" placeholder="dd/mm/yy">
+            <button id="due-date-button" type="button">dd/mm/yy</button>
           </div>
         </div>
         <div class="label-task">
@@ -152,8 +152,6 @@ export function Interface(user) {
     </div>
   </div>
 </div>
-
-
 
       <!-- Confirmation Popup -->
       <div id="confirmation-popup" class="hidden">

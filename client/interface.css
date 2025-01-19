@@ -57,7 +57,7 @@ background-color: #25282D;
   position: fixed;
   top: 13.5vh;
   color: white;
-  left: 12vh;
+  left: 9vw;
   z-index: 4;
   font-size: calc(1.3vw); 
 }
@@ -78,7 +78,8 @@ position: fixed;
 
 #board-text {
 position: relative;
-left: 3.3vh;
+top: -0.5vh;
+left: 2vw;
 font-size: calc(1.3vw)  ;
 color: white;
 letter-spacing: 1px;
@@ -86,14 +87,14 @@ letter-spacing: 1px;
 
 #create-board-button {
 position: relative;
-top: -4.2vh;
-left: 16.5vh;
+top: -4vh;
+left: 8.5vw;
 background-color: transparent;
 color: #949AA0;
 border: 1.5px solid #949AA0;
 border-radius: 8px;
 padding: 4px 12px;
-font-size: calc(1vw);
+font-size: calc(0.9vw);
 letter-spacing: 1px;
 cursor: pointer;
 outline: none;
@@ -130,15 +131,15 @@ border-color: #949AA0;
   width: 6.5vh;
   height: 6.5vh;
   border-radius: 50%;
-  left: 8vh;
+  left: 4vw;
 }
 
 #userbox span {
   position: fixed;
-  top: 91.3vh;
-  left: 19vh;
+  top: 92vh;
+  left: 9vw;
   color: white;
-  font-size: calc(1.1vw + 0.5vh); /* Dynamically adjusts font size */
+  font-size: calc(1.3vw); /* Dynamically adjusts font size */
 }
 
 /* Popup Overlay */
@@ -338,29 +339,21 @@ display: none;
 z-index: 2;
 }
 
-#project-text {
-position: relative;
-left: 3.3vh;
-font-size: calc(1.3vw);
-color: white;
-letter-spacing: 1px;
-}
-
 /* Create Project Button Styling */
 #create-project-button {
 position: relative;
 top: -1vh;
-left: 1vh;
+left: 0.2vw;
 background-color: transparent;
 color: white;
 border: 1.5px solid transparent;
 border-radius: 6px;
-padding: 1vh 6vh;
+padding: 1vh 3vw;
 font-size: calc(1.3vw);
 letter-spacing: 1px;
 cursor: pointer;
 text-align: center;
-outline: none;
+outline: none; 
 margin-bottom: 1vh;
 }
 
@@ -375,13 +368,13 @@ color: white;
 width: 100%;
 height: 1px;  
 background-color: #474E55;
-margin: -0.5vh auto 0 auto; /* 1vh gap and centered line */
+margin: 0vh auto 0 auto; /* 1vh gap and centered line */
 }
 
 #tasks-checkbox {
   position: fixed;
   top: 5vh;
-  right: 18vh;
+  right: 10vw;
   background-color: transparent;
   padding: 10px 15px;
   border-radius: 10px;
@@ -418,7 +411,7 @@ margin: -0.5vh auto 0 auto; /* 1vh gap and centered line */
   background-color: transparent;
   appearance: none;
   -webkit-appearance: none;
-  margin-right: 2.5vh;
+  margin-right: 1.3vw;
   cursor: pointer;
 }
 
@@ -437,7 +430,6 @@ margin: -0.5vh auto 0 auto; /* 1vh gap and centered line */
   font-size: 13px;
   font-weight: bold;
 }
-
 
 
 /* Project Popup Overlay */
@@ -544,7 +536,7 @@ align-items: center;
 #settings-icon {
   position: fixed;
   top: 5.3vh;
-  right: 7.5vh;
+  right: 3.8vw;
   width: 42px;
   height: 42px;
   border-radius: 6px;
@@ -566,7 +558,7 @@ align-items: center;
 #settings-popup {
   position: fixed;
   top: 14vh;
-  right: 7.5vh;
+  right: 3.8vw;
   width: 180px;
   background-color: #11161C;
   padding: 10px 0;
@@ -940,23 +932,27 @@ align-items: center;
   width: 48%; /* Half of the container width */
 }
 
-.date-inputs label {
-  margin-bottom: 15px;
-  font-size: 14px;
-}
-
-.date-inputs input {
+#start-date-button, #due-date-button {
+  position: relative;
+  left: 20px;
   margin-bottom: 25px;
-  width: 30%;
-  height: 15px;
-  margin-left: 20px;
-  border: transparent;
+  background-color: #3A3E42;
+  color: #949AA0;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  padding: 8px 16px;
+  font-size: 14px;
+  cursor: pointer;
+  letter-spacing: 1px;
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
-.date-inputs input::placeholder {
-  color: #949AA0;
-  text-align: center;
-  letter-spacing: 1px;
+#start-date-button:hover, #due-date-button:hover {
+  background-color: #44484F; /* Slightly darker background on hover */
 }
 
 /* Reminder Section */
@@ -1013,6 +1009,10 @@ align-items: center;
   margin-bottom: 25px;
 }
 
+#add-file-button:hover {
+  background-color: #44484F;
+}
+
 .label-task {
   display: flex;
   justify-content: space-between;
@@ -1040,6 +1040,10 @@ align-items: center;
   font-size: 14px;
   left: 20px;
   margin-bottom: 25px;
+}
+
+.label-task button:hover {
+  background-color: #44484F;
 }
 
 /* Task Assigned To and Add Member Button */
@@ -1167,4 +1171,145 @@ align-items: center;
   font-size: 12px;
   cursor: pointer;
   z-index: 1; /* Ensure it stays above the file name */
+}
+
+/* Ensure parent containers do not clip the calendar */
+.container {
+  overflow: visible;
+}
+
+.pika-single.is-hidden {
+  display: none; 
+}
+
+.pika-single {
+  position: fixed;
+  top: 50%; 
+  left: 50%;
+  background-color: #1C2025;
+  color: #F6F6F6;
+  border: 1px solid #484E55;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+  z-index: 10000;
+  padding: 10px; /* Reduced padding */
+  font-family: 'Inter', sans-serif;
+  max-width: 300px; /* Reduced width */
+  display: grid;
+  grid-template-rows: auto auto 1fr;
+  gap: 20px; /* Reduced gap between rows */
+}
+
+/* Calendar Header */
+.pika-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #484E55;
+  color: #F6F6F6;
+  font-size: 12px; /* Smaller font size */
+  font-weight: bold;
+  padding: 6px; /* Reduced padding */
+  border-radius: 8px;
+  text-transform: uppercase;
+  max-width: 290px; /* Reduced width */
+}
+
+/* Navigation Arrows */
+.pika-prev, .pika-next {
+  color: #F6F6F6;
+  font-size: 10px; /* Reduced font size */
+  cursor: pointer;
+  transition: color 0.2s ease;
+  background-color: #33363B;
+  padding: 2px 6px; /* Reduced padding */
+}
+
+.pika-prev:hover, .pika-next:hover {
+  color: #949AA0;
+}
+
+/* Weekdays Row */
+.pika-label {
+  text-align: center;
+  max-width: 300px; /* Reduced width */
+  font-size: 10px; /* Smaller font size */
+  color: #949AA0;
+  font-weight: bold;
+  text-transform: uppercase;
+  line-height: 30px; /* Adjusted vertical alignment */
+}
+
+/* Weekday Grid Layout */
+.pika-table {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr); 
+  gap: 4px; /* Smaller gap */
+  max-width: 290px; /* Reduced width */
+}
+
+/* Days */
+.pika-day {
+  width: 100%; 
+  aspect-ratio: 1; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px; /* Reduced font size */
+  background-color: #484E55;
+  color: white;
+  border-radius: 4px; /* Reduced rounding */
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Hover Effect for Days */
+.pika-day:hover {
+  background-color: #949AA0;
+  color: #33363B;
+}
+
+/* Selected Day */
+.is-selected {
+  background-color: #F6F6F6 !important;
+  color: #33363B !important;
+  font-weight: bold;
+  border-radius: 4PX  ;
+  border: 1px solid #949AA0; /* Reduced border size */
+}
+
+/* Today Highlight */
+.is-today {
+  background-color: #33363B;
+  color: #33363B;
+  font-weight: bold;
+  border-radius: 4px;
+  border: 1px solid #33363B;
+}
+
+/* Empty Cells */
+.pika-day.is-empty {
+  visibility: hidden;
+}
+
+/* Disabled Days */
+.is-disabled, .is-outside-current-month {
+  color: #484E55;
+  pointer-events: none;
+}
+
+/* Animation Effects */
+.pika-single {
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9); /* Slightly smaller initial size */
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }

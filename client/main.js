@@ -1,5 +1,6 @@
 import { DiscordSDK } from "@discord/embedded-app-sdk";
 import { Interface } from "./interface.js";
+import Pikaday from 'pikaday';
 import "./style.css";
 import "./interface.css";
 
@@ -58,49 +59,110 @@ async function fetchUserProfile(token) {
 function renderApp() {
   document.querySelector("#app").innerHTML = Interface(user);
 
-  // Add File Button Logic
-  const addFileButton = document.getElementById("add-file-button");
+  function setupDatePickers() {
+    const startDateButton = document.getElementById("start-date-button");
+    const dueDateButton = document.getElementById("due-date-button");
+  
+    const createDayLabels = () => {
+      const labels = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+      return labels.map(label => `<div class="pika-day-label">${label}</div>`).join('');
+    };
+  
+    // Initialize Start Date Picker
+    const startDatePicker = new Pikaday({
+      field: startDateButton,
+      format: 'DD/MM/YYYY',
+      firstDay: 0, // Start week on Sunday
+      bound: true,
+      showDaysInMonth: true,
+      onOpen: function () {
+        const dayLabels = createDayLabels();
+        const calendar = this.el.querySelector('.pika-lendar');
+        if (!calendar.querySelector('.pika-day-labels')) {
+          const dayRow = document.createElement('div');
+          dayRow.className = 'pika-day-labels';
+          dayRow.innerHTML = dayLabels;
+          calendar.prepend(dayRow);
+        }
+      },
+      onSelect: function (date) {
+        startDateButton.textContent = this.toString(); // Update button text
+        this.hide();
+      },
+    });
+  
+    // Initialize Due Date Picker
+    const dueDatePicker = new Pikaday({
+      field: dueDateButton,
+      format: 'DD/MM/YYYY',
+      firstDay: 0, // Start week on Sunday
+      bound: true,
+      showDaysInMonth: true,
+      onOpen: function () {
+        const dayLabels = createDayLabels();
+        const calendar = this.el.querySelector('.pika-lendar');
+        if (!calendar.querySelector('.pika-day-labels')) {
+          const dayRow = document.createElement('div');
+          dayRow.className = 'pika-day-labels';
+          dayRow.innerHTML = dayLabels;
+          calendar.prepend(dayRow);
+        }
+      },
+      onSelect: function (date) {
+        dueDateButton.textContent = this.toString(); // Update button text
+        this.hide();
+      },
+    });
+  }
+  
+  setupDatePickers();  
 
-  // Create a hidden file input
-  const fileInput = document.createElement("input");
-  fileInput.type = "file";
-  fileInput.style.display = "none"; // Hide the file input
+  
+// Add File Button Logic
+const addFileButton = document.getElementById("add-file-button");
 
-  // Add event listener to the button
-  addFileButton.addEventListener("click", () => {
-    fileInput.click(); // Trigger the file input dialog
-  });
+// Create a hidden file input
+const fileInput = document.createElement("input");
+fileInput.type = "file";
+fileInput.style.display = "none"; // Hide the file input
 
-  // Handle file selection
-  fileInput.addEventListener("change", (event) => {
-    const file = event.target.files[0]; // Get the selected file
-    if (file) {
-      console.log("Selected file:", file.name);
+// Add event listener to the button
+addFileButton.addEventListener("click", () => {
+  fileInput.value = ""; // Reset file input to prevent unintended triggers
+  fileInput.click(); // Trigger the file input dialog
+});
 
-      // Create a file display container
-      const fileDisplay = document.createElement("div");
-      fileDisplay.classList.add("file-display");
-      fileDisplay.textContent = file.name;
+// Handle file selection
+fileInput.addEventListener("change", (event) => {
+  const file = event.target.files[0]; // Get the selected file
+  if (file) {
+    console.log("Selected file:", file.name);
 
-      // Create a remove button (X)
-      const removeButton = document.createElement("button");
-      removeButton.textContent = "X";
-      removeButton.classList.add("remove-file-button");
-      removeButton.addEventListener("click", () => {
-        // Restore the 'add-file-button'
-        fileDisplay.replaceWith(addFileButton);
-      });
+    // Create a file display container
+    const fileDisplay = document.createElement("div");
+    fileDisplay.classList.add("file-display");
+    fileDisplay.textContent = file.name;
 
-      // Append the remove button to the file display
-      fileDisplay.appendChild(removeButton);
+    // Create a remove button (X)
+    const removeButton = document.createElement("button");
+    removeButton.textContent = "X";
+    removeButton.classList.add("remove-file-button");
+    removeButton.addEventListener("click", () => {
+      // Restore the 'add-file-button'
+      fileDisplay.replaceWith(addFileButton);
+    });
 
-      // Replace the button with the file display
-      addFileButton.replaceWith(fileDisplay);
-    }
-  });
+    // Append the remove button to the file display
+    fileDisplay.appendChild(removeButton);
 
-  // Append the file input to the document
-  document.body.appendChild(fileInput);
+    // Replace the button with the file display
+    addFileButton.replaceWith(fileDisplay);
+  }
+});
+
+// Append the file input to the document
+document.body.appendChild(fileInput);
+
   
   // Settings Popup Logic
   const settingsIcon = document.getElementById("settings-icon");
