@@ -53,7 +53,7 @@
 background-color: #25282D;
 }
 
-#projectmain {
+#projectname {
   position: fixed;
   top: 13.5vh;
   color: white;
@@ -364,11 +364,11 @@ color: white;
 
 /* Line below the button */
 #line-under-button {
-width: 100%;
-height: 1px;  
-background-color: #474E55;
-margin: 0vh auto 0 auto; /* 1vh gap and centered line */
-}
+  width: 100%;
+  height: 1px;  
+  background-color: #474E55;
+  margin: 0vh auto 0 auto; /* 1vh gap and centered line */
+  }
 
 #tasks-checkbox {
   position: fixed;
@@ -649,79 +649,6 @@ align-items: center;
   text-overflow: ellipsis; /* Adds ellipsis (...) for overflowing text */
   width: 100%; /* Ensures the title fits within the container */
   display: block; /* Ensures it behaves like a block-level element */
-}
-
-/* Task card inside the list */
-.task-card {
-  background-color: #484E55; /* Slightly lighter gray for task background */
-  border-radius: 8px; /* Rounded corners for task cards */
-  padding: 12px; /* Inner padding */
-  display: flex; /* Use flexbox for layout within the task */
-  flex-direction: column; /* Stack content vertically */
-  gap: 8px; /* Space between task elements */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Subtle shadow */
-  cursor: pointer; /* Pointer cursor on hover for interactivity */
-  transition: background-color 0.3s ease; /* Smooth hover effect */
-}
-
-/* Hover effect for task cards */
-.task-card:hover {
-  background-color: #474E55; /* Slightly darker background on hover */
-}
-
-/* Header section of the task card */
-.task-header {
-  display: flex;
-  justify-content: space-between; /* Space out title and status indicator */
-  align-items: center; /* Align vertically */
-}
-
-/* Task title styling */
-.task-title {
-  color: white; /* White text color */
-  font-size: 14px; /* Font size */
-  font-weight: bold; /* Bold font */
-  margin-left: 10px; /* Move title to the right by 10px */
-}
-
-/* Task status indicator (colored dots) */
-.task-status {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%; /* Make it circular */
-}
-
-/* Status colors */
-.task-status-blue {
-  background-color: #2594E3; /* Blue for ongoing tasks */
-}
-
-.task-status-red {
-  background-color: #F34141; /* Red for critical tasks */
-}
-
-/* Task details section */
-.task-details {
-  display: flex;
-  justify-content: space-between; /* Space out task details and options */
-  align-items: center; /* Center align */
-  color: #BEBEBE; /* Light gray text color */
-  font-size: 12px; /* Font size */
-}
-
-/* Options section in task details */
-.task-options {
-  display: flex; /* Use flexbox for alignment */
-  gap: 8px; /* Space between options */
-}
-
-/* Task checkbox for marking progress */
-.task-checkbox {
-  width: 16px;
-  height: 16px;
-  background-color: #474E55; /* Gray background */
-  border-radius: 50%; /* Circular shape */
-  cursor: pointer; /* Pointer cursor for interactivity */
 }
 
 /* Add Task button inside the list */
@@ -1383,4 +1310,77 @@ align-items: center;
   height: 100%;
   overflow: hidden;
   background-color: #1C2025;
+}
+
+#project-list-container {
+  margin-top: 0.5vh;
+  max-height: 53.8vh; 
+  overflow-y: auto; 
+  position: relative;
+}
+
+.project-button {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 1vh 1.5vw;
+  margin: 2vh 0;
+  background-color: transparent;
+  border: none;
+  border-radius: 4px;
+  font-size: calc(1.4vw);
+  color: #f3f3f3;
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+  margin-bottom: 1.5vh;
+  margin-top: 1.5vh;
+}
+
+.project-button:hover {
+  background-color: #2594E3;
+}
+
+.project-button .checkmark {
+  width: calc(1.4vw); /* Reserve width for the checkmark */
+  height: calc(1.4vw); /* Same height for consistency */
+  margin-right: 1.5vw; /* Space between checkmark and text */
+  color: white; /* Checkmark color */
+  font-size: calc(1.3vw); /* Icon font size */
+  visibility: hidden; /* Initially hidden */
+  display: flex; /* Ensure alignment */
+  align-items: center; /* Center align within reserved space */
+  justify-content: center;
+}
+
+.project-button.active .checkmark {
+  visibility: visible; /* Make the checkmark visible */
+}
+
+.project-button .project-name {
+  flex-grow: 1; /* Ensure the text takes the remaining space */
+  width: 2vw;
+}
+
+
+#project-list-container::-webkit-scrollbar {
+  width: 6px; /* Optional scrollbar width */
+  border-radius: 4px;
+}
+
+#project-list-container::-webkit-scrollbar-thumb {
+  background-color: #33363B; /* Scrollbar thumb color */
+  border-radius: 4px;
+}
+
+#project-list-container::-webkit-scrollbar-track {
+  background-color: #25282D; /* Scrollbar track color */
+}
+
+.dynamic-line {
+  width: 100%;
+  height: 1px;  
+  background-color: #474E55;
+  margin: 0vh auto 0 auto; /* 1vh gap and centered line */
+  position: absolute; /* Allow dynamic positioning */
 }

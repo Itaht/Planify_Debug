@@ -61,7 +61,7 @@ export function Interface(user) {
 
       <!-- Project Box -->
       <div id="projectbox" class="clickable">
-        <div id="projectmain">Project 1</div>
+        <div id="projectname">Project 1</div>
       </div>
 
 
@@ -84,6 +84,7 @@ export function Interface(user) {
       <div id="project-section">
         <button id="create-project-button">+ create new project</button>
         <div id="line-under-button"></div>
+        <div id="project-list-container"></div>
       </div>
 
       <!-- Main Popup and Overlay -->
@@ -133,7 +134,7 @@ export function Interface(user) {
 <div id="task-popup-overlay" class="hidden">
   <div id="task-popup-content">
     <div class="popup-header">
-      <h2 id="task-list-title">Add Task</h2>
+      <h2 id="task-list-title">add task</h2>
       <button id="close-task-popup-button">✖</button>
     </div>
     <div id="popup-body">

@@ -56,6 +56,84 @@ async function fetchUserProfile(token) {
 
 function renderApp() {
   document.querySelector("#app").innerHTML = Interface(user);
+
+  const projectListContainer = document.getElementById("project-list-container");
+  const createProjectButtonForm = document.getElementById("create-project-button-form");
+  const projectPopupOverlay = document.getElementById("project-popup-overlay");
+
+  // Function to dynamically position the line
+  function createOrUpdateDynamicLine() {
+    const projectSection = document.getElementById("project-section");
+
+    let dynamicLine = document.querySelector(".dynamic-line");
+    if (!dynamicLine) {
+      dynamicLine = document.createElement("div");
+      dynamicLine.className = "dynamic-line";
+      projectSection.appendChild(dynamicLine);
+    }
+
+    const lastProjectButton = projectListContainer.querySelector(".project-button:last-child");
+
+    if (lastProjectButton) {
+      const lastButtonRect = lastProjectButton.getBoundingClientRect();
+      const projectSectionRect = projectSection.getBoundingClientRect();
+      const offsetVh = (lastButtonRect.bottom - projectSectionRect.top) / window.innerHeight * 100;
+
+      dynamicLine.style.top = `calc(${offsetVh}vh + 2.5vh)`; // Adjust "2vh" as needed for spacing
+      dynamicLine.style.left = "0%";
+      dynamicLine.style.width = "100%";
+      dynamicLine.style.display = "block";
+    } else {
+      dynamicLine.style.display = "none";
+    }
+  }
+
+  // Handle creating a new project button
+  createProjectButtonForm.addEventListener("click", (event) => {
+    event.preventDefault();
+
+    const projectNameInput = document.getElementById("project-name");
+    const projectName = projectNameInput.value.trim();
+
+    if (projectName) {
+      const newProjectButton = document.createElement("button");
+      newProjectButton.className = "project-button";
+      newProjectButton.innerHTML = `
+        <span class="checkmark hidden">✓</span>
+        <span class="project-name">${projectName}</span>
+      `;
+
+      newProjectButton.addEventListener("click", () => {
+        document.querySelectorAll(".project-button").forEach((btn) => {
+          btn.classList.remove("active");
+          btn.querySelector(".checkmark").classList.add("hidden");
+        });
+
+        newProjectButton.classList.add("active");
+        newProjectButton.querySelector(".checkmark").classList.remove("hidden");
+      });
+
+      projectListContainer.appendChild(newProjectButton);
+      projectNameInput.value = "";
+      projectPopupOverlay.classList.add("hidden");
+
+      createOrUpdateDynamicLine();
+    } else {
+      alert("Please enter a project name.");
+    }
+  });
+
+  projectListContainer.addEventListener("click", (event) => {
+    if (event.target.classList.contains("delete-project-button")) {
+      const buttonToDelete = event.target.closest(".project-button");
+      buttonToDelete.remove();
+      createOrUpdateDynamicLine();
+    }
+  });
+
+  // Initial call to set up the dynamic line
+  createOrUpdateDynamicLine();
+
   
   // Get references to the board list container and create board form
   const createBoardButtonForm = document.getElementById("create-board-button-form");
@@ -512,7 +590,6 @@ updateAddListButtonPosition();
 
   // Project Popup Logic
   const createProjectButton = document.getElementById("create-project-button");
-  const projectPopupOverlay = document.getElementById("project-popup-overlay");
   const closeProjectPopupButton = document.getElementById("close-project-popup-button");
   const cancelProjectButton = document.getElementById("cancel-project-button");
   const createProjectForm = document.getElementById("create-project-form");
@@ -694,6 +771,11 @@ updateAddListButtonPosition();
     // Hide Confirmation Popup
     function hideConfirmationPopup() {
       confirmationPopup.classList.add("hidden");
+      popupOverlay.classList.add("hidden");
+      projectPopupOverlay.classList.add("hidden");
+      // Reset input fields
+      clearBoardFormFields();
+      clearProjectFormFields(); 
     }
   }
   
@@ -760,12 +842,19 @@ projectBox.addEventListener("click", () => {
 
   // Utility functions
   function clearBoardFormFields() {
-    createBoardForm.reset();
+    const boardNameInput = document.getElementById("board-name");
+    if (boardNameInput) {
+      boardNameInput.value = "";
+    }
   }
-
+  
   function clearProjectFormFields() {
-    createProjectForm.reset();
+    const projectNameInput = document.getElementById("project-name");
+    if (projectNameInput) {
+      projectNameInput.value = "";
+    }
   }
+  
 
   function clearTaskFormFields() {
     addTaskForm.reset();
