@@ -1,6 +1,5 @@
 export function Interface(user) {
   return `
-  
     <div class="file-display">
       <span class="file-name">very_long_file_name_example.txt</span>
       <button class="remove-file-button">X</button>
@@ -26,31 +25,21 @@ export function Interface(user) {
       </div>
     </div>
 
-
-    <!-- Add List Button -->
     <button id="add-list-button">+ add a list</button>
-      <!-- List Container -->
+
     <div id="list-container"></div>
     <div id="board-page">
-      <!-- Board Topic -->
       <div id="board-topic">board 1</div>
-      
-      <!-- Board Description -->
       <div id="board-description">board description</div>
-      
-      <!-- Settings Icon -->
       <div id="settings-icon" onclick="toggleSettingsPopup()">
         <img src="assets/setting.svg" alt="Settings">
       </div>
-      
-      <!-- Tasks Checkbox -->
+
       <div id="tasks-checkbox">
         <input type="checkbox" id="tasks-checkbox-input">
         <label id="tasks-checkbox-label">tasks assigned to me</label>
       </div>
-
     </div>
-
 
     <div id="sidebar">
       <div id="logo"></div>
@@ -59,35 +48,29 @@ export function Interface(user) {
         <span id="username">${user.username}</span>
       </div>
 
-      <!-- Project Box -->
       <div id="projectbox" class="clickable">
         <div id="projectname">Project 1</div>
       </div>
 
-
-      <!-- Settings Popup -->
       <div id="settings-popup">
         <p id="edit-board">edit board</p>
         <p id="delete-board" class="delete">delete board</p>
       </div>
 
-      <!-- Board Section -->
       <div id="board-section">
         <span id="board-text">Boards</span>
         <div id="create-board-container">
-          <button id="create-board-button">+ Create New Board</button>
+          <button id="create-board-button">+ create new board</button>
         </div>
-        <div id="board-list-container"></div> <!-- Separate container for boards -->
+        <div id="board-list-container"></div>
       </div>
 
-      <!-- Project Section -->
       <div id="project-section">
         <button id="create-project-button">+ create new project</button>
         <div id="line-under-button"></div>
         <div id="project-list-container"></div>
       </div>
 
-      <!-- Main Popup and Overlay -->
       <div id="popup-overlay" class="hidden">
         <div id="popup-content">
           <div class="popup-header">
@@ -103,13 +86,12 @@ export function Interface(user) {
             </form>
           </div>
           <div class="popup-buttons">
-                <button type="button" id="cancel-button">cancel</button>
-                <button type="submit" id="create-board-button-form">create board</button>
-              </div>
+            <button type="button" id="cancel-button">cancel</button>
+            <button type="submit" id="create-board-button-form">create board</button>
+          </div>
         </div>
       </div>
 
-      <!-- Project Popup and Overlay -->
       <div id="project-popup-overlay" class="hidden">
         <div id="popup-content">
           <div class="popup-header">
@@ -125,82 +107,80 @@ export function Interface(user) {
             </form>
           </div>
           <div class="popup-buttons">
-                <button type="button" id="cancel-project-button">cancel</button>
-                <button type="submit" id="create-project-button-form">create project</button>
+            <button type="button" id="cancel-project-button">cancel</button>
+            <button type="submit" id="create-project-button-form">create project</button>
           </div>
         </div>
       </div>
 
-<div id="task-popup-overlay" class="hidden">
-  <div id="task-popup-content">
-    <div class="popup-header">
-      <h2 id="task-list-title">add task</h2>
-      <button id="close-task-popup-button">✖</button>
-    </div>
-    <div id="popup-body">
-      <form id="add-task-form">
-        <label for="task-name">task name</label>
-        <input type="text" id="task-name" placeholder="Enter task name" required>
-        <label for="task-details">task description (optional)</label>
-        <textarea id="task-details" placeholder="Enter task description"></textarea>
-        <label for="attached-file">attached file</label>
-        <div id="file-container">
-          <button id="add-file-button" type="button">+ add file</button>
+      <div id="task-popup-overlay" class="hidden">
+        <div id="task-popup-content">
+          <div class="popup-header">
+            <h2 id="task-list-title">add task</h2>
+            <button id="close-task-popup-button">✖</button>
+          </div>
+          <div id="popup-body">
+            <form id="add-task-form">
+              <label for="task-name">task name</label>
+              <input type="text" id="task-name" placeholder="Enter task name" required>
+              <label for="task-details">task description (optional)</label>
+              <textarea id="task-details" placeholder="Enter task description"></textarea>
+              <label for="attached-file">attached file</label>
+              <div id="file-container">
+                <button id="add-file-button" type="button">+ add file</button>
+              </div>
+              <div class="date-inputs">
+                <div>
+                  <label for="start-date">start date</label>
+                  <button id="start-date-button" type="button">dd/mm/yy</button>
+                </div>
+                <div>
+                  <label for="due-date">due date</label>
+                  <button id="due-date-button" type="button">dd/mm/yy</button>
+                </div>
+              </div>
+              <div class="label-task">
+                <div>
+                  <label for="label">label</label>
+                  <button id="set-label-button" type="button">set label</button>
+                </div>
+                <div>
+                  <label for="task-assigned-to">task assigned to</label>
+                  <button id="add-member-button" type="button">+ add member</button>
+                </div>
+              </div>
+              <div class="reminder">
+                <label for="reminder">set reminder</label>
+                <div class="reminder-inputs">
+                  <span>remind every</span>
+                  <input type="text" id="reminder" placeholder="dd">
+                  <span>day</span>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="popup-buttons">
+            <button type="button" id="cancel-task-button">cancel</button>
+            <button type="submit" id="add-task-button-submit">add a task</button>
+          </div>
         </div>
-        <div class="date-inputs">
-          <div>
-            <label for="start-date">start date</label>
-            <button id="start-date-button" type="button">dd/mm/yy</button>
-          </div>
-          <div>
-            <label for="due-date">due date</label>
-            <button id="due-date-button" type="button">dd/mm/yy</button>
-          </div>
-        </div>
-        <div class="label-task">
-          <div>
-            <label for="label">label</label>
-            <button id="set-label-button" type="button">set label</button>
-          </div>
-          <div>
-            <label for="task-assigned-to">task assigned to</label>
-            <button id="add-member-button" type="button">+ add member</button>
-          </div>
-        </div>
-        <div class="reminder">
-          <label for="reminder">set reminder</label>
-          <div class="reminder-inputs">
-            <span>remind every</span>
-            <input type="text" id="reminder" placeholder="dd">
-            <span>day</span>
-          </div>
-        </div>
-      </form>
-    </div>
-    <div class="popup-buttons">
-      <button type="button" id="cancel-task-button">cancel</button>
-      <button type="submit" id="add-task-button-submit">add a task</button>
-    </div>
-  </div>
-</div>
-
-
-<div id="label-popup" class="hidden">
-  <div class="popup-content">
-    <div class="label-options">
-      <button class="label-option" style="background-color: #A259FF;" data-color="#A259FF"></button>
-      <button class="label-option" style="background-color: #FFD93D;" data-color="#FFD93D"></button>
-      <button class="label-option" style="background-color: #53D1F0;" data-color="#53D1F0"></button>
-      <button class="label-option" style="background-color: #FF773D;" data-color="#FF773D"></button>
-      <button class="label-option" style="background-color: #3D8BFF;" data-color="#3D8BFF"></button>
-      <button class="label-option" style="background-color: #FF3D71;" data-color="#FF3D71"></button>
-      <button class="label-option" style="background-color: #3DFF77;" data-color="#3DFF77"></button>
-      <button id="done-label-button" class="done-button">done</button>
       </div>
-  </div>
-</div>
 
-      <!-- Confirmation Popup -->
+      <div id="label-popup" class="hidden">
+        <div class="popup-content">
+          <div class="label-options">
+            <button class="label-option" style="background-color: #A259FF;" data-color="#A259FF"></button>
+            <button class="label-option" style="background-color: #FFD93D;" data-color="#FFD93D"></button>
+            <button class="label-option" style="background-color: #53D1F0;" data-color="#53D1F0"></button>
+            <button class="label-option" style="background-color: #FF773D;" data-color="#FF773D"></button>
+            <button class="label-option" style="background-color: #3D8BFF;" data-color="#3D8BFF"></button>
+            <button class="label-option" style="background-color: #FF3D71;" data-color="#FF3D71"></button>
+            <button class="label-option" style="background-color: #3DFF77;" data-color="#3DFF77"></button>
+            <button id="done-label-button" class="done-button">done</button>
+          </div>
+        </div>
+      </div>
+
       <div id="confirmation-popup" class="hidden">
         <div id="confirmation-content">
           <h3>Discard changes?</h3>

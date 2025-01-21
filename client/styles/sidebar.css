@@ -1,0 +1,94 @@
+/* Sidebar styles */
+* {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+
+
+#sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 20%; /* 1/5 of the screen width */
+  height: 100vh; /* Full height of the screen */
+  background-color: #1C2025;
+  padding: 20px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  border-right: 1px solid #474E55; /* Right edge line color */
+  overflow-y: auto; /* Allows scrolling if content overflows */
+  z-index: 1;
+}
+
+#logo {
+  position: fixed;
+  top: 0vh;
+  left: 0;
+  width: 20%; /* 1/5 of the screen width */
+  height: 5vh; /* Full height of the screen */
+  background-color: #1C2025;
+  padding: 20px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  border-right: 1px solid #474E55; /* Right edge line color */
+  border-bottom: 1px solid #474E55; /* Right edge line color */
+  z-index: 4;
+}
+
+#projectbox {
+  position: fixed;
+  top: 11vh;
+  left: 0;
+  width: 20%; /* 1/5 of the screen width */
+  height: 5vh; /* Full height of the screen */
+  background-color: #1C2025;
+  padding: 20px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  border-right: 1px solid #474E55; /* Right edge line color */
+  border-bottom: 1px solid #474E55; /* Right edge line color */
+  z-index: 3;
+  font-size: calc(1.3vw); 
+}
+
+#projectbox:hover {
+background-color: #25282D;
+}
+
+#projectname {
+  position: fixed;
+  top: 13.5vh;
+  color: white;
+  left: 9vw;
+  z-index: 4;
+  font-size: calc(1.3vw); 
+}
+
+#userbox {
+  position: fixed;
+  top: 87vh;
+  left: 0;
+  width: 20%; /* 1/5 of the screen width */
+  height: 5vh; /* Full height of the screen */
+  background-color: #1C2025;
+  padding: 20px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  border-right: 1px solid #474E55; /* Right edge line color */
+  border-top: 1px solid #474E55; /* Right edge line color */
+  z-index: 10;
+}
+
+#userbox img {
+  position: fixed;
+  top: 90.5vh;
+  width: 6.5vh;
+  height: 6.5vh;
+  border-radius: 50%;
+  left: 4vw;
+}
+
+#userbox span {
+  position: fixed;
+  top: 92vh;
+  left: 9vw;
+  color: white;
+  font-size: calc(1.3vw); /* Dynamically adjusts font size */
+}

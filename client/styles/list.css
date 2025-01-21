@@ -1,0 +1,67 @@
+/* Container for all lists */
+#list-container {
+    position: absolute;
+    top: 19vh;
+    left: 27vw;
+    display: flex; /* Enable horizontal alignment */
+    flex-wrap: nowrap; /* Prevent wrapping to the next row */
+    gap: 32px; /* Gap between lists */
+    overflow-x: auto; /* Enable horizontal scrolling */
+    overflow-y: hidden; /* Prevent vertical scrolling */
+    white-space: nowrap; /* Ensure content stays in one line */
+    align-items: flex-start; /* Align items to the top */
+  }
+  
+  /* Individual list styling */
+  .list {
+    background-color: #33363B; /* Dark gray */
+    width: 250px; /* Fixed width */
+    padding: 10px; /* Inner padding */
+    border-radius: 12px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    flex-shrink: 0; /* Prevent shrinking */
+    overflow-x: hidden;
+  }
+  
+  
+  /* List title styling */
+  .list-title {
+    color: white; /* White text color */
+    font-size: 19px; /* Font size for the title */
+    margin-bottom: 3px; /* Space below the title */
+    margin-top: 6px;
+    margin-left: 12px;
+    letter-spacing: 1px;
+    white-space: nowrap; /* Prevents text from wrapping */
+    overflow: hidden; /* Clips overflowing content */
+    text-overflow: ellipsis; /* Adds ellipsis (...) for overflowing text */
+    width: 100%; /* Ensures the title fits within the container */
+    display: block; /* Ensures it behaves like a block-level element */
+  }
+  
+  /* Add Task button inside the list */
+  .add-task-button {
+    background-color: #33363B; /* Gray background */
+    color: white; /* White text color */
+    border: none; /* Remove border */
+    border-radius: 8px; /* Rounded corners */
+    padding: 8px 0; /* Vertical padding */
+    font-size: 14px; /* Font size */
+    cursor: pointer; /* Pointer cursor */
+    text-align: center; /* Center-align text */
+    outline: none;
+    letter-spacing: 1px;
+  }
+  
+  /* Remove focus outline */
+  .add-task-button:focus {
+    outline: none; /* Ensure no border appears on focus */
+  }
+  
+  /* Hover effect for Add Task button */
+  .add-task-button:hover {
+    background-color: #44484F; /* Keep the same color on hover */
+  }

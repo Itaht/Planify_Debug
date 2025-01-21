@@ -1,0 +1,58 @@
+/* Task Popup Overlay */
+#task-popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+#task-popup-overlay:not(.hidden) {
+  display: flex;
+}
+
+#task-popup-content {
+  background-color: #33363B;
+  padding: 2vh;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  width: 50vw;
+  max-height: 75vh;
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+  overflow: hidden;
+}
+
+.date-inputs {
+  display: flex;
+  justify-content: space-between;
+  gap: 2vw;
+}
+
+.date-inputs div {
+  width: 48%;
+}
+
+#start-date-button,
+#due-date-button {
+  background-color: #3A3E42;
+  color: #949AA0;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  padding: 2vh 4vw;
+  font-size: calc(1.3vh);
+  cursor: pointer;
+  letter-spacing: 1px;
+}
+
+#start-date-button:hover,
+#due-date-button:hover {
+  background-color: #44484F;
+}

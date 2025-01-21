@@ -1,0 +1,107 @@
+/* Board Section Styling */
+#board-section {
+  position: fixed;
+    top: 22vh;
+    left: 0;
+    width: 20%; /* 1/5 of the screen width */
+    height: 5vh; /* Full height of the screen */
+    background-color: #1C2025;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    border-right: 1px solid #474E55; /* Right edge line color */
+    z-index: 2;
+  }
+  
+  #board-text {
+  position: relative;
+  left: 1vw;
+  font-size: calc(1.4vw);
+  color: white;
+  letter-spacing: 1px;
+  }
+  
+  #create-board-button {
+  position: relative;
+  top: -3.7vh;
+  left: 8vw;
+  background-color: transparent;
+  color: #949AA0;
+  border: 1.5px solid #949AA0;
+  border-radius: 8px;
+  padding: 4px 14px;
+  font-size: calc(0.9vw);
+  letter-spacing: 1px;
+  cursor: pointer;
+  outline: none;
+  /* Center the text inside the button */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  }
+  
+  #create-board-button:hover {
+  background-color: #949AA0;
+  color: white;
+  border-color: #949AA0;
+  }  
+
+  #userbox {
+    position: fixed;
+    top: 87vh;
+    left: 0;
+    width: 20%; /* 1/5 of the screen width */
+    height: 5vh; /* Full height of the screen */
+    background-color: #1C2025;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    border-right: 1px solid #474E55; /* Right edge line color */
+    border-top: 1px solid #474E55; /* Right edge line color */
+    z-index: 10;
+  }
+  
+  #userbox img {
+    position: fixed;
+    top: 90.5vh;
+    width: 6.5vh;
+    height: 6.5vh;
+    border-radius: 50%;
+    left: 4vw;
+  }
+  
+  #userbox span {
+    position: fixed;
+    top: 92vh;
+    left: 9vw;
+    color: white;
+    font-size: calc(1.3vw); /* Dynamically adjusts font size */
+  }
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  #board-section {
+    width: 100%;
+    padding: 10px;
+    font-size: calc(1.5vw);
+  }
+
+  #board-text {
+    font-size: calc(2vw);
+  }
+
+  #create-board-button {
+    font-size: calc(1.1vw);
+    padding: 4px 12px;
+  }
+
+  #userbox {
+    top: 85vh;
+    padding: 10px;
+    font-size: calc(1.2vw);
+  }
+
+  #userbox img {
+    width: 8vh;
+    height: 8vh;
+  }
+}

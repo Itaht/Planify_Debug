@@ -1,0 +1,88 @@
+/* Popup Styles */
+#popup-overlay, #task-popup-overlay, #project-popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw; /* Full viewport width */
+  height: 100vh; /* Full viewport height */
+  background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black */
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+#popup-overlay:not(.hidden), #task-popup-overlay:not(.hidden), #project-popup-overlay:not(.hidden) {
+  display: flex; /* Show the popup when it's not hidden */
+}
+
+/* Popup Content */
+#popup-content, #task-popup-content, #project-popup-content {
+  background-color: #33363B;
+  padding: 2vh; /* Vertical padding using vh */
+  border-radius: 1.5vw; /* Border radius in vw */
+  width: 50vw; /* Responsive width based on viewport width */
+  max-height: 75vh; /* Max height using vh */
+  color: white;
+  display: flex;
+  flex-direction: column; /* Ensures header and content are stacked vertically */
+  overflow-y: auto; /* Make sure it doesn't overflow */
+}
+
+/* Popup Header */
+.popup-header {
+  background-color: #33363B;
+  font-size: 1.5vh; /* Font size in vh for scaling */
+  font-weight: bold;
+  padding: 1vh;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+/* Popup Header Title */
+.popup-header h2 {
+  margin-left: 2vw; /* Left margin using vw */
+  font-size: 2vh; /* Font size in vh for responsiveness */
+}
+
+/* Popup Buttons Container */
+.popup-buttons {
+  background-color: #33363B;
+  display: flex;
+  justify-content: flex-end;
+  padding: 1vh;
+}
+
+/* Popup Buttons */
+.popup-buttons button {
+  background-color: transparent;
+  color: white;
+  border: 1.5px solid transparent;
+  border-radius: 8px;
+  padding: 0.5vh 1.5vw; /* Vertical padding in vh and horizontal padding in vw */
+  cursor: pointer;
+  font-size: 1.2vh; /* Font size in vh */
+  transition: background-color 0.3s ease; /* Smooth background color transition */
+}
+
+.popup-buttons button:hover {
+  background-color: #949AA0;
+  color: white;
+}
+
+/* Cancel Button Styling */
+.popup-buttons #cancel-button, .popup-buttons #cancel-task-button {
+  background-color: transparent;
+  color: white;
+  border: 1.5px solid transparent;
+  border-radius: 10px;
+  font-size: 1.2vh;
+  padding: 0.5vh 2vw; /* Adjusted padding */
+  cursor: pointer;
+}
+
+/* Ensure hidden class is used to hide the popups */
+.hidden {
+  display: none;
+}
