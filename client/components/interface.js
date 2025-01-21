@@ -1,76 +1,89 @@
 export function Interface(user) {
   return `
-    <div class="file-display">
-      <span class="file-name">very_long_file_name_example.txt</span>
-      <button class="remove-file-button">X</button>
-    </div>
+    <div id="app-container">
+      <!-- File Display -->
+      <div class="file-display">
+        <span class="file-name">very_long_file_name_example.txt</span>
+        <button class="remove-file-button">X</button>
+      </div>
 
-    <div id="calendar-container" class="hidden">
-      <div id="calendar">
-        <div class="calendar-header">
-          <button id="prev-month-button">←</button>
-          <span id="month-year-display"></span>
-          <button id="next-month-button">→</button>
+      <!-- Calendar Container -->
+      <div id="calendar-container" class="hidden">
+        <div id="calendar">
+          <div class="calendar-header">
+            <button id="prev-month-button">←</button>
+            <span id="month-year-display"></span>
+            <button id="next-month-button">→</button>
+          </div>
+          <div class="calendar-grid">
+            <div class="weekday">Sun</div>
+            <div class="weekday">Mon</div>
+            <div class="weekday">Tue</div>
+            <div class="weekday">Wed</div>
+            <div class="weekday">Thu</div>
+            <div class="weekday">Fri</div>
+            <div class="weekday">Sat</div>
+          </div>
+          <div class="calendar-days"></div>
         </div>
-        <div class="calendar-grid">
-          <div class="weekday">Sun</div>
-          <div class="weekday">Mon</div>
-          <div class="weekday">Tue</div>
-          <div class="weekday">Wed</div>
-          <div class="weekday">Thu</div>
-          <div class="weekday">Fri</div>
-          <div class="weekday">Sat</div>
+      </div>
+
+      <!-- Sidebar -->
+      <div id="sidebar">
+        <div id="logo"></div>
+        <div id="userbox">
+          <img src="${user.avatarUrl}" alt="Profile Picture" id="profile-pic">
+          <span id="username">${user.username}</span>
         </div>
-        <div class="calendar-days"></div>
-      </div>
-    </div>
-
-    <button id="add-list-button">+ add a list</button>
-
-    <div id="list-container"></div>
-    <div id="board-page">
-      <div id="board-topic">board 1</div>
-      <div id="board-description">board description</div>
-      <div id="settings-icon" onclick="toggleSettingsPopup()">
-        <img src="assets/setting.svg" alt="Settings">
-      </div>
-
-      <div id="tasks-checkbox">
-        <input type="checkbox" id="tasks-checkbox-input">
-        <label id="tasks-checkbox-label">tasks assigned to me</label>
-      </div>
-    </div>
-
-    <div id="sidebar">
-      <div id="logo"></div>
-      <div id="userbox">
-        <img src="${user.avatarUrl}" alt="Profile Picture" id="profile-pic">
-        <span id="username">${user.username}</span>
-      </div>
-
-      <div id="projectbox" class="clickable">
-        <div id="projectname">Project 1</div>
-      </div>
-
-      <div id="settings-popup">
-        <p id="edit-board">edit board</p>
-        <p id="delete-board" class="delete">delete board</p>
-      </div>
-
-      <div id="board-section">
-        <span id="board-text">Boards</span>
-        <div id="create-board-container">
-          <button id="create-board-button">+ create new board</button>
+        
+        <!-- Project Section -->
+        <div id="projectbox" class="clickable">
+          <div id="projectname">Project 1</div>
         </div>
-        <div id="board-list-container"></div>
+
+        <!-- Settings Popup -->
+        <div id="settings-popup" class="hidden">
+          <p id="edit-board">edit board</p>
+          <p id="delete-board" class="delete">delete board</p>
+        </div>
+
+        <!-- Board Section -->
+        <div id="board-section">
+          <span id="board-text">Boards</span>
+          <div id="create-board-container">
+            <button id="create-board-button">+ create new board</button>
+          </div>
+          <div id="board-list-container"></div>
+        </div>
+
+        <!-- Project Section -->
+        <div id="project-section">
+          <button id="create-project-button">+ create new project</button>
+          <div id="line-under-button"></div>
+          <div id="project-list-container"></div>
+        </div>
       </div>
 
-      <div id="project-section">
-        <button id="create-project-button">+ create new project</button>
-        <div id="line-under-button"></div>
-        <div id="project-list-container"></div>
+      <!-- Board Page -->
+      <div id="board-page">
+        <div id="board-topic">board 1</div>
+        <div id="board-description">board description</div>
+        <div id="settings-icon">
+          <img src="assets/setting.svg" alt="Settings">
+        </div>
+
+        <!-- Tasks Checkbox -->
+        <div id="tasks-checkbox">
+          <input type="checkbox" id="tasks-checkbox-input">
+          <label id="tasks-checkbox-label">tasks assigned to me</label>
+        </div>
       </div>
 
+      <!-- List Container -->
+      <button id="add-list-button">+ add a list</button>
+      <div id="list-container"></div>
+
+      <!-- Popups -->
       <div id="popup-overlay" class="hidden">
         <div id="popup-content">
           <div class="popup-header">
@@ -92,6 +105,7 @@ export function Interface(user) {
         </div>
       </div>
 
+      <!-- Project Popup -->
       <div id="project-popup-overlay" class="hidden">
         <div id="popup-content">
           <div class="popup-header">
@@ -113,6 +127,7 @@ export function Interface(user) {
         </div>
       </div>
 
+      <!-- Task Popup -->
       <div id="task-popup-overlay" class="hidden">
         <div id="task-popup-content">
           <div class="popup-header">
@@ -166,6 +181,7 @@ export function Interface(user) {
         </div>
       </div>
 
+      <!-- Label Popup -->
       <div id="label-popup" class="hidden">
         <div class="popup-content">
           <div class="label-options">
@@ -181,6 +197,7 @@ export function Interface(user) {
         </div>
       </div>
 
+      <!-- Confirmation Popup -->
       <div id="confirmation-popup" class="hidden">
         <div id="confirmation-content">
           <h3>Discard changes?</h3>
