@@ -9,7 +9,6 @@ import { ConfirmationPopup } from "./components/confirmationPopup.js";
 import { TaskLabel } from "./components/taskLabel.js";
 
 import "./style.css";
-import "./interface.css";
 
 const discordSdk = new DiscordSDK(import.meta.env.VITE_DISCORD_CLIENT_ID);
 let user = {};
