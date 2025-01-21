@@ -5,12 +5,12 @@ export function ProjectPopup() {
     const createProjectForm = document.querySelector('#create-project-form');
     
     // Event listener to show the project popup when the "Create Project" button is clicked
-    createProjectButton.addEventListener('click', function () {
+    createProjectButton.addEventListener('click', () => {
       projectPopupOverlay.classList.remove('hidden');
     });
     
     // Event listener for the close button to hide the project popup
-    closeProjectPopupButton.addEventListener('click', function () {
+    closeProjectPopupButton.addEventListener('click', () => {
       projectPopupOverlay.classList.add('hidden');
       createProjectForm.reset();  // Optionally reset the form fields
     });
@@ -21,7 +21,7 @@ export function ProjectPopup() {
     }
   
     // Event listener to close the popup if clicked outside
-    projectPopupOverlay.addEventListener('click', function (event) {
+    projectPopupOverlay.addEventListener('click', (event) => {
       if (event.target === projectPopupOverlay) {
         projectPopupOverlay.classList.add('hidden');
         createProjectForm.reset();  // Optionally reset the form fields if clicking outside
