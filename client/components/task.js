@@ -1,172 +1,152 @@
+import { TaskLabel } from './taskLabel.js'; // Import TaskLabel module
+
 export function Task() {
-    const addTaskForm = document.querySelector('#add-task-form');
-    const taskNameInput = document.querySelector('#task-name');
-    const taskDetailsInput = document.querySelector('#task-details');
-    const addFileButton = document.querySelector('#add-file-button');
-    const startDateButton = document.querySelector('#start-date-button');
-    const dueDateButton = document.querySelector('#due-date-button');
-    const setLabelButton = document.querySelector('#set-label-button');
-    const addMemberButton = document.querySelector('#add-member-button');
-    const reminderInput = document.querySelector('#reminder');
-    const taskPopupOverlay = document.querySelector('#task-popup-overlay');
-    const closeTaskPopupButton = document.querySelector('#close-task-popup-button');
-    const fileContainer = document.querySelector('#file-container'); // Container to display selected files
-  
-    let taskData = {}; // Object to hold task data
-    let uploadedFiles = []; // Array to hold files
-  
-    // Handle task form submission
-    addTaskForm.addEventListener('submit', function (event) {
-      event.preventDefault();
-  
-      const taskName = taskNameInput.value;
-      const taskDetails = taskDetailsInput.value;
-      const reminder = reminderInput.value;
-  
-      if (taskName && taskDetails) {
-        taskData = {
-          taskName,
-          taskDetails,
-          reminder,
-          startDate: taskData.startDate || null,
-          dueDate: taskData.dueDate || null,
-          label: taskData.label || null,
-          members: taskData.members || [],
-          files: uploadedFiles // Include files in the task data
-        };
-  
-        // Save the task (to localStorage or backend)
-        saveTask(taskData);
-  
-        // Close the popup after adding the task
-        hideTaskPopup();
-  
-        // Optionally reset the form inputs
-        addTaskForm.reset();
-        fileContainer.innerHTML = ''; // Clear the file container after task creation
-      } else {
-        alert('Please enter both task name and details.');
-      }
-    });
-  
-    // Real function to save a task (e.g., to localStorage or backend)
-    function saveTask(taskData) {
-      // Simulate saving task in localStorage or sending to backend
-      localStorage.setItem('task', JSON.stringify(taskData)); // Example: saving to localStorage
-      alert(`Task "${taskData.taskName}" saved!`);
-    }
-  
-    // Event listener for adding a file
-    addFileButton.addEventListener('click', function () {
-      // Trigger file input for file selection
-      const fileInput = document.createElement('input');
-      fileInput.type = 'file';
-      fileInput.multiple = true; // Allow multiple files to be selected
-      fileInput.click();
-  
-      fileInput.addEventListener('change', function () {
-        const files = fileInput.files;
-        if (files.length > 0) {
-          // Display selected files
-          displayFiles(files);
-        }
-      });
-    });
-  
-    // Function to display selected files
-    function displayFiles(files) {
-      for (let i = 0; i < files.length; i++) {
-        const file = files[i];
-  
-        // Add file to uploadedFiles array
-        uploadedFiles.push(file);
-  
-        // Create a new file element to display
-        const fileElement = document.createElement('div');
-        fileElement.classList.add('file-item');
-        fileElement.innerHTML = `
-          <span>${file.name}</span>
-          <button class="remove-file-button">Remove</button>
-        `;
-  
-        // Add remove file functionality
-        const removeButton = fileElement.querySelector('.remove-file-button');
-        removeButton.addEventListener('click', function () {
-          removeFile(file);
-          fileElement.remove();
-        });
-  
-        // Append file element to file container
-        fileContainer.appendChild(fileElement);
-      }
-    }
-  
-    // Function to remove a file from the uploadedFiles array
-    function removeFile(fileToRemove) {
-      uploadedFiles = uploadedFiles.filter(file => file !== fileToRemove);
-    }
-  
-    // Event listener for selecting start date
-    startDateButton.addEventListener('click', function () {
-      const startDate = prompt("Enter Start Date (YYYY-MM-DD):");
-      if (startDate) {
-        taskData.startDate = startDate;
-        alert(`Start date set to: ${startDate}`);
-      }
-    });
-  
-    // Event listener for selecting due date
-    dueDateButton.addEventListener('click', function () {
-      const dueDate = prompt("Enter Due Date (YYYY-MM-DD):");
-      if (dueDate) {
-        taskData.dueDate = dueDate;
-        alert(`Due date set to: ${dueDate}`);
-      }
-    });
-  
-    // Event listener for setting a label
-    setLabelButton.addEventListener('click', function () {
-      const label = prompt("Enter Label for the task:");
-      if (label) {
-        taskData.label = label;
-        alert(`Label set to: ${label}`);
-      }
-    });
-  
-    // Event listener for adding a member to the task
-    addMemberButton.addEventListener('click', function () {
-      const member = prompt("Enter member name to add:");
-      if (member) {
-        taskData.members.push(member);
-        alert(`${member} added to task.`);
-      }
-    });
-  
-    // Event listener for reminder input change
-    reminderInput.addEventListener('change', function () {
-      const reminderValue = reminderInput.value;
-      taskData.reminder = reminderValue;
-      alert(`Reminder set to: ${reminderValue}`);
-    });
-  
-    // Show the task popup
-    function showTaskPopup() {
-      taskPopupOverlay.classList.remove('hidden');
-    }
-  
-    // Hide the task popup
-    function hideTaskPopup() {
-      taskPopupOverlay.classList.add('hidden');
-    }
-  
-    // Event listener to close the popup when the close button is clicked
-    closeTaskPopupButton.addEventListener('click', function () {
-      hideTaskPopup();
-      addTaskForm.reset(); // Reset the form fields when closing the popup
-      fileContainer.innerHTML = ''; // Clear the file container
-    });
-  
-    // Optionally, you can add event listeners to show the popup in the UI
-    // For example, you can trigger `showTaskPopup()` when a "Create Task" button is clicked
+  // DOM References
+  const taskPopupOverlay = document.getElementById("task-popup-overlay");
+  const closeTaskPopupButton = document.getElementById("close-task-popup-button");
+  const cancelTaskButton = document.getElementById("cancel-task-button");
+  const addTaskForm = document.getElementById("add-task-form");
+  const taskNameInput = document.getElementById("task-name");
+  const taskDetailsInput = document.getElementById("task-details");
+  const fileContainer = document.getElementById("file-container");
+
+  const startDateButton = document.getElementById("start-date-button");
+  const dueDateButton = document.getElementById("due-date-button");
+  const setLabelButton = document.getElementById("set-label-button");
+  const reminderInput = document.getElementById("reminder");
+
+  const { showLabelPopup } = TaskLabel(); // Get the showLabelPopup function from TaskLabel
+
+  let uploadedFiles = []; // Array to manage uploaded files
+  let taskData = {}; // Object to store task details
+  document.getElementById("task-popup-content").style.height = "75vh";
+
+  // Show Task Popup
+  function showTaskPopup() {
+    taskPopupOverlay.classList.remove("hidden");
   }
+
+  // Close Task Popup
+  function closeTaskPopup() {
+    taskPopupOverlay.classList.add("hidden");
+    resetTaskPopupInputs(); // Reset all inputs
+  }
+
+  // Reset Task Popup Inputs
+  function resetTaskPopupInputs() {
+    if (addTaskForm) addTaskForm.reset();
+
+    // Clear file container
+    fileContainer.innerHTML = "";
+
+    // Restore "Add File" button
+    const addFileButtonElement = document.createElement("button");
+    addFileButtonElement.id = "add-file-button";
+    addFileButtonElement.type = "button";
+    addFileButtonElement.textContent = "+ add file";
+    addFileButtonElement.classList.add("file-button-class"); // Optional: add styling class
+
+    fileContainer.appendChild(addFileButtonElement); // Add the "Add File" button
+
+    // Initialize file handler for the new button
+    initializeFileHandler(addFileButtonElement);
+
+    // Reset date and label buttons
+    startDateButton.textContent = "dd/mm/yy";
+    startDateButton.style.backgroundColor = "";
+    startDateButton.style.color = "#949AA0";
+
+    dueDateButton.textContent = "dd/mm/yy";
+    dueDateButton.style.backgroundColor = "";
+    dueDateButton.style.color = "#949AA0";
+
+    setLabelButton.textContent = "set label";
+    setLabelButton.style.backgroundColor = "";
+    setLabelButton.style.color = "#949AA0";
+
+    uploadedFiles = [];
+    taskData = {};
+  }
+
+  // Initialize File Handling Logic
+  function initializeFileHandler(button) {
+    const fileInput = document.createElement("input");
+    fileInput.type = "file";
+    fileInput.style.display = "none";
+
+    // Trigger file dialog on button click
+    button.addEventListener("click", () => {
+      fileInput.value = ""; // Reset input value
+      fileInput.click(); // Open file dialog
+    });
+
+    // Handle file selection
+    fileInput.addEventListener("change", (event) => {
+      const file = event.target.files[0];
+      if (file) {
+        displayFile(file);
+      }
+    });
+
+    fileContainer.appendChild(fileInput); // Append the hidden file input
+  }
+
+  // Display Selected File
+  function displayFile(file) {
+    uploadedFiles.push(file);
+
+    const fileDisplay = document.createElement("div");
+    fileDisplay.classList.add("file-display");
+    fileDisplay.innerHTML = `
+      <span class="file-name">${file.name}</span>
+      <button class="remove-file-button">X</button>
+    `;
+
+    // Add event listener to remove button
+    const removeButton = fileDisplay.querySelector(".remove-file-button");
+    removeButton.addEventListener("click", () => {
+      uploadedFiles = uploadedFiles.filter((f) => f !== file); // Remove file from the array
+      fileDisplay.remove(); // Remove the file display element
+    });
+
+    fileContainer.appendChild(fileDisplay);
+  }
+
+  // Restrict Reminder Input to Numbers Only
+  reminderInput.addEventListener("input", () => {
+    // Remove non-numeric characters
+    reminderInput.value = reminderInput.value.replace(/\D/g, "");
+
+    // Restrict maximum value to 100
+    if (parseInt(reminderInput.value) > 100) {
+      reminderInput.value = "99";
+    }
+  });
+
+  // Ensure a valid value on blur (optional for clearing invalid input)
+  reminderInput.addEventListener("blur", () => {
+    if (!reminderInput.value || parseInt(reminderInput.value) <= 0) {
+      reminderInput.value = ""; // Clear invalid input
+    }
+  });
+
+  // Attach Event Listeners
+  closeTaskPopupButton.addEventListener("click", closeTaskPopup);
+  cancelTaskButton.addEventListener("click", closeTaskPopup);
+
+  taskPopupOverlay.addEventListener("click", (event) => {
+    if (event.target === taskPopupOverlay) {
+      closeTaskPopup();
+    }
+  });
+
+  // Show Label Popup when setLabelButton is clicked
+  setLabelButton.addEventListener("click", () => {
+    showLabelPopup();
+  });
   
+  console.log("Task module initialized."); // Debug log
+
+  // Initialize the Task Popup
+  resetTaskPopupInputs(); // Ensure initial setup
+}
