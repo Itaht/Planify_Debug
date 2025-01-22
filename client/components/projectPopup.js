@@ -1,36 +1,122 @@
+import { ConfirmationPopup } from './confirmationPopup.js';
+
 export function ProjectPopup() {
-    const projectPopupOverlay = document.querySelector('#project-popup-overlay');
-    const createProjectButton = document.querySelector('#create-project-button');
-    const closeProjectPopupButton = document.querySelector('#close-project-popup-button');
-    const createProjectForm = document.querySelector('#create-project-form');
-    
-    // Event listener to show the project popup when the "Create Project" button is clicked
-    createProjectButton.addEventListener('click', function () {
-      projectPopupOverlay.classList.remove('hidden');
-    });
-    
-    // Event listener for the close button to hide the project popup
-    closeProjectPopupButton.addEventListener('click', function () {
-      projectPopupOverlay.classList.add('hidden');
-      createProjectForm.reset();  // Optionally reset the form fields
-    });
-    
-    // Function to show the project popup (you can call this if needed)
-    function showProjectPopup() {
-      projectPopupOverlay.classList.remove('hidden');
-    }
-  
-    // Event listener to close the popup if clicked outside
-    projectPopupOverlay.addEventListener('click', function (event) {
-      if (event.target === projectPopupOverlay) {
-        projectPopupOverlay.classList.add('hidden');
-        createProjectForm.reset();  // Optionally reset the form fields if clicking outside
-      }
-    });
-    
-    // Expose the showProjectPopup function if you need to call it from elsewhere
-    return {
-      showProjectPopup
-    };
+  const projectListContainer = document.getElementById("project-list-container");
+  const createProjectButton = document.getElementById("create-project-button");
+  const createProjectButtonForm = document.getElementById("create-project-button-form");
+  const projectPopupOverlay = document.getElementById("project-popup-overlay");
+  const closeProjectPopupButton = document.getElementById("close-project-popup-button");
+  const cancelProjectButton = document.getElementById("cancel-project-button");
+  const projectNameInput = document.getElementById("project-name");
+  const projectDescriptionInput = document.getElementById("project-description");
+  const { showConfirmationPopup, hideConfirmationPopup } = ConfirmationPopup();
+
+  // Function to reset and hide the project popup overlay
+  function resetProjectPopupOverlay() {
+    projectPopupOverlay.classList.add("hidden");
+    projectNameInput.value = ""; // Clear the input field when hiding the popup
+    projectDescriptionInput.value = ""; // Clear the description field when hiding the popup
   }
-  
+
+  // Function to handle the confirmation logic
+  function handleConfirmation(action) {
+    if (action === "discard") {
+      resetProjectPopupOverlay();
+    }
+    hideConfirmationPopup();
+  }
+
+  // Attach event listeners to confirmation popup buttons
+  document.getElementById("cancel-discard-button").addEventListener("click", () => {
+    hideConfirmationPopup();
+  });
+
+  document.getElementById("discard-button").addEventListener("click", () => {
+    handleConfirmation("discard");
+  });
+
+  // Show the project popup
+  function showProjectPopup() {
+    projectPopupOverlay.classList.remove("hidden");
+  }
+
+  // Function to dynamically position the line
+  function createOrUpdateDynamicLine() {
+    const projectSection = document.getElementById("project-section");
+    let dynamicLine = document.querySelector(".dynamic-line");
+
+    if (!dynamicLine) {
+      dynamicLine = document.createElement("div");
+      dynamicLine.className = "dynamic-line";
+      projectSection.appendChild(dynamicLine);
+    }
+
+    const lastProjectButton = projectListContainer.querySelector(".project-button:last-child");
+    if (lastProjectButton) {
+      const lastButtonRect = lastProjectButton.getBoundingClientRect();
+      const projectSectionRect = projectSection.getBoundingClientRect();
+      const offsetVh = ((lastButtonRect.bottom - projectSectionRect.top) / window.innerHeight) * 100;
+      dynamicLine.style.top = `calc(${offsetVh}vh + 2.5vh)`; // Adjust for spacing
+      dynamicLine.style.left = "0";
+      dynamicLine.style.width = "100%";
+      dynamicLine.style.display = "block";
+    } else {
+      dynamicLine.style.display = "none"; // Hide if no projects
+    }
+  }
+
+  // Handle creating a new project button
+  function handleCreateProject(event) {
+    event.preventDefault();
+
+    const projectName = projectNameInput.value.trim();
+    const projectDescription = projectDescriptionInput.value.trim();
+    if (projectName) {
+      const newProjectButton = document.createElement("button");
+      newProjectButton.className = "project-button";
+      newProjectButton.innerHTML = `
+        <span class="checkmark hidden">✓</span>
+        <span class="project-name">${projectName}</span>
+      `;
+
+      // Store the project description as a data attribute (hidden)
+      newProjectButton.dataset.description = projectDescription;
+
+      newProjectButton.addEventListener("click", () => {
+        document.querySelectorAll(".project-button").forEach((btn) => {
+          btn.classList.remove("active");
+          btn.querySelector(".checkmark").classList.add("hidden");
+        });
+        newProjectButton.classList.add("active");
+        newProjectButton.querySelector(".checkmark").classList.remove("hidden");
+      });
+
+      projectListContainer.appendChild(newProjectButton);
+      resetProjectPopupOverlay();
+      createOrUpdateDynamicLine();
+    } else {
+      alert("Please enter a project name.");
+    }
+  }
+
+  // Show confirmation popup for specific actions
+  function showConfirmationOnAction(event) {
+    event.stopPropagation();
+    showConfirmationPopup();
+  }
+
+  // Add event listeners
+  createProjectButton.addEventListener("click", showProjectPopup);
+  createProjectButtonForm.addEventListener("click", handleCreateProject);
+  closeProjectPopupButton.addEventListener("click", showConfirmationOnAction);
+  cancelProjectButton.addEventListener("click", showConfirmationOnAction);
+
+  projectPopupOverlay.addEventListener("click", (event) => {
+    if (event.target === projectPopupOverlay) {
+      showConfirmationPopup();
+    }
+  });
+
+  // Optional: Handle dynamic line updates on window resize
+  window.addEventListener("resize", createOrUpdateDynamicLine);
+}

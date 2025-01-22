@@ -31,40 +31,216 @@
   overflow: hidden;
 }
 
-/* Board Section */
 #project-section {
   position: fixed;
-  top: 22vh; /* Using vh for vertical positioning */
+  top: 22vh;
   left: 0;
-  width: 20vw; /* Width using vw for scaling */
-  height: 5vh; /* Height using vh */
+  width: 20%;
+  height: 5vh;
   background-color: #1C2025;
-  padding: 2vh;
+  padding: 20px;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
   border-right: 1px solid #474E55;
   display: none;
   z-index: 2;
-}
-
-/* Create Project Button Styling */
-#create-project-button {
+  }
+  
+  /* Create Project Button Styling */
+  #create-project-button {
   position: relative;
-  top: -1vh; /* Adjust using vh */
-  left: 0.2vw; /* Adjust left position using vw */
+  top: -1vh;
+  left: 0.2vw;
   background-color: transparent;
   color: white;
   border: 1.5px solid transparent;
   border-radius: 6px;
-  padding: 1vh 3vw; /* Vertical padding in vh and horizontal padding in vw */
-  font-size: calc(1.3vw); /* Responsive font size */
+  padding: 1vh 3vw;
+  font-size: calc(1.3vw);
   letter-spacing: 1px;
   cursor: pointer;
   text-align: center;
-  outline: none;
+  outline: none; 
   margin-bottom: 1vh;
-}
+  }
 
-#create-project-button:hover {
+  #create-project-button:hover {
+    background-color: #2594E3;
+    color: white;
+  }
+  
+/* Form Labels and Inputs Spacing */
+form label {
+  display: block;
+  margin-bottom: 15px; /* Space between label and input/textarea */
+  font-size: 14px;
+  }
+  
+  form input,
+  form textarea {
+  width: 87%;
+  padding: 10px;
+  border: 1px solid #6D7276;
+  border-radius: 12px; /* Rounded corners for input and textarea */
+  background-color: #3A3E42;
+  color: #fff;
+  font-size: 14px;
+  }
+  
+  /* Fixed height for textarea */
+  form textarea {
+  height: 110px;
+  resize: none; /* Prevent textarea resizing */
+  margin-bottom: 25px;
+  }
+  
+  /* Ensure 30px gap between input and the next label */
+  #board-name , #project-name ,#task-name{
+  margin-bottom: 30px;
+  }
+  
+  
+  .popup-buttons button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  }
+  
+  #create-board-form ,#create-project-form ,#add-task-form{
+  position: relative;
+  left: 30px; /* Move the form 25px to the right */
+  letter-spacing: 1px;
+  }
+  
+  .popup-buttons {
+  background-color: #33363B;
+  display: flex;
+  justify-content: flex-end;
+  position: sticky;
+  bottom: 15px;
+  padding-right: 40px;
+  z-index: 1;
+  }
+  
+  #cancel-button ,
+  #cancel-project-button ,
+  #cancel-task-button {
+  background-color: transparent;
+  color: white;
+  border: 1.5px solid transparent;
+  border-radius: 10px;
+  padding: 6px 22px;
+  font-size: 14px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  outline: none;
+  box-sizing: border-box;
+  
+  /* Move the cancel button close to the left side of the create button */
+  margin-right: -1px;
+  }
+  
+  #cancel-button:hover ,
+  #cancel-project-button:hover ,
+  #cancel-task-button:hover {
+  background-color: #474B51;
+  color: white;
+  border: 1.5px solid #474B51;
+  }
+  
+  #create-board-button-form ,
+  #create-project-button-form ,
+  #add-task-button-submit{
+  background-color: transparent;
+  color: #2594E3;
+  border: 1.5px solid #2594E3;
+  border-radius: 10px;
+  padding: 6px 30px;
+  font-size: 14px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  outline: none;
+  box-sizing: border-box;
+  position: relative;
+  margin-left: 12px;
+  }
+  
+  #create-board-button-form:hover ,
+  #create-project-button-form:hover ,
+  #add-task-button-submit:hover{
   background-color: #2594E3;
   color: white;
-}
+  border: 1.5px solid #2594E3;
+  }
+  
+  /* Line below the button */
+  #line-under-button {
+  width: 100%;
+  height: 1px;  
+  background-color: #474E55;
+  margin: 0vh auto 0 auto; /* 1vh gap and centered line */
+  }
+
+  #project-list-container {
+    margin-top: 0.5vh;
+    max-height: 53.8vh; 
+    overflow-y: auto; 
+    position: relative;
+  }
+  .project-button {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 1vh 1.5vw;
+    margin: 2vh 0;
+    background-color: transparent;
+    border: none;
+    border-radius: 4px;
+    font-size: calc(1.4vw);
+    color: #f3f3f3;
+    cursor: pointer;
+    text-align: left;
+    width: 100%;
+    margin-bottom: 1.5vh;
+    margin-top: 1.5vh;
+  }
+  .project-button:hover {
+    background-color: #2594E3;
+  }
+  .project-button .checkmark {
+    width: calc(1.4vw); /* Reserve width for the checkmark */
+    height: calc(1.4vw); /* Same height for consistency */
+    margin-right: 1.5vw; /* Space between checkmark and text */
+    color: white; /* Checkmark color */
+    font-size: calc(1.3vw); /* Icon font size */
+    visibility: hidden; /* Initially hidden */
+    display: flex; /* Ensure alignment */
+    align-items: center; /* Center align within reserved space */
+    justify-content: center;
+  }
+  .project-button.active .checkmark {
+    visibility: visible; /* Make the checkmark visible */
+  }
+  .project-button .project-name {
+    flex-grow: 1; /* Ensure the text takes the remaining space */
+    width: 2vw;
+  }
+  #project-list-container::-webkit-scrollbar {
+    width: 6px; /* Optional scrollbar width */
+    border-radius: 4px;
+  }
+  #project-list-container::-webkit-scrollbar-thumb {
+    background-color: #33363B; /* Scrollbar thumb color */
+    border-radius: 4px;
+  }
+  #project-list-container::-webkit-scrollbar-track {
+    background-color: #25282D; /* Scrollbar track color */
+  }
+  .dynamic-line {
+    width: 100%;
+    height: 1px;  
+    background-color: #474E55;
+    margin: 0vh auto 0 auto; /* 1vh gap and centered line */
+    position: absolute; /* Allow dynamic positioning */
+  }

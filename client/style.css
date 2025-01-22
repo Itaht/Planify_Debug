@@ -97,34 +97,66 @@ button:focus-visible {
   }
 }
 
-/* Initial state: no background color */
-.checkbox-container {
-  position: absolute;
-  top: 30px;
-  right: 130px;
-  border-radius: 12px;
-  padding: 10px 20px;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-/* Background color appears on hover */
-.checkbox-container:hover {
-  background-color: #32353A;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.checkbox-label {
-  font-size: calc(1vw + 0.5vh);
-  color: #ffffff;
+/* Ensure the entire area is clickable */
+#tasks-checkbox {
+  position: fixed;
+  top: 5vh;
+  right: 10vw;
+  background-color: transparent;
+  padding: 10px 15px; /* Padding defines the clickable area */
+  border-radius: 10px;
+  cursor: pointer;
   display: flex;
   align-items: center;
+}
+
+#tasks-checkbox:hover {
+  background-color: #32353A; /* Highlight on hover */
+}
+
+/* Hide the default checkbox */
+#tasks-checkbox input[type="checkbox"] {
+  opacity: 0; /* Make it invisible */
+  position: absolute; /* Remove it from the layout */
+  z-index: -1;
+}
+
+/* Style the label to act as the clickable area */
+#tasks-checkbox label {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1.5vw; /* Space between checkbox and text */
+  font-size: calc(1.1vw);
+  color: white;
   cursor: pointer;
+  width: 100%; /* Ensure the label covers the full width */
+  user-select: none;
+  letter-spacing: 1px;
 }
 
-#task-checkbox {
-  margin-right: 10px;
-  accent-color: #949AA0;
-  height: 3vh;
-  width: 3vh;
+/* Add a custom checkbox */
+#tasks-checkbox label::before {
+  content: "";
+  width: 18px;
+  height: 18px;
+  border: 1px solid #949AA0;
+  border-radius: 3px;
+  background-color: transparent;
 }
 
+/* Checked state styling */
+#tasks-checkbox input[type="checkbox"]:checked + label::before {
+  background-color: #949AA0;
+  border-color: #949AA0;
+  content: "✔";
+  color: white;
+  text-align: center;
+  line-height: 18px;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.hidden {
+  display: none;
+}
