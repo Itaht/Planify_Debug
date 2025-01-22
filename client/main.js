@@ -7,6 +7,9 @@ import { SettingsPopup } from "./components/settings.js";
 import { ProjectPopup } from "./components/projectPopup.js";
 import { ConfirmationPopup } from "./components/confirmationPopup.js";
 import { TaskLabel } from "./components/taskLabel.js";
+import { BoardProject } from "./components/boardproject.js";
+import { List } from "./components/list.js";
+
 
 import "./style.css";
 
@@ -75,6 +78,8 @@ function renderApp() {
     ProjectPopup();
     ConfirmationPopup();
     TaskLabel();
+    BoardProject();
+    List();
 
     console.log("Components initialized successfully.");
   } catch (error) {

@@ -156,3 +156,7 @@ button:focus-visible {
   font-size: 13px;
   font-weight: bold;
 }
+
+.hidden {
+  display: none;
+}
