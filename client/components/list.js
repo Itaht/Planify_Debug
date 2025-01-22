@@ -33,7 +33,7 @@ export function List() {
   
       // Cancel button
       const cancelButton = document.createElement("button");
-      cancelButton.textContent = "Cancel";
+      cancelButton.textContent = "cancel";
       cancelButton.classList.add("cancel-list-button");
       cancelButton.addEventListener("click", () => {
         createNewListBox.remove();
@@ -42,7 +42,7 @@ export function List() {
   
       // Confirm button
       const confirmButton = document.createElement("button");
-      confirmButton.textContent = "Confirm";
+      confirmButton.textContent = "confirm";
       confirmButton.classList.add("confirm-list-button");
       confirmButton.addEventListener("click", () => {
         const listName = listInput.value.trim();

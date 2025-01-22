@@ -1,4 +1,5 @@
-import { TaskLabel } from './taskLabel.js'; // Import TaskLabel module
+import { TaskLabel } from "./taskLabel.js"; // Import TaskLabel module
+import { Member } from "./member.js"; // Import Member module
 
 export function Task() {
   // DOM References
@@ -9,13 +10,25 @@ export function Task() {
   const taskNameInput = document.getElementById("task-name");
   const taskDetailsInput = document.getElementById("task-details");
   const fileContainer = document.getElementById("file-container");
-
+  const addMemberButton = document.getElementById("add-member-button");
   const startDateButton = document.getElementById("start-date-button");
   const dueDateButton = document.getElementById("due-date-button");
   const setLabelButton = document.getElementById("set-label-button");
   const reminderInput = document.getElementById("reminder");
 
-  const { showLabelPopup } = TaskLabel(); // Get the showLabelPopup function from TaskLabel
+
+  const projectMembers = [
+    { id: "1", name: "Alice", profilePicture: "https://via.placeholder.com/40" },
+    { id: "2", name: "Bob", profilePicture: "https://via.placeholder.com/40" },
+    { id: "3", name: "Charlie", profilePicture: "https://via.placeholder.com/40" },
+  ];
+
+  // Debug to confirm members are correctly defined
+  console.log("Project members:", JSON.stringify(projectMembers, null, 2));
+
+  // Initialize the Member module with project members
+  const { showMemberPopup } = Member(projectMembers);
+  const { showLabelPopup } = TaskLabel(); // Get the showLabelPopup function from TaskLabel module
 
   let uploadedFiles = []; // Array to manage uploaded files
   let taskData = {}; // Object to store task details
@@ -63,6 +76,10 @@ export function Task() {
     setLabelButton.textContent = "set label";
     setLabelButton.style.backgroundColor = "";
     setLabelButton.style.color = "#949AA0";
+
+    addMemberButton.textContent = "+ add member"; // Reset add member button
+    addMemberButton.style.backgroundColor = "";
+    addMemberButton.style.color = "#949AA0";
 
     uploadedFiles = [];
     taskData = {};
@@ -144,7 +161,14 @@ export function Task() {
   setLabelButton.addEventListener("click", () => {
     showLabelPopup();
   });
-  
+
+  // Show Member Popup when addMemberButton is clicked
+  addMemberButton.addEventListener("click", () => {
+    console.log("Add member button clicked.");
+    showMemberPopup();
+  });
+
+
   console.log("Task module initialized."); // Debug log
 
   // Initialize the Task Popup
