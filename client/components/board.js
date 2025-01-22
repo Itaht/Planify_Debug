@@ -44,7 +44,7 @@ export function Board() {
 
     // Function to create a new board
     function createBoard(event) {
-        event.preventDefault();
+        event.preventDefault(); // Prevent form submission reload
 
         // Get inputs
         const boardNameInput = document.getElementById("board-name");
@@ -88,10 +88,7 @@ export function Board() {
     createBoardForm.addEventListener("submit", createBoard);
 
     // Explicitly handle clicks on the "Create Board" button
-    createBoardButtonForm.addEventListener("click", (event) => {
-        console.log("Create Board button clicked");
-        createBoardForm.dispatchEvent(new Event("submit")); // Trigger form submission
-    });
+    createBoardButtonForm.addEventListener("click", createBoard);
 
     // Show popup when the create board button is clicked
     createBoardButton.addEventListener("click", () => {
@@ -99,12 +96,14 @@ export function Board() {
     });
 
     // Show confirmation popup on close button click
-    closePopupButton.addEventListener("click", () => {
+    closePopupButton.addEventListener("click", (event) => {
+        event.preventDefault(); // Prevent page reload
         showConfirmationPopup();
     });
 
     // Show confirmation popup on cancel button click
-    cancelButton.addEventListener("click", () => {
+    cancelButton.addEventListener("click", (event) => {
+        event.preventDefault(); // Prevent page reload
         showConfirmationPopup();
     });
 
