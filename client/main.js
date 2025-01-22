@@ -9,7 +9,7 @@ import { ConfirmationPopup } from "./components/confirmationPopup.js";
 import { TaskLabel } from "./components/taskLabel.js";
 import { BoardProject } from "./components/boardproject.js";
 import { List } from "./components/list.js";
-
+import { Member } from "./components/member.js";
 
 import "./style.css";
 
@@ -80,6 +80,7 @@ function renderApp() {
     TaskLabel();
     BoardProject();
     List();
+    Member();
 
     console.log("Components initialized successfully.");
   } catch (error) {

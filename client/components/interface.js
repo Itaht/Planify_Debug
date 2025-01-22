@@ -1,4 +1,4 @@
-export function Interface(user) {
+export function Interface(user,member) {
   return `
     <div class="file-display">
       <span class="file-name">very_long_file_name_example.txt</span>
@@ -195,6 +195,12 @@ export function Interface(user) {
             </div>
           </div>
         </div>
+
+        <div id="member-popup" class="hidden">
+            <div class="member-options"></div>
+            <button id="done-member-button">Done</button>
+        </div>
+        <button id="add-member-button">+ Add Member</button>
 
         <!-- Confirmation Popup -->
         <div id="confirmation-popup" class="hidden">
