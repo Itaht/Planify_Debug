@@ -1,172 +1,176 @@
+import { TaskLabel } from "./taskLabel.js";
+import { Member } from "./member.js";
+import { ConfirmationPopup } from "./confirmationPopup.js";
+
 export function Task() {
-    const addTaskForm = document.querySelector('#add-task-form');
-    const taskNameInput = document.querySelector('#task-name');
-    const taskDetailsInput = document.querySelector('#task-details');
-    const addFileButton = document.querySelector('#add-file-button');
-    const startDateButton = document.querySelector('#start-date-button');
-    const dueDateButton = document.querySelector('#due-date-button');
-    const setLabelButton = document.querySelector('#set-label-button');
-    const addMemberButton = document.querySelector('#add-member-button');
-    const reminderInput = document.querySelector('#reminder');
-    const taskPopupOverlay = document.querySelector('#task-popup-overlay');
-    const closeTaskPopupButton = document.querySelector('#close-task-popup-button');
-    const fileContainer = document.querySelector('#file-container'); // Container to display selected files
-  
-    let taskData = {}; // Object to hold task data
-    let uploadedFiles = []; // Array to hold files
-  
-    // Handle task form submission
-    addTaskForm.addEventListener('submit', function (event) {
-      event.preventDefault();
-  
-      const taskName = taskNameInput.value;
-      const taskDetails = taskDetailsInput.value;
-      const reminder = reminderInput.value;
-  
-      if (taskName && taskDetails) {
-        taskData = {
-          taskName,
-          taskDetails,
-          reminder,
-          startDate: taskData.startDate || null,
-          dueDate: taskData.dueDate || null,
-          label: taskData.label || null,
-          members: taskData.members || [],
-          files: uploadedFiles // Include files in the task data
-        };
-  
-        // Save the task (to localStorage or backend)
-        saveTask(taskData);
-  
-        // Close the popup after adding the task
-        hideTaskPopup();
-  
-        // Optionally reset the form inputs
-        addTaskForm.reset();
-        fileContainer.innerHTML = ''; // Clear the file container after task creation
-      } else {
-        alert('Please enter both task name and details.');
-      }
-    });
-  
-    // Real function to save a task (e.g., to localStorage or backend)
-    function saveTask(taskData) {
-      // Simulate saving task in localStorage or sending to backend
-      localStorage.setItem('task', JSON.stringify(taskData)); // Example: saving to localStorage
-      alert(`Task "${taskData.taskName}" saved!`);
-    }
-  
-    // Event listener for adding a file
-    addFileButton.addEventListener('click', function () {
-      // Trigger file input for file selection
-      const fileInput = document.createElement('input');
-      fileInput.type = 'file';
-      fileInput.multiple = true; // Allow multiple files to be selected
-      fileInput.click();
-  
-      fileInput.addEventListener('change', function () {
-        const files = fileInput.files;
-        if (files.length > 0) {
-          // Display selected files
-          displayFiles(files);
-        }
-      });
-    });
-  
-    // Function to display selected files
-    function displayFiles(files) {
-      for (let i = 0; i < files.length; i++) {
-        const file = files[i];
-  
-        // Add file to uploadedFiles array
-        uploadedFiles.push(file);
-  
-        // Create a new file element to display
-        const fileElement = document.createElement('div');
-        fileElement.classList.add('file-item');
-        fileElement.innerHTML = `
-          <span>${file.name}</span>
-          <button class="remove-file-button">Remove</button>
-        `;
-  
-        // Add remove file functionality
-        const removeButton = fileElement.querySelector('.remove-file-button');
-        removeButton.addEventListener('click', function () {
-          removeFile(file);
-          fileElement.remove();
-        });
-  
-        // Append file element to file container
-        fileContainer.appendChild(fileElement);
-      }
-    }
-  
-    // Function to remove a file from the uploadedFiles array
-    function removeFile(fileToRemove) {
-      uploadedFiles = uploadedFiles.filter(file => file !== fileToRemove);
-    }
-  
-    // Event listener for selecting start date
-    startDateButton.addEventListener('click', function () {
-      const startDate = prompt("Enter Start Date (YYYY-MM-DD):");
-      if (startDate) {
-        taskData.startDate = startDate;
-        alert(`Start date set to: ${startDate}`);
-      }
-    });
-  
-    // Event listener for selecting due date
-    dueDateButton.addEventListener('click', function () {
-      const dueDate = prompt("Enter Due Date (YYYY-MM-DD):");
-      if (dueDate) {
-        taskData.dueDate = dueDate;
-        alert(`Due date set to: ${dueDate}`);
-      }
-    });
-  
-    // Event listener for setting a label
-    setLabelButton.addEventListener('click', function () {
-      const label = prompt("Enter Label for the task:");
-      if (label) {
-        taskData.label = label;
-        alert(`Label set to: ${label}`);
-      }
-    });
-  
-    // Event listener for adding a member to the task
-    addMemberButton.addEventListener('click', function () {
-      const member = prompt("Enter member name to add:");
-      if (member) {
-        taskData.members.push(member);
-        alert(`${member} added to task.`);
-      }
-    });
-  
-    // Event listener for reminder input change
-    reminderInput.addEventListener('change', function () {
-      const reminderValue = reminderInput.value;
-      taskData.reminder = reminderValue;
-      alert(`Reminder set to: ${reminderValue}`);
-    });
-  
-    // Show the task popup
-    function showTaskPopup() {
-      taskPopupOverlay.classList.remove('hidden');
-    }
-  
-    // Hide the task popup
-    function hideTaskPopup() {
-      taskPopupOverlay.classList.add('hidden');
-    }
-  
-    // Event listener to close the popup when the close button is clicked
-    closeTaskPopupButton.addEventListener('click', function () {
-      hideTaskPopup();
-      addTaskForm.reset(); // Reset the form fields when closing the popup
-      fileContainer.innerHTML = ''; // Clear the file container
-    });
-  
-    // Optionally, you can add event listeners to show the popup in the UI
-    // For example, you can trigger `showTaskPopup()` when a "Create Task" button is clicked
+  // DOM References
+  const taskPopupOverlay = document.getElementById("task-popup-overlay");
+  const closeTaskPopupButton = document.getElementById("close-task-popup-button");
+  const cancelTaskButton = document.getElementById("cancel-task-button");
+  const addTaskForm = document.getElementById("add-task-form");
+  const fileContainer = document.getElementById("file-container");
+  const addMemberButton = document.getElementById("add-member-button");
+  const startDateButton = document.getElementById("start-date-button");
+  const dueDateButton = document.getElementById("due-date-button");
+  const setLabelButton = document.getElementById("set-label-button");
+  const reminderInput = document.getElementById("reminder");
+
+  const { showConfirmationPopup, hideConfirmationPopup } = ConfirmationPopup();
+
+  const projectMembers = [
+    { id: "1", name: "Alice", profilePicture: "https://via.placeholder.com/40" },
+    { id: "2", name: "Bob", profilePicture: "https://via.placeholder.com/40" },
+    { id: "3", name: "Charlie", profilePicture: "https://via.placeholder.com/40" },
+  ];
+
+  const { showMemberPopup } = Member(projectMembers);
+  const { showLabelPopup } = TaskLabel();
+
+  let uploadedFiles = [];
+  let taskData = {};
+  document.getElementById("task-popup-content").style.height = "75vh";
+
+  // Show Task Popup
+  function showTaskPopup() {
+    taskPopupOverlay.classList.remove("hidden");
   }
-  
+
+  // Close Task Popup with Confirmation
+  function closeTaskPopupWithConfirmation() {
+    showConfirmationPopup();
+
+    // Attach event listener to confirm button in confirmation popup
+    const discardButton = document.querySelector("#discard-button");
+    discardButton.addEventListener("click", () => {
+      closeTaskPopup(); // Close the popup and reset the inputs
+      hideConfirmationPopup(); // Hide the confirmation popup
+    });
+
+    // Cancel button simply hides the confirmation popup
+    const cancelDiscardButton = document.querySelector("#cancel-discard-button");
+    cancelDiscardButton.addEventListener("click", () => {
+      hideConfirmationPopup();
+    });
+  }
+
+  // Close Task Popup (without confirmation, for confirmed discard)
+  function closeTaskPopup() {
+    taskPopupOverlay.classList.add("hidden");
+    resetTaskPopupInputs(); // Reset all inputs
+  }
+
+  // Reset Task Popup Inputs
+  function resetTaskPopupInputs() {
+    if (addTaskForm) addTaskForm.reset();
+
+    fileContainer.innerHTML = "";
+
+    const addFileButtonElement = document.createElement("button");
+    addFileButtonElement.id = "add-file-button";
+    addFileButtonElement.type = "button";
+    addFileButtonElement.textContent = "+ add file";
+    addFileButtonElement.classList.add("file-button-class");
+
+    fileContainer.appendChild(addFileButtonElement);
+    initializeFileHandler(addFileButtonElement);
+
+    startDateButton.textContent = "dd/mm/yy";
+    startDateButton.style.backgroundColor = "";
+    startDateButton.style.color = "#949AA0";
+
+    dueDateButton.textContent = "dd/mm/yy";
+    dueDateButton.style.backgroundColor = "";
+    dueDateButton.style.color = "#949AA0";
+
+    addMemberButton.textContent = "+ add member";
+    addMemberButton.style.backgroundColor = "";
+    addMemberButton.style.color = "#949AA0";
+
+    // Reset startDate and dueDate
+    startDate = null;
+    dueDate = null;
+
+    uploadedFiles = [];
+    taskData = {};
+  }
+
+
+  // Initialize File Handling Logic
+  function initializeFileHandler(button) {
+    const fileInput = document.createElement("input");
+    fileInput.type = "file";
+    fileInput.style.display = "none";
+
+    button.addEventListener("click", () => {
+      fileInput.value = "";
+      fileInput.click();
+    });
+
+    fileInput.addEventListener("change", (event) => {
+      const file = event.target.files[0];
+      if (file) {
+        displayFile(file);
+      }
+    });
+
+    fileContainer.appendChild(fileInput);
+  }
+
+  // Display Selected File
+  function displayFile(file) {
+    uploadedFiles.push(file);
+
+    const fileDisplay = document.createElement("div");
+    fileDisplay.classList.add("file-display");
+    fileDisplay.innerHTML = `
+      <span class="file-name">${file.name}</span>
+      <button class="remove-file-button">X</button>
+    `;
+
+    const removeButton = fileDisplay.querySelector(".remove-file-button");
+    removeButton.addEventListener("click", () => {
+      uploadedFiles = uploadedFiles.filter((f) => f !== file);
+      fileDisplay.remove();
+    });
+
+    fileContainer.appendChild(fileDisplay);
+  }
+
+  // Restrict Reminder Input to Numbers Only
+  reminderInput.addEventListener("input", () => {
+    reminderInput.value = reminderInput.value.replace(/\D/g, "");
+    if (parseInt(reminderInput.value) > 100) {
+      reminderInput.value = "99";
+    }
+  });
+
+  reminderInput.addEventListener("blur", () => {
+    if (!reminderInput.value || parseInt(reminderInput.value) <= 0) {
+      reminderInput.value = "";
+    }
+  });
+
+  // Attach Event Listeners
+  closeTaskPopupButton.addEventListener("click", closeTaskPopupWithConfirmation);
+  cancelTaskButton.addEventListener("click", closeTaskPopupWithConfirmation);
+
+  taskPopupOverlay.addEventListener("click", (event) => {
+    if (event.target === taskPopupOverlay) {
+      closeTaskPopupWithConfirmation();
+    }
+  });
+
+  // Show Label Popup when setLabelButton is clicked
+  setLabelButton.addEventListener("click", () => {
+    showLabelPopup();
+  });
+
+  // Show Member Popup when addMemberButton is clicked
+  addMemberButton.addEventListener("click", () => {
+    console.log("Add member button clicked.");
+    showMemberPopup();
+  });
+
+  console.log("Task module initialized.");
+  resetTaskPopupInputs();
+}

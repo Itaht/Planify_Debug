@@ -1,67 +1,320 @@
+/* Add List Button */
+#add-list-button {
+  position: absolute; /* Allow precise positioning */
+  top: 19vh; /* Align vertically */
+  margin-right: 30px; /* Ensure 30px gap from the right edge */
+  width: 270px;
+  background-color: #33363B; /* Gray background */
+  color: #949AA0; /* White text color */
+  font-size: 22px; /* Font size for the title */
+  letter-spacing: 1px;
+  border: none;
+  border-radius: 12px; /* Rounded corners */
+  padding: 14px 16px; /* Button padding */
+  font-size: 16px; /* Text size */
+  cursor: pointer; /* Pointer cursor */
+  outline: none;
+}
+
+
+#add-list-button:hover {
+  background-color: #565B63; /* Slightly darker on hover */
+  color: white;
+}
+
+/* Responsive behavior */
+@media (max-width: 768px) {
+  #list-container {
+    top: 10vh; /* Adjust position for smaller screens */
+    left: 5vw; /* Reduce left margin */
+    gap: 12px; /* Decrease gap between lists */
+  }
+
+  .list {
+    width: 250px; /* Reduce list width */
+  }
+
+  #add-list-button {
+    top: 85vh; /* Adjust button position */
+    left: 5vw; /* Align with list container */
+    font-size: 12px; /* Smaller font size */
+  }
+}
+
 /* Container for all lists */
 #list-container {
-    position: absolute;
-    top: 19vh;
-    left: 27vw;
-    display: flex; /* Enable horizontal alignment */
-    flex-wrap: nowrap; /* Prevent wrapping to the next row */
-    gap: 32px; /* Gap between lists */
-    overflow-x: auto; /* Enable horizontal scrolling */
-    overflow-y: hidden; /* Prevent vertical scrolling */
-    white-space: nowrap; /* Ensure content stays in one line */
-    align-items: flex-start; /* Align items to the top */
-  }
-  
-  /* Individual list styling */
-  .list {
-    background-color: #33363B; /* Dark gray */
-    width: 250px; /* Fixed width */
-    padding: 10px; /* Inner padding */
-    border-radius: 12px; /* Rounded corners */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    flex-shrink: 0; /* Prevent shrinking */
-    overflow-x: hidden;
-  }
-  
-  
-  /* List title styling */
-  .list-title {
-    color: white; /* White text color */
-    font-size: 19px; /* Font size for the title */
-    margin-bottom: 3px; /* Space below the title */
-    margin-top: 6px;
-    margin-left: 12px;
-    letter-spacing: 1px;
-    white-space: nowrap; /* Prevents text from wrapping */
-    overflow: hidden; /* Clips overflowing content */
-    text-overflow: ellipsis; /* Adds ellipsis (...) for overflowing text */
-    width: 100%; /* Ensures the title fits within the container */
-    display: block; /* Ensures it behaves like a block-level element */
-  }
-  
-  /* Add Task button inside the list */
-  .add-task-button {
-    background-color: #33363B; /* Gray background */
-    color: white; /* White text color */
-    border: none; /* Remove border */
-    border-radius: 8px; /* Rounded corners */
-    padding: 8px 0; /* Vertical padding */
-    font-size: 14px; /* Font size */
-    cursor: pointer; /* Pointer cursor */
-    text-align: center; /* Center-align text */
-    outline: none;
-    letter-spacing: 1px;
-  }
-  
-  /* Remove focus outline */
-  .add-task-button:focus {
-    outline: none; /* Ensure no border appears on focus */
-  }
-  
-  /* Hover effect for Add Task button */
-  .add-task-button:hover {
-    background-color: #44484F; /* Keep the same color on hover */
-  }
+  position: absolute;
+  top: 19vh;
+  left: 27vw;
+  display: flex; /* Enable horizontal alignment */
+  flex-wrap: nowrap; /* Prevent wrapping to the next row */
+  gap: 32px; /* Gap between lists */
+  overflow-x: auto; /* Enable horizontal scrolling */
+  overflow-y: hidden; /* Prevent vertical scrolling */
+  white-space: nowrap; /* Ensure content stays in one line */
+  align-items: flex-start; /* Align items to the top */
+}
+
+/* Individual list styling */
+.list {
+  background-color: #33363B; /* Dark gray */
+  width: 250px; /* Fixed width */
+  padding: 10px; /* Inner padding */
+  border-radius: 12px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex-shrink: 0; /* Prevent shrinking */
+  overflow-x: hidden;
+}
+
+
+/* List title styling */
+.list-title {
+  color: white; /* White text color */
+  font-size: 19px; /* Font size for the title */
+  margin-bottom: 3px; /* Space below the title */
+  margin-top: 6px;
+  margin-left: 12px;
+  letter-spacing: 1px;
+  white-space: nowrap; /* Prevents text from wrapping */
+  overflow: hidden; /* Clips overflowing content */
+  text-overflow: ellipsis; /* Adds ellipsis (...) for overflowing text */
+  width: 100%; /* Ensures the title fits within the container */
+  display: block; /* Ensures it behaves like a block-level element */
+}
+.create-new-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #33363B; /* Matches list background */
+  width: 250px;
+  height: auto;
+  padding: 10px;
+  border-radius: 12px;
+  gap: 12px; /* Space between elements */
+}
+
+.add-list-input {
+  width: 89%;
+  padding: 4px 6px;
+  font-size: 18px;
+  outline: none;
+  background-color: transparent;
+  border: none;
+  letter-spacing: 1px;
+  margin-top: 10px;
+  color: white;
+}
+
+.add-list-input::placeholder {
+  color: #949AA0;
+  letter-spacing: 1px;
+}
+
+/* Wrap both buttons in a container */
+.button-row {
+  display: flex;
+  justify-content: space-between; /* Spread buttons evenly */
+  width: 100%; /* Make sure the buttons fill the available width */
+  margin-top: 10px; /* Add space between input and buttons */
+}
+
+/* Styles for buttons */
+.cancel-list-button,
+.confirm-list-button {
+  background-color: transparent;
+  padding: 2px;
+  width: 115px;
+  border: none;
+  border-radius: 9px;
+  cursor: pointer;
+  font-size: 16px;
+  letter-spacing: 1px;
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.cancel-list-button {
+  color: white;
+}
+
+.confirm-list-button {
+  color: #2594E3;
+  border: #2594E3 solid 1px;
+}
+
+.cancel-list-button:hover {
+  background-color: #474B51;
+}
+
+.confirm-list-button:hover {
+  background-color: #2594E3;
+  color: white;
+  outline: none;
+}
+/* Add Task button inside the list */
+.add-task-button {
+  background-color: #33363B; /* Gray background */
+  color: white; /* White text color */
+  border: none; /* Remove border */
+  border-radius: 8px; /* Rounded corners */
+  padding: 8px 0; /* Vertical padding */
+  font-size: 14px; /* Font size */
+  cursor: pointer; /* Pointer cursor */
+  text-align: center; /* Center-align text */
+  outline: none;
+  letter-spacing: 1px;
+}
+
+/* Remove focus outline */
+.add-task-button:focus {
+  outline: none; /* Ensure no border appears on focus */
+}
+
+/* Hover effect for Add Task button */
+.add-task-button:hover {
+  background-color: #44484F; /* Keep the same color on hover */
+}
+
+/* Container for list title and settings icon */
+.list-title-container {
+  display: flex;
+  justify-content: space-between; /* Align title on the left and icon on the right */
+  align-items: center;
+  width: 100%; /* Ensure it spans the full width of the list */
+  padding-left: 2px; /* Add padding around the title and icon */
+  position: relative; /* For precise positioning of children if needed */
+}
+
+/* List title styling */
+.list-title {
+  font-size: 19px;
+  font-weight: bold;
+  color: white;
+  white-space: nowrap; /* Prevent text wrapping */
+  overflow: hidden; /* Hide overflowing text */
+  text-overflow: ellipsis; /* Add ellipsis for overflowing text */
+}
+
+.list-settings-icon {
+  cursor: pointer;
+  padding: 10px 12px;
+  border-radius: 4px;
+  width: 10px;
+  height: 10px;
+  margin-top: 4px;
+  margin-left: 8px;
+  margin-right: 8px;
+}
+
+.list-settings-icon:hover {
+  background-color: #3E4147;
+}
+
+/* Settings Popup for Lists */
+.list-settings-popup {
+  position: absolute;
+  top: 40px;
+  right: 10px;
+  width: 150px;
+  background-color: #11161C;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  padding: 4px;
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.list-settings-popup.hidden {
+  display: none;
+}
+
+.list-settings-popup p {  
+  padding: 4px 0px;
+  padding-left: 20px;
+  font-size: 12px;
+  margin: 4px ;
+  color: white;
+  cursor: pointer;
+  text-align: left;
+  letter-spacing: 1px;
+}
+
+.list-settings-popup p:hover {
+  background-color: #1B2128;
+  border-radius: 4px;
+}
+
+.list-settings-popup p.delete {
+  color: #D51A1A; /* Red for delete */
+}
+
+.list-settings-popup p.delete:hover {
+  background-color: #1B2128;
+}
+
+.rename-container {
+  display: flex;
+  flex-direction: column;
+  background-color: #33363B; /* Matches list background */
+  border-radius: 8px;
+  padding: 10px;
+  margin-top: 10px;
+}
+.add-list-input::placeholder {
+  color: #949AA0;
+}
+.rename-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #33363B; /* Matches list background */
+  width: 250px;
+  height: auto;
+  padding: 0px 10px;
+  border-radius: 12px;
+  margin-left: -10px;
+}
+
+.cancel-rename-button,
+.confirm-rename-button {
+  background-color: transparent;
+  padding: 2px;
+  width: 115px;
+  border: none;
+  border-radius: 9px;
+  cursor: pointer;
+  font-size: 16px;
+  letter-spacing: 1px;
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-top: 15px;
+}
+.cancel-rename-button {
+  color: white;
+}
+
+.confirm-rename-button {
+  color: #2594E3;
+  border: #2594E3 solid 1px;
+}
+
+.cancel-rename-button:hover {
+  background-color: #474B51;
+}
+
+.confirm-rename-button:hover {
+  background-color: #2594E3;
+  color: white;
+  outline: none;
+}

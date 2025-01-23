@@ -1,35 +1,78 @@
 export function TaskLabel() {
-  const labelPopup = document.querySelector('#label-popup');
-  const doneLabelButton = document.querySelector('#done-label-button');
-  const labelOptions = document.querySelectorAll('.label-option');
-  const selectedLabelDisplay = document.querySelector('#selected-label');  // Element to display selected label
-  let selectedLabel = null;  // Variable to hold selected label
-  
-  // Show label popup when needed
+  const labelPopup = document.getElementById("label-popup");
+  const doneLabelButton = document.getElementById("done-label-button");
+  const labelOptions = document.querySelectorAll(".label-option");
+  const setLabelButton = document.getElementById("set-label-button");
+
+  let selectedColorButton = null; // Track the currently selected color button
+
+  // Show the Label Popup
   function showLabelPopup() {
-    labelPopup.classList.remove('hidden');
-  }
-  
-  // Hide the label popup when 'Done' button is clicked
-  doneLabelButton.addEventListener('click', function () {
-    if (selectedLabel) {
-      selectedLabelDisplay.textContent = `Selected Label: ${selectedLabel}`;
+    if (labelPopup) {
+      labelPopup.style.display = "block"; // Show the popup
+      console.log("Showing label popup.");
+    } else {
+      console.error("Label popup element not found.");
     }
-    labelPopup.classList.add('hidden');
-  });
-  
-  // Handle selecting a label from options
-  labelOptions.forEach(function (option) {
-    option.addEventListener('click', function () {
-      selectedLabel = option.getAttribute('data-label'); // Get the label data
-      // Optionally highlight the selected label
-      labelOptions.forEach(opt => opt.classList.remove('selected')); // Remove previous selection
-      option.classList.add('selected'); // Add selected class to the clicked option
+  }
+
+  // Hide the Label Popup
+  function hideLabelPopup() {
+    if (labelPopup) {
+      labelPopup.style.display = "none"; // Hide the popup
+    }
+  }
+
+  // Handle Label Selection
+  labelOptions.forEach((button) => {
+    button.addEventListener("click", () => {
+      // Clear the previous selection
+      if (selectedColorButton) {
+        selectedColorButton.innerHTML = ""; // Remove the checkmark
+      }
+
+      // Mark the clicked button as selected
+      selectedColorButton = button;
+      button.innerHTML = "✓"; // Add the checkmark symbol
+
+      console.log("Selected color:", button.getAttribute("data-color"));
     });
   });
 
-  // Expose the function to open the popup if needed
+  // Handle Done Button Click
+  doneLabelButton.addEventListener("click", () => {
+    if (selectedColorButton) {
+      const selectedColor = selectedColorButton.getAttribute("data-color");
+
+    // Update the "set-label-button" with the selected color
+    setLabelButton.style.backgroundColor = selectedColor;
+    setLabelButton.style.border = "none"; // Remove border for a clean look
+    setLabelButton.textContent = ""; // Clear any existing text
+
+    // Ensure the button retains its original size
+    setLabelButton.style.width = "27%"; // Adjust width as needed
+    setLabelButton.style.height = "35%";
+    setLabelButton.style.borderRadius = "12px"; // Optional: add rounded corners
+    setLabelButton.style.border = "1px solid #949AA0"; // Optional: add border to the button
+
+      hideLabelPopup(); // Close the popup
+    } else {
+      alert("Please select a color before clicking 'Done'.");
+    }
+  });
+
+  // Hide the popup on outside click
+  document.addEventListener("click", (event) => {
+    if (
+      labelPopup &&
+      !labelPopup.contains(event.target) &&
+      event.target.id !== "set-label-button"
+    ) {
+      hideLabelPopup();
+    }
+  });
+
   return {
-    showLabelPopup
+    showLabelPopup,
   };
 }
