@@ -1,5 +1,6 @@
-import { TaskLabel } from "./taskLabel.js"; // Import TaskLabel module
-import { Member } from "./member.js"; // Import Member module
+import { TaskLabel } from "./taskLabel.js";
+import { Member } from "./member.js";
+import { ConfirmationPopup } from "./confirmationPopup.js";
 
 export function Task() {
   // DOM References
@@ -7,8 +8,6 @@ export function Task() {
   const closeTaskPopupButton = document.getElementById("close-task-popup-button");
   const cancelTaskButton = document.getElementById("cancel-task-button");
   const addTaskForm = document.getElementById("add-task-form");
-  const taskNameInput = document.getElementById("task-name");
-  const taskDetailsInput = document.getElementById("task-details");
   const fileContainer = document.getElementById("file-container");
   const addMemberButton = document.getElementById("add-member-button");
   const startDateButton = document.getElementById("start-date-button");
@@ -16,6 +15,7 @@ export function Task() {
   const setLabelButton = document.getElementById("set-label-button");
   const reminderInput = document.getElementById("reminder");
 
+  const { showConfirmationPopup, hideConfirmationPopup } = ConfirmationPopup();
 
   const projectMembers = [
     { id: "1", name: "Alice", profilePicture: "https://via.placeholder.com/40" },
@@ -23,15 +23,11 @@ export function Task() {
     { id: "3", name: "Charlie", profilePicture: "https://via.placeholder.com/40" },
   ];
 
-  // Debug to confirm members are correctly defined
-  console.log("Project members:", JSON.stringify(projectMembers, null, 2));
-
-  // Initialize the Member module with project members
   const { showMemberPopup } = Member(projectMembers);
-  const { showLabelPopup } = TaskLabel(); // Get the showLabelPopup function from TaskLabel module
+  const { showLabelPopup } = TaskLabel();
 
-  let uploadedFiles = []; // Array to manage uploaded files
-  let taskData = {}; // Object to store task details
+  let uploadedFiles = [];
+  let taskData = {};
   document.getElementById("task-popup-content").style.height = "75vh";
 
   // Show Task Popup
@@ -39,7 +35,25 @@ export function Task() {
     taskPopupOverlay.classList.remove("hidden");
   }
 
-  // Close Task Popup
+  // Close Task Popup with Confirmation
+  function closeTaskPopupWithConfirmation() {
+    showConfirmationPopup();
+
+    // Attach event listener to confirm button in confirmation popup
+    const discardButton = document.querySelector("#discard-button");
+    discardButton.addEventListener("click", () => {
+      closeTaskPopup(); // Close the popup and reset the inputs
+      hideConfirmationPopup(); // Hide the confirmation popup
+    });
+
+    // Cancel button simply hides the confirmation popup
+    const cancelDiscardButton = document.querySelector("#cancel-discard-button");
+    cancelDiscardButton.addEventListener("click", () => {
+      hideConfirmationPopup();
+    });
+  }
+
+  // Close Task Popup (without confirmation, for confirmed discard)
   function closeTaskPopup() {
     taskPopupOverlay.classList.add("hidden");
     resetTaskPopupInputs(); // Reset all inputs
@@ -49,22 +63,17 @@ export function Task() {
   function resetTaskPopupInputs() {
     if (addTaskForm) addTaskForm.reset();
 
-    // Clear file container
     fileContainer.innerHTML = "";
 
-    // Restore "Add File" button
     const addFileButtonElement = document.createElement("button");
     addFileButtonElement.id = "add-file-button";
     addFileButtonElement.type = "button";
     addFileButtonElement.textContent = "+ add file";
-    addFileButtonElement.classList.add("file-button-class"); // Optional: add styling class
+    addFileButtonElement.classList.add("file-button-class");
 
-    fileContainer.appendChild(addFileButtonElement); // Add the "Add File" button
-
-    // Initialize file handler for the new button
+    fileContainer.appendChild(addFileButtonElement);
     initializeFileHandler(addFileButtonElement);
 
-    // Reset date and label buttons
     startDateButton.textContent = "dd/mm/yy";
     startDateButton.style.backgroundColor = "";
     startDateButton.style.color = "#949AA0";
@@ -73,17 +82,18 @@ export function Task() {
     dueDateButton.style.backgroundColor = "";
     dueDateButton.style.color = "#949AA0";
 
-    setLabelButton.textContent = "set label";
-    setLabelButton.style.backgroundColor = "";
-    setLabelButton.style.color = "#949AA0";
-
-    addMemberButton.textContent = "+ add member"; // Reset add member button
+    addMemberButton.textContent = "+ add member";
     addMemberButton.style.backgroundColor = "";
     addMemberButton.style.color = "#949AA0";
+
+    // Reset startDate and dueDate
+    startDate = null;
+    dueDate = null;
 
     uploadedFiles = [];
     taskData = {};
   }
+
 
   // Initialize File Handling Logic
   function initializeFileHandler(button) {
@@ -91,13 +101,11 @@ export function Task() {
     fileInput.type = "file";
     fileInput.style.display = "none";
 
-    // Trigger file dialog on button click
     button.addEventListener("click", () => {
-      fileInput.value = ""; // Reset input value
-      fileInput.click(); // Open file dialog
+      fileInput.value = "";
+      fileInput.click();
     });
 
-    // Handle file selection
     fileInput.addEventListener("change", (event) => {
       const file = event.target.files[0];
       if (file) {
@@ -105,7 +113,7 @@ export function Task() {
       }
     });
 
-    fileContainer.appendChild(fileInput); // Append the hidden file input
+    fileContainer.appendChild(fileInput);
   }
 
   // Display Selected File
@@ -119,11 +127,10 @@ export function Task() {
       <button class="remove-file-button">X</button>
     `;
 
-    // Add event listener to remove button
     const removeButton = fileDisplay.querySelector(".remove-file-button");
     removeButton.addEventListener("click", () => {
-      uploadedFiles = uploadedFiles.filter((f) => f !== file); // Remove file from the array
-      fileDisplay.remove(); // Remove the file display element
+      uploadedFiles = uploadedFiles.filter((f) => f !== file);
+      fileDisplay.remove();
     });
 
     fileContainer.appendChild(fileDisplay);
@@ -131,29 +138,25 @@ export function Task() {
 
   // Restrict Reminder Input to Numbers Only
   reminderInput.addEventListener("input", () => {
-    // Remove non-numeric characters
     reminderInput.value = reminderInput.value.replace(/\D/g, "");
-
-    // Restrict maximum value to 100
     if (parseInt(reminderInput.value) > 100) {
       reminderInput.value = "99";
     }
   });
 
-  // Ensure a valid value on blur (optional for clearing invalid input)
   reminderInput.addEventListener("blur", () => {
     if (!reminderInput.value || parseInt(reminderInput.value) <= 0) {
-      reminderInput.value = ""; // Clear invalid input
+      reminderInput.value = "";
     }
   });
 
   // Attach Event Listeners
-  closeTaskPopupButton.addEventListener("click", closeTaskPopup);
-  cancelTaskButton.addEventListener("click", closeTaskPopup);
+  closeTaskPopupButton.addEventListener("click", closeTaskPopupWithConfirmation);
+  cancelTaskButton.addEventListener("click", closeTaskPopupWithConfirmation);
 
   taskPopupOverlay.addEventListener("click", (event) => {
     if (event.target === taskPopupOverlay) {
-      closeTaskPopup();
+      closeTaskPopupWithConfirmation();
     }
   });
 
@@ -168,9 +171,6 @@ export function Task() {
     showMemberPopup();
   });
 
-
-  console.log("Task module initialized."); // Debug log
-
-  // Initialize the Task Popup
-  resetTaskPopupInputs(); // Ensure initial setup
+  console.log("Task module initialized.");
+  resetTaskPopupInputs();
 }
