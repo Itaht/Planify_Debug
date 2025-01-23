@@ -30,6 +30,7 @@ export function Interface(user,member) {
 
     <!-- List Container -->
     <div id="list-container"></div>
+
     <div id="board-page">
 
       <!-- Board Topic -->

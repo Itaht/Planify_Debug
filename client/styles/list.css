@@ -180,3 +180,141 @@
 .add-task-button:hover {
   background-color: #44484F; /* Keep the same color on hover */
 }
+
+/* Container for list title and settings icon */
+.list-title-container {
+  display: flex;
+  justify-content: space-between; /* Align title on the left and icon on the right */
+  align-items: center;
+  width: 100%; /* Ensure it spans the full width of the list */
+  padding-left: 2px; /* Add padding around the title and icon */
+  position: relative; /* For precise positioning of children if needed */
+}
+
+/* List title styling */
+.list-title {
+  font-size: 19px;
+  font-weight: bold;
+  color: white;
+  white-space: nowrap; /* Prevent text wrapping */
+  overflow: hidden; /* Hide overflowing text */
+  text-overflow: ellipsis; /* Add ellipsis for overflowing text */
+}
+
+.list-settings-icon {
+  cursor: pointer;
+  padding: 10px 12px;
+  border-radius: 4px;
+  width: 10px;
+  height: 10px;
+  margin-top: 4px;
+  margin-left: 8px;
+  margin-right: 8px;
+}
+
+.list-settings-icon:hover {
+  background-color: #3E4147;
+}
+
+/* Settings Popup for Lists */
+.list-settings-popup {
+  position: absolute;
+  top: 40px;
+  right: 10px;
+  width: 150px;
+  background-color: #11161C;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  padding: 4px;
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.list-settings-popup.hidden {
+  display: none;
+}
+
+.list-settings-popup p {  
+  padding: 4px 0px;
+  padding-left: 20px;
+  font-size: 12px;
+  margin: 4px ;
+  color: white;
+  cursor: pointer;
+  text-align: left;
+  letter-spacing: 1px;
+}
+
+.list-settings-popup p:hover {
+  background-color: #1B2128;
+  border-radius: 4px;
+}
+
+.list-settings-popup p.delete {
+  color: #D51A1A; /* Red for delete */
+}
+
+.list-settings-popup p.delete:hover {
+  background-color: #1B2128;
+}
+
+.rename-container {
+  display: flex;
+  flex-direction: column;
+  background-color: #33363B; /* Matches list background */
+  border-radius: 8px;
+  padding: 10px;
+  margin-top: 10px;
+}
+.add-list-input::placeholder {
+  color: #949AA0;
+}
+.rename-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #33363B; /* Matches list background */
+  width: 250px;
+  height: auto;
+  padding: 0px 10px;
+  border-radius: 12px;
+  margin-left: -10px;
+}
+
+.cancel-rename-button,
+.confirm-rename-button {
+  background-color: transparent;
+  padding: 2px;
+  width: 115px;
+  border: none;
+  border-radius: 9px;
+  cursor: pointer;
+  font-size: 16px;
+  letter-spacing: 1px;
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-top: 15px;
+}
+.cancel-rename-button {
+  color: white;
+}
+
+.confirm-rename-button {
+  color: #2594E3;
+  border: #2594E3 solid 1px;
+}
+
+.cancel-rename-button:hover {
+  background-color: #474B51;
+}
+
+.confirm-rename-button:hover {
+  background-color: #2594E3;
+  color: white;
+  outline: none;
+}
