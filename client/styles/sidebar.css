@@ -134,3 +134,73 @@ background-color: #25282D;
 .triangle-down {
   transform: rotate(360deg);
 }
+
+.project-settings-icon {
+  cursor: pointer;
+  padding: 10px 10px;
+  border-radius: 4px;
+  width: 10px;
+  height: 10px;
+  position: absolute;
+  top: 35%; /* Center vertically */
+  right: 1vw; /* Align to the right */
+  z-index: 1; /* Ensure it’s above other elements */
+  display: inline-block;
+  transform-origin: center;
+}
+
+.project-settings-icon:hover {
+  background-color: #3E4147;
+}
+
+/* Popup container */
+.project-settings-popup {
+  position: absolute;
+  top: 40px;
+  right: 10px;
+  width: 150px;
+  background-color: #11161C;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  padding: 4px;
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+/* Hide by default */
+.project-settings-popup.hidden {
+  display: none;
+}
+
+/* Options inside the popup */
+.project-settings-option {
+  padding: 4px 0px;
+  padding-left: 20px;
+  font-size: 12px;
+  margin: 4px ;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  text-align: left; 
+  border-radius: 4px;
+  letter-spacing: 1px;
+}
+
+.project-settings-option {
+  font-size: 12px;
+}
+
+.project-settings-option:hover {
+  background-color: #1B2128;
+}
+
+/* Delete option styling */
+.project-settings-option.delete {
+  color: #D51A1A;
+}
+
+.project-settings-option.delete:hover {
+  background-color: #1B2128;
+}
