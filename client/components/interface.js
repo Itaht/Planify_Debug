@@ -59,7 +59,8 @@ export function Interface(user,member) {
 
         <!-- Project Box -->
         <div id="projectbox" class="clickable">
-          <div id="projectname">Project 1</div>
+          <div id="projectname">Project Name</div>
+          <div id="projectdescription">Project Description</div>
         </div>
 
         <!-- Settings Popup -->

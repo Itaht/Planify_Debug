@@ -63,8 +63,10 @@ export function Task() {
   function resetTaskPopupInputs() {
     if (addTaskForm) addTaskForm.reset();
 
+    // Clear file container
     fileContainer.innerHTML = "";
 
+    // Restore "Add File" button
     const addFileButtonElement = document.createElement("button");
     addFileButtonElement.id = "add-file-button";
     addFileButtonElement.type = "button";
@@ -74,6 +76,7 @@ export function Task() {
     fileContainer.appendChild(addFileButtonElement);
     initializeFileHandler(addFileButtonElement);
 
+    // Reset date and label buttons
     startDateButton.textContent = "dd/mm/yy";
     startDateButton.style.backgroundColor = "";
     startDateButton.style.color = "#949AA0";
@@ -82,18 +85,17 @@ export function Task() {
     dueDateButton.style.backgroundColor = "";
     dueDateButton.style.color = "#949AA0";
 
+    setLabelButton.textContent = "set label";
+    setLabelButton.style.backgroundColor = "";
+    setLabelButton.style.color = "#949AA0";
+
     addMemberButton.textContent = "+ add member";
     addMemberButton.style.backgroundColor = "";
     addMemberButton.style.color = "#949AA0";
 
-    // Reset startDate and dueDate
-    startDate = null;
-    dueDate = null;
-
     uploadedFiles = [];
     taskData = {};
   }
-
 
   // Initialize File Handling Logic
   function initializeFileHandler(button) {

@@ -9,13 +9,15 @@ export function ProjectPopup() {
   const cancelProjectButton = document.getElementById("cancel-project-button");
   const projectNameInput = document.getElementById("project-name");
   const projectDescriptionInput = document.getElementById("project-description");
+  const projectNameDisplay = document.getElementById("projectname"); // Display area for project name
+  const projectDescriptionDisplay = document.getElementById("projectdescription"); // Display area for project description
   const { showConfirmationPopup, hideConfirmationPopup } = ConfirmationPopup();
 
   // Function to reset and hide the project popup overlay
   function resetProjectPopupOverlay() {
     projectPopupOverlay.classList.add("hidden");
-    projectNameInput.value = ""; // Clear the input field when hiding the popup
-    projectDescriptionInput.value = ""; // Clear the description field when hiding the popup
+    projectNameInput.value = ""; // Clear the input field
+    projectDescriptionInput.value = ""; // Clear the description field
   }
 
   // Function to handle the confirmation logic
@@ -82,6 +84,7 @@ export function ProjectPopup() {
       // Store the project description as a data attribute (hidden)
       newProjectButton.dataset.description = projectDescription;
 
+      // Add event listener to select the project and update projectbox
       newProjectButton.addEventListener("click", () => {
         document.querySelectorAll(".project-button").forEach((btn) => {
           btn.classList.remove("active");
@@ -89,6 +92,10 @@ export function ProjectPopup() {
         });
         newProjectButton.classList.add("active");
         newProjectButton.querySelector(".checkmark").classList.remove("hidden");
+
+        // Update the projectbox with the selected project's name and description
+        projectNameDisplay.textContent = projectName;
+        projectDescriptionDisplay.textContent = projectDescription || "No description.";
       });
 
       projectListContainer.appendChild(newProjectButton);

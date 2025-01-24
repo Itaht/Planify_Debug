@@ -33,7 +33,7 @@
 
 #project-section {
   position: fixed;
-  top: 22vh;
+  top: 23.3vh;
   left: 0;
   width: 20%;
   height: 5vh;
@@ -183,8 +183,8 @@ form label {
   }
 
   #project-list-container {
-    margin-top: 0.5vh;
-    max-height: 53.8vh; 
+    margin-top: 1.8vh;
+    max-height: 52.5vh; 
     overflow-y: auto; 
     position: relative;
   }
@@ -204,6 +204,9 @@ form label {
     width: 100%;
     margin-bottom: 1.5vh;
     margin-top: 1.5vh;
+    overflow: hidden; /* Hide overflow text */
+    white-space: nowrap; /* Prevent text wrapping */
+    text-overflow: ellipsis; /* Show ellipsis for overflow */
   }
   .project-button:hover {
     background-color: #2594E3;
@@ -225,6 +228,9 @@ form label {
   .project-button .project-name {
     flex-grow: 1; /* Ensure the text takes the remaining space */
     width: 2vw;
+    overflow: hidden; /* Hide overflow text */
+    white-space: nowrap; /* Prevent text wrapping */
+    text-overflow: ellipsis; /* Show ellipsis for overflow */
   }
   #project-list-container::-webkit-scrollbar {
     width: 6px; /* Optional scrollbar width */
