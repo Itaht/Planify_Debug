@@ -39,10 +39,9 @@
   top: 11vh;
   left: 0;
   width: 20%; /* 1/5 of the screen width */
-  height: 5vh; /* Full height of the screen */
+  height: 6vh; /* Full height of the screen */
   background-color: #1C2025;
-  padding: 20px;
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  padding: 3.5vh 20px;
   border-right: 1px solid #474E55; /* Right edge line color */
   border-bottom: 1px solid #474E55; /* Right edge line color */
   z-index: 3;
@@ -55,11 +54,29 @@ background-color: #25282D;
 
 #projectname {
   position: fixed;
-  top: 13.5vh;
+  top: 13.75vh;
   color: white;
-  left: 9vw;
+  left: 5vw;
   z-index: 4;
   font-size: calc(1.3vw); 
+  letter-spacing: 1px;
+  white-space: nowrap; /* Prevent text wrapping */
+  overflow: hidden; /* Hide overflowing text */
+  text-overflow: ellipsis; /* Add ellipsis for overflowing text */
+  max-width: 13vw;
+}
+#projectdescription {
+  position: fixed;
+  top: 18.25vh;
+  color: #BEBEBE;
+  left: 7.5vw;
+  z-index: 4;
+  font-size: calc(1vw); 
+  letter-spacing: 1px;
+  white-space: nowrap; /* Prevent text wrapping */
+  overflow: hidden; /* Hide overflowing text */
+  text-overflow: ellipsis; /* Add ellipsis for overflowing text */
+  max-width: 11vw;
 }
 
 #userbox {
@@ -91,4 +108,29 @@ background-color: #25282D;
   left: 9vw;
   color: white;
   font-size: calc(1.3vw); /* Dynamically adjusts font size */
+}
+
+/* Triangle symbol base style */
+#triangle-symbol {
+  width: 0;
+  height: 0;
+  border-left: 1vh solid transparent;
+  border-right: 1vh solid transparent;
+  border-top: 1vh solid #B6CADB;
+  display: inline-block;
+  transform-origin: center;
+  transition: transform 0.2s ease; /* Smooth transition */  
+  position: absolute; /* Use absolute positioning */
+  top: 50%; /* Center vertically */
+  left: 2vw; /* Adjust distance from the left */
+}
+
+/* Triangle facing right */
+.triangle-right {
+  transform: rotate(270deg);
+}
+
+/* Triangle facing down */
+.triangle-down {
+  transform: rotate(360deg);
 }
