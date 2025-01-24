@@ -249,7 +249,7 @@ border: 1.5px solid #2594E3;
   max-height: 53.5vh; /* Adjust as needed */
   overflow-y: auto; /* Allow scrolling if content exceeds container height */
   position: relative; /* Ensure the container's position can be adjusted */
-  top: -0.2vh; /* Moves the container 1vh higher */
+  top: -1vh; /* Moves the container 1vh higher */
 }
 
 .board-button {

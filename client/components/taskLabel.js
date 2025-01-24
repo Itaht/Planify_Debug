@@ -10,7 +10,9 @@ export function TaskLabel() {
   function showLabelPopup() {
     if (labelPopup) {
       labelPopup.style.display = "block"; // Show the popup
+      labelPopup.classList.remove("hidden");
       console.log("Showing label popup.");
+      console.log(labelPopup);
     } else {
       console.error("Label popup element not found.");
     }
