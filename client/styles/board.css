@@ -7,11 +7,9 @@
     height: 5vh; /* Full height of the screen */
     background-color: #1C2025;
     padding: 20px;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
     border-right: 1px solid #474E55; /* Right edge line color */
     z-index: 2;
   }
-  
   #board-text {
   position: relative;
   left: 1.1vw;
@@ -254,6 +252,7 @@ border: 1.5px solid #2594E3;
 
 .board-button {
   display: block;
+  z-index: 5;
   width: 100%;
   padding: 10px 15px;
   margin: 4px 0;
