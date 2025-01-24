@@ -183,7 +183,7 @@ form label {
   }
 
   #project-list-container {
-    margin-top: 1.8vh;
+    margin-top: 1vh;
     max-height: 52.5vh; 
     overflow-y: auto; 
     position: relative;

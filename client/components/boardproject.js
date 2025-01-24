@@ -8,7 +8,7 @@ export function BoardProject() {
 
   // Default text for project name and description
   const defaultProjectName = "No Project Selected";
-  const defaultProjectDescription = "No description.";
+  const defaultProjectDescription = "No description available";
 
   // Create and add the triangle symbol
   const triangleSymbol = document.createElement("div");
