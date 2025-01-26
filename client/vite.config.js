@@ -8,7 +8,7 @@ export default defineConfig({
   plugins: [react()],
   envDir: '../', // Ensure this matches the location of your environment variables file
   server: {
-    allowedHosts: ['scholars-survivor-joining-peripheral.trycloudflare.com'],
+    allowedHosts: ['lbs-field-barriers-grenada.trycloudflare.com'],
     proxy: {
       '/api': {
         target: 'http://localhost:3001', // Ensure this matches your backend API URL

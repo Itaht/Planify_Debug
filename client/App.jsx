@@ -49,7 +49,7 @@ const App = () => {
         console.log('Authorization code received...');
 
         // Exchange authorization code for access token
-        const response = await fetch('/.proxy/api/token', {
+        const response = await fetch('/.proxy/token/token', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ code }),

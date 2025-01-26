@@ -19,7 +19,7 @@ app.use(cors({
 app.use(express.json());
 
 // Exchange authorization code for access token
-app.post('/api/token', async (req, res) => {
+app.post('/token', async (req, res) => {
   try {
     const { code } = req.body;
 
@@ -38,11 +38,19 @@ app.post('/api/token', async (req, res) => {
         client_secret: process.env.DISCORD_CLIENT_SECRET,
         grant_type: 'authorization_code',
         code: code,
-        redirect_uri: process.env.REDIRECT_URI, // Ensure this matches your Discord app settings
       }),
     });
 
     if (!response.ok) {
+      console.log(response)
+      console.log(
+        {
+          client_id: process.env.VITE_DISCORD_CLIENT_ID,
+          client_secret: process.env.DISCORD_CLIENT_SECRET,
+          grant_type: 'authorization_code',
+          code: code
+        }
+      )
       return res.status(500).send({ error: 'Failed to exchange code for token' });
     }
 
