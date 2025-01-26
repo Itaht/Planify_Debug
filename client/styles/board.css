@@ -1,22 +1,93 @@
 /* Board Section Styling */
+.board-section {
+  position: fixed;
+  top: 23.3vh;
+  left: 0;
+  width: 20%; /* 1/5 of the screen width */
+  height: 5vh; /* Full height of the screen */
+  background-color: #1C2025;
+  padding: 20px;
+  border-right: 1px solid #474E55; /* Right edge line color */
+  z-index: 2;
+  display: none; /* Hidden by default */
+}
 #board-section {
   position: fixed;
-    top: 23.3vh;
-    left: 0;
-    width: 20%; /* 1/5 of the screen width */
-    height: 5vh; /* Full height of the screen */
-    background-color: #1C2025;
-    padding: 20px;
-    border-right: 1px solid #474E55; /* Right edge line color */
-    z-index: 2;
-  }
-  #board-text {
-  position: relative;
-  left: 1.1vw;
-  font-size: calc(1.4vw);
-  color: white;
-  letter-spacing: 1px;
-  }
+  top: 23.3vh;
+  left: 0;
+  width: 20%; /* 1/5 of the screen width */
+  height: 5vh; /* Full height of the screen */
+  background-color: #1C2025;
+  padding: 20px;
+  border-right: 1px solid #474E55; /* Right edge line color */
+  z-index: 2;
+  display: none; /* Hidden by default */
+}
+
+.board-section.active {
+  display: block; /* Show only the active board section */
+}
+
+.board-section , #board-list-container , .board-list-container {
+  max-height: 53.5vh; /* Adjust as needed */
+  overflow-y: auto; /* Allow scrolling if content exceeds container height */
+  position: relative; /* Ensure the container's position can be adjusted */
+  top: -1vh; /* Moves the container 1vh higher */
+}
+
+/* Styling for Board Buttons */
+.board-button {
+  display: block;
+  z-index: 5;
+  width: 100%;
+  padding: 10px 15px;
+  margin: 4px 0;
+  background-color: transparent;
+  border: none;
+  border-radius: 4px;
+  text-align: left;
+  font-size: calc(1.3vw);
+  color: #f3f3f3;
+  cursor: pointer;
+  text-indent: 2.5vw; /* Moves text to the right */
+  margin-bottom: 1.5vh;
+  overflow: hidden; /* Hide overflow text */
+  white-space: nowrap; /* Prevent text wrapping */
+  text-overflow: ellipsis; /* Show ellipsis for overflow */
+}
+
+.board-button:hover {
+  background-color: #25282D;
+}
+
+.board-button.active {
+  background-color: #1C2B41;
+  color: #3C90E2;
+}
+
+/* Scrollbar for Board List Container */
+.board-section .board-list-container::-webkit-scrollbar {
+  width: 6px; /* Optional scrollbar width */
+  border-radius: 4px;
+}
+
+.board-section .board-list-container::-webkit-scrollbar-thumb {
+  background-color: #33363B; /* Scrollbar thumb color */
+  border-radius: 4px;
+}
+
+.board-section .board-list-container::-webkit-scrollbar-track {
+  background-color: #25282D; /* Scrollbar track color */
+}
+
+
+  .board-text {
+    position: relative;
+    left: 1.1vw;
+    font-size: calc(1.4vw);
+    color: white;
+    letter-spacing: 1px;
+    }
   
   #create-board-button {
   position: relative;
@@ -31,6 +102,7 @@
   letter-spacing: 1px;
   cursor: pointer;
   outline: none;
+  display: block; /* Ensure it is visible */
   /* Center the text inside the button */
   display: flex;
   align-items: center;
@@ -248,49 +320,6 @@ border: 1.5px solid #2594E3;
   overflow-y: auto; /* Allow scrolling if content exceeds container height */
   position: relative; /* Ensure the container's position can be adjusted */
   top: -1vh; /* Moves the container 1vh higher */
-}
-
-.board-button {
-  display: block;
-  z-index: 5;
-  width: 100%;
-  padding: 10px 15px;
-  margin: 4px 0;
-  background-color: transparent;
-  border: none;
-  border-radius: 4px;
-  text-align: left;
-  font-size: calc(1.3vw);
-  color: #f3f3f3;
-  cursor: pointer;
-  text-indent: 2.5vw; /* Moves text 3vw to the left */
-  margin-bottom: 1.5vh;
-  overflow: hidden; /* Hide overflow text */
-  white-space: nowrap; /* Prevent text wrapping */
-  text-overflow: ellipsis; /* Show ellipsis for overflow */
-}
-
-.board-button:hover {
-  background-color: #25282D;
-}
-
-.board-button.active {
-  background-color: #1C2B41;
-  color: #3C90E2;
-}
-
-#board-list-container::-webkit-scrollbar {
-  width: 6px; /* Optional scrollbar width */
-  border-radius: 4px;
-}
-
-#board-list-container::-webkit-scrollbar-thumb {
-  background-color: #33363B; /* Scrollbar thumb color */
-  border-radius: 4px;
-}
-
-#board-list-container::-webkit-scrollbar-track {
-  background-color: #25282D; /* Scrollbar track color */
 }
 
 #board-page {

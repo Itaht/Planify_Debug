@@ -1,41 +1,64 @@
-import express from "express";
-import dotenv from "dotenv";
-import fetch from "node-fetch";
-dotenv.config({ path: "../.env" });
+import express from 'express';
+import dotenv from 'dotenv';
+import fetch from 'node-fetch';
+import cors from 'cors';
+
+dotenv.config({ path: '../.env' });
 
 const app = express();
 const port = 3001;
 
-// Allow express to parse JSON bodies
+// Enable CORS (you can restrict it if needed)
+app.use(cors({
+  origin: 'http://localhost:5173', // Adjust this to match the URL of your frontend
+  methods: ['GET', 'POST'],
+  allowedHeaders: ['Content-Type'],
+}));
+
+// Parse JSON bodies
 app.use(express.json());
 
-app.post("/api/token", async (req, res) => {
-  
-  // Exchange the code for an access_token
-  const response = await fetch(`https://discord.com/api/oauth2/token`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/x-www-form-urlencoded",
-    },
-    body: new URLSearchParams({
-      client_id: process.env.VITE_DISCORD_CLIENT_ID,
-      client_secret: process.env.DISCORD_CLIENT_SECRET,
-      grant_type: "authorization_code",
-      code: req.body.code,
-    }),
-  });
+// Exchange authorization code for access token
+app.post('/api/token', async (req, res) => {
+  try {
+    const { code } = req.body;
 
-  // Retrieve the access_token from the response
-  const resp = await response.json();
-  const { access_token } = resp
+    if (!code) {
+      return res.status(400).send({ error: 'Code is required' });
+    }
 
-  // Return the access_token to our client as { access_token: "..."}
-  console.log(resp)
-  res.send({access_token});
+    // Exchange the authorization code for an access token
+    const response = await fetch(`https://discord.com/api/oauth2/token`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: new URLSearchParams({
+        client_id: process.env.DISCORD_CLIENT_ID,
+        client_secret: process.env.DISCORD_CLIENT_SECRET,
+        grant_type: 'authorization_code',
+        code: code,
+        redirect_uri: process.env.REDIRECT_URI, // Ensure this matches your Discord app settings
+      }),
+    });
+
+    if (!response.ok) {
+      return res.status(500).send({ error: 'Failed to exchange code for token' });
+    }
+
+    // Get the access token from the response
+    const data = await response.json();
+    const { access_token } = data;
+
+    // Send the access token back to the frontend
+    res.send({ access_token });
+  } catch (error) {
+    console.error('Error during token exchange:', error);
+    res.status(500).send({ error: 'Internal Server Error' });
+  }
 });
 
-console.log(process.env)
-
+// Start the backend server
 app.listen(port, () => {
   console.log(`Server listening at http://localhost:${port}`);
 });

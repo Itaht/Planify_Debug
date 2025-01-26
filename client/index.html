@@ -1,30 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Planify</title>
-  
-  <!-- Specific styles for different components -->
-  <link rel="stylesheet" href="styles/board.css">
-  <link rel="stylesheet" href="styles/calendar.css">
-  <link rel="stylesheet" href="styles/confirmation.css">
-  <link rel="stylesheet" href="styles/label.css">
-  <link rel="stylesheet" href="styles/popup.css">
-  <link rel="stylesheet" href="styles/sidebar.css">
-  <link rel="stylesheet" href="styles/project.css">
-  <link rel="stylesheet" href="styles/list.css">
-  <link rel="stylesheet" href="styles/task.css">
-  <link rel="stylesheet" href="styles/settings.css">
-  <link rel="stylesheet" href="./style.css">
-  <link rel="stylesheet" href="styles/member.css">
-  
-</head>
-<body>
-  <div id="app"></div>
-
-  <!-- Including the necessary JS files -->
-  <script type="module" src="main.js"></script>
-  
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Security-Policy" content="
+  default-src 'self';
+  connect-src 'self' 
+    wss://1322956099464462358.discordsays.com/.proxy/ 
+    wss://discord.com/api/ 
+    wss://canary.discord.com/api/ 
+    wss://ptb.discord.com/api/ 
+    https://cdn.discordapp.com/ 
+    https://discordapp.com/ 
+    https://media.discordapp.net/ 
+    data: 
+    blob:;
+">
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="./index.jsx"></script>
+  </body>
 </html>
