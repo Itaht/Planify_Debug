@@ -8,11 +8,6 @@ const root = document.getElementById('root');
 const rootElement = ReactDOM.createRoot(root);  // Use the correct method
 rootElement.render(
   <React.StrictMode>
-    <MemoryRouter>
-      
-      <Routes>
-        <Route path="/" element={<App />} /> 
-      </Routes>
-    </MemoryRouter>
+    <App />
   </React.StrictMode>
 );
