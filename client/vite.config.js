@@ -8,14 +8,8 @@ export default defineConfig({
   plugins: [react()],
   envDir: '../', // Ensure this matches the location of your environment variables file
   server: {
-    allowedHosts: ['lbs-field-barriers-grenada.trycloudflare.com'],
+    allowedHosts: ['boxing-problem-prime-floor.trycloudflare.com'],
     proxy: {
-      '/api': {
-        target: 'http://localhost:3001', // Ensure this matches your backend API URL
-        changeOrigin: true,
-        secure: false, // Disable SSL verification for dev environment
-        ws: true,  // Proxy WebSocket connections
-      },
       '/socket': {
         target: 'wss://discord.com/api/', // Proxy Discord WebSocket API requests
         ws: true, // Ensure WebSocket is properly proxied

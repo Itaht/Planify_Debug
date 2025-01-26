@@ -1,11 +1,7 @@
-// ConfirmationPopup.js (React Component)
 import React from 'react';
-import '/styles/confirmation.css';
-
+import '/styles/confirmation.css'; // Ensure this path is correct for your CSS
 
 const ConfirmationPopup = ({
-  message = "Are you sure?",
-  subMessage = "This action cannot be undone.",
   onConfirm,
   onCancel,
   isVisible,
@@ -13,16 +9,16 @@ const ConfirmationPopup = ({
   if (!isVisible) return null;
 
   return (
-    <div className="confirmation-popup-overlay">
-      <div className="confirmation-popup">
-        <h3>{message}</h3>
-        <p>{subMessage}</p>
+    <div id="confirmation-popup" className="confirmation-popup-overlay">
+      <div id="confirmation-content" className="confirmation-popup">
+        <h3>Discard changes?</h3>
+        <p>If you go back now, you will lose any changes you’ve made.</p>
         <div className="confirmation-buttons">
-          <button className="cancel-button" onClick={onCancel} aria-label="Cancel action">
+          <button id="cancel-discard-button" className="cancel-button" onClick={onCancel} aria-label="Cancel action">
             Cancel
           </button>
-          <button className="confirm-button" onClick={onConfirm} aria-label="Confirm action">
-            Confirm
+          <button id="discard-button" className="confirm-button" onClick={onConfirm} aria-label="Confirm action">
+            Discard
           </button>
         </div>
       </div>

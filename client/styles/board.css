@@ -7,33 +7,9 @@
   height: 5vh; /* Full height of the screen */
   background-color: #1C2025;
   padding: 20px;
-  border-right: 1px solid #474E55; /* Right edge line color */
   z-index: 2;
-  display: none; /* Hidden by default */
-}
-#board-section {
-  position: fixed;
-  top: 23.3vh;
-  left: 0;
-  width: 20%; /* 1/5 of the screen width */
-  height: 5vh; /* Full height of the screen */
-  background-color: #1C2025;
-  padding: 20px;
-  border-right: 1px solid #474E55; /* Right edge line color */
-  z-index: 2;
-  display: none; /* Hidden by default */
 }
 
-.board-section.active {
-  display: block; /* Show only the active board section */
-}
-
-.board-section , #board-list-container , .board-list-container {
-  max-height: 53.5vh; /* Adjust as needed */
-  overflow-y: auto; /* Allow scrolling if content exceeds container height */
-  position: relative; /* Ensure the container's position can be adjusted */
-  top: -1vh; /* Moves the container 1vh higher */
-}
 
 /* Styling for Board Buttons */
 .board-button {
@@ -81,7 +57,7 @@
 }
 
 
-  .board-text {
+.board-text {
     position: relative;
     left: 1.1vw;
     font-size: calc(1.4vw);
@@ -137,14 +113,14 @@
   
   /* Form Labels and Inputs Spacing */
   /* Form Labels and Inputs Spacing */
-form label {
+.popup-label {
   display: block;
   margin-bottom: 15px; /* Space between label and input/textarea */
   font-size: calc(1.1vw);
   }
   
-  form input,
-  form textarea {
+  .popup-input,
+  .popup-textarea {
   width: 85%;
   padding: 10px;
   border: 1px solid #6D7276;
@@ -155,7 +131,7 @@ form label {
   }
   
   /* Fixed height for textarea */
-  form textarea {
+  .popup-textarea {
   height: 110px !important;
   resize: none; /* Prevent textarea resizing */
   margin-bottom: 25px;
@@ -216,15 +192,16 @@ form label {
   }
   
 
-  #popup-content {
+  .popup-content {
+    position: relative;
     background-color: #33363B;
-    padding: 0; /* Remove padding to align header and buttons */
+    padding: 2vh 2vw; /* Remove padding to align header and buttons */
     border-radius: 12px;
     width: 60vw !important;
-    max-height: 70vh; /* Set a maximum height */
+    max-height: 75vh; /* Set a maximum height */
     display: flex;
     flex-direction: column;
-    color: #fff;
+    box-sizing: border-box; /* Ensure padding is accounted for in the width/height calculation */
     font-family: 'Inter', sans-serif;
     overflow: hidden; /* Prevent popup overflow */  
   }
@@ -240,23 +217,27 @@ form label {
   #header-title {
     font-size: calc(1.8vw) !important;
     margin-left: 2.5vw; /* Adjust alignment */
+    margin-top: 2vh;
+    margin-bottom: 2vh;
     letter-spacing: 1px;
     color: white;
     font-weight: normal;
   }
+
+.input-wrapper {
+  margin-left: 5.5vw;
+}
   
   
   /* Close Button Styling */
-  #close-project-popup-button,
-  #close-popup-button,
-  #close-task-popup-button {
+  .close-popup-button {
   position: absolute;
   top: 2.5vh;
   right: 3.5vh;
   background: none;
   border: none;
   color: #949AA0;
-  font-size: 16px;
+  font-size: calc(1.8vw);
   cursor: pointer;
   outline: none;
   }

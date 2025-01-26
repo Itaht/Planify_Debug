@@ -1,7 +1,7 @@
 // Task.js (React Component)
 import React, { useState } from 'react';
-import TaskLabel from './TaskLabel';
-import Member from './Member';
+import TaskLabel from './client/components/TaskLabel';
+import Member from './client/components/Member';
 import '/styles/popup.css';
 import '/styles/task.css';
 

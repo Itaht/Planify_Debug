@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Board from './Board';
 import Calendar from './Calendar';
-import Task from './Task';
+import Task from '../../Task';
 import SettingsPopup from './Settings';
 import ProjectPopup from './ProjectPopup';
 import ConfirmationPopup from './ConfirmationPopup';

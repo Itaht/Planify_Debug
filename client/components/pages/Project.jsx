@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { DiscordSDK } from '@discord/embedded-app-sdk';
 import Interface from '../Interface.jsx';
 import Calendar from '../Calendar.jsx';
-import Task from '../Task.jsx';
+import Task from '../../../Task.jsx';
 import Board from '../Board.jsx';
 import SettingsPopup from '../Settings.jsx';
 import ProjectPopup from '../ProjectPopup.jsx';
@@ -11,6 +11,8 @@ import TaskLabel from '../TaskLabel.jsx';
 import BoardProject from '../BoardProject.jsx';
 import List from '../List.jsx';
 import Member from '../Member.jsx';
+import '/styles/sidebar.css';
+
 
 const Project = () => {
   const [discordSdk, setDiscordSdk] = useState(null);
@@ -47,7 +49,7 @@ const Project = () => {
         console.log('Authorization code received...');
 
         // Exchange authorization code for access token
-        const response = await fetch('/.proxy/api/api/v1/token', {
+        const response = await fetch('/.proxy/api/v1/token', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ code }),
