@@ -24,10 +24,9 @@ const App = () => {
     const setupDiscordSdk = async () => {
       try {
         const discordClientId = import.meta.env.VITE_DISCORD_CLIENT_ID;
-        const discordClientSecret = import.meta.env.VITE_DISCORD_CLIENT_SECRET;
 
-        if (!discordClientId || !discordClientSecret) {
-          throw new Error('Discord Client ID or Client Secret is missing');
+        if (!discordClientId) {
+          throw new Error('Discord Client ID is missing');
         }
 
         console.log('Setting up Discord SDK...');
@@ -50,7 +49,7 @@ const App = () => {
         console.log('Authorization code received...');
 
         // Exchange authorization code for access token
-        const response = await fetch('/api/token', {
+        const response = await fetch('/.proxy/api/token', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ code }),
