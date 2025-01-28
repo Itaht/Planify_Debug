@@ -20,7 +20,7 @@ const SettingsPopup = ({ isVisible, onClose, onEditBoard, onDeleteBoard }) => {
 
   return (
     <div className="settings-popup-overlay" onClick={onClose}>
-      <div className="settings-popup" onClick={(e) => e.stopPropagation()}>
+      <div className="settings-popup" onClick={(e) => e.stoppagation()}>
         <p className="settings-option" onClick={handleEditBoard}>
           Edit Board
         </p>

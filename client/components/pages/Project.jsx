@@ -8,9 +8,10 @@ import SettingsPopup from '../Settings.jsx';
 import ProjectPopup from '../ProjectPopup.jsx';
 import ConfirmationPopup from '../ConfirmationPopup.jsx';
 import TaskLabel from '../TaskLabel.jsx';
-import BoardProject from '../BoardProject.jsx';
+import BoardProject from '../BoardProject2.jsx';
 import List from '../List.jsx';
 import Member from '../Member.jsx';
+import ErrorBoundary from '/ErrorBoundary.jsx';
 import '/styles/sidebar.css';
 
 
@@ -107,11 +108,8 @@ const Project = () => {
   return (
     <div id="app">
       <Interface user={user} />
-      <Calendar />
       <Task />
-      <Board />
       <SettingsPopup />
-      <ProjectPopup />
       <ConfirmationPopup
         isVisible={isConfirmationVisible}
         onConfirm={handleConfirmation}
@@ -122,7 +120,9 @@ const Project = () => {
         onLabelSelect={(label) => console.log('Selected label:', label)}
         onClose={() => setLabelPopupVisible(false)}
       />
-      <BoardProject />
+      <ErrorBoundary>
+        <BoardProject />
+      </ErrorBoundary>
       <List />
       <Member members={[{ id: 1, name: 'Alice' }, { id: 2, name: 'Bob' }]} />
     </div>

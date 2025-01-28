@@ -30,16 +30,14 @@ const Interface = ({ user }) => {
 
       {/* Main Content */}
       <main className="main-content">
-        {/* Board */}
-        <Board />
-
+    
         {/* Conditional Rendering for Popup Components */}
         {showCalendar && <Calendar />}
         {showTaskPopup && <Task />}
         {showSettingsPopup && <SettingsPopup />}
         {showProjectPopup && <ProjectPopup />}
         {showConfirmationPopup && <ConfirmationPopup />}
-        {showLabelPopup && <TaskLabel />}
+        {showLabelPopup && <TaskLabel />} 
 
         {/* Task List and Member Components */}
         <List />

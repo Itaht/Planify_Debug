@@ -1,4 +1,3 @@
-// Board.jsx
 import React, { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import '/styles/board.css'; 
@@ -84,40 +83,54 @@ export function Board() {
       {popupVisible && (
         <div className="popup-overlay" id="popup-overlay" onClick={handleShowConfirmation}>
           <div className="popup-content" id="popup-content" onClick={(e) => e.stopPropagation()}>
-            <button className="close-popup-button" id="close-popup-button" onClick={handleShowConfirmation}>
-              &times;
+            <div className="header-title" id="header-title">Create New Board</div>
+            <button
+              className="close-popup-button"
+              id="close-popup-button"
+              onClick={handleShowConfirmation}
+            >
+              ✖
             </button>
 
-            <div className="header-title" id="header-title">Create New Board</div>
+            {/* Scrollable body */}
+            <div className="popup-body">
+              <div className="input-wrapper">
+                <label htmlFor="board-name" className="popup-label">Board Name</label>
+                <input
+                  className="popup-input"
+                  id="board-name"
+                  type="text"
+                  placeholder="Enter Board Name"
+                  value={newBoard.name}
+                  onChange={(e) => setNewBoard({ ...newBoard, name: e.target.value })}
+                />
+              </div>
 
-            <div className="input-wrapper">
-              <label htmlFor="board-name" className="popup-label">Board Name</label>
-              <input
-                className="popup-input"
-                id="board-name"
-                type="text"
-                placeholder="Enter Board Name"
-                value={newBoard.name}
-                onChange={(e) => setNewBoard({ ...newBoard, name: e.target.value })}
-              />
+              <div className="input-wrapper">
+                <label htmlFor="board-description" className="popup-label">Board Description</label>
+                <textarea
+                  className="popup-textarea"
+                  id="board-description"
+                  placeholder="Enter Board Description (Optional)"
+                  value={newBoard.description}
+                  onChange={(e) => setNewBoard({ ...newBoard, description: e.target.value })}
+                />
+              </div>
             </div>
 
-            <div className="input-wrapper">
-              <label htmlFor="board-description" className="popup-label">Board Description</label>
-              <textarea
-                className="popup-textarea"
-                id="board-description"
-                placeholder="Enter Board Description (Optional)"
-                value={newBoard.description}
-                onChange={(e) => setNewBoard({ ...newBoard, description: e.target.value })}
-              />
-            </div>
-
-            <div className="popup-buttons">
-              <button className="cancel-button" id="cancel-button" onClick={handleShowConfirmation}>
+            <div className="popup-buttons" id="popup-buttons">
+              <button
+                className="cancel-button"
+                id="cancel-button"
+                onClick={handleShowConfirmation}
+              >
                 Cancel
               </button>
-              <button className="create-board-button-form" id="create-board-button-form" onClick={createBoard}>
+              <button
+                className="create-board-button-form"
+                id="create-board-button-form"
+                onClick={createBoard}
+              >
                 Create Board
               </button>
             </div>
@@ -128,24 +141,17 @@ export function Board() {
       {/* Confirmation Popup */}
       {confirmationVisible && (
         <ConfirmationPopup
-          message="Are you sure you want to delete this board?"
-          subMessage="This action cannot be undone."
-          onConfirm={handleDeleteBoard}
-          onCancel={() => setConfirmationVisible(false)} // Close only confirmation popup
           isVisible={confirmationVisible}
+          onConfirm={() => {
+            setConfirmationVisible(false); // Close the confirmation popup
+            resetPopupOverlay(); // Close the board popup and reset inputs
+          }}
+          onCancel={() => setConfirmationVisible(false)} // Just close the confirmation popup
         />
-      )}
-
-      {/* Active Board Details Section */}
-      {activeBoard && (
-        <div className="board-details">
-          <h2 id="board-topic">{activeBoard.name}</h2>
-          <p id="board-topic-description">{activeBoard.description || 'No description available.'}</p>
-          <button onClick={() => setConfirmationVisible(true)}>Delete Board</button>
-        </div>
       )}
     </div>
   );
 }
 
 export default Board;
+  

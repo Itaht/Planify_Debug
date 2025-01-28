@@ -162,7 +162,7 @@
   display: flex;
   justify-content: flex-end;
   position: sticky;
-  bottom: 15px;
+  bottom: 2vh;
   padding-right: 40px;
   z-index: 1;
   }
@@ -198,31 +198,41 @@
     padding: 2vh 2vw; /* Remove padding to align header and buttons */
     border-radius: 12px;
     width: 60vw !important;
-    max-height: 75vh; /* Set a maximum height */
+    max-height: 80vh !important; /* Set a maximum height */
     display: flex;
     flex-direction: column;
     box-sizing: border-box; /* Ensure padding is accounted for in the width/height calculation */
     font-family: 'Inter', sans-serif;
-    overflow: hidden; /* Prevent popup overflow */  
+    overflow: none; /* Prevent popup overflow */  
+    z-index: 999;
   }
   
+  .popup-body {
+    flex: 1;
+    overflow-y: hidden; /* Enable only vertical scrolling if needed */
+    padding: 10px;
+    max-height: 50vh; /* Prevent it from taking too much space */
+  }
+
   .popup-header {
     background-color: #33363B;
     position: sticky;
-    top: 4vh;
+    top: 1vh;
     z-index: 1;
     margin: 1vh 0;
   }
-  
-  #header-title {
-    font-size: calc(1.8vw) !important;
-    margin-left: 2.5vw; /* Adjust alignment */
-    margin-top: 2vh;
-    margin-bottom: 2vh;
-    letter-spacing: 1px;
-    color: white;
-    font-weight: normal;
-  }
+
+/* Ensure header title spacing is applied */
+.header-title {
+  font-size: calc(1.8vw) !important;
+  margin: 1vh 2vw; /* Adjust spacing: Top and bottom = 3vh, Left and right = 2vw */
+  padding: 0vh 0; /* Add some internal space */
+  letter-spacing: 1px;
+  color: white;
+  font-weight: normal;
+  display: block; /* Ensure it behaves as a block element */
+}
+
 
 .input-wrapper {
   margin-left: 5.5vw;
@@ -273,28 +283,6 @@ color: white;
 border: 1.5px solid #2594E3;
 }
 
-/* Popup Body (Scrollable) */
-#popup-body-main {
-  position: relative;
-  flex: 1;
-  top: -3.5vh;
-  padding: 40px;
-  overflow-y: hidden; /* Allow vertical scrolling */
-  overflow-x: hidden; /* Prevent horizontal scrolling */
-}
-
-#popup-body-main::-webkit-scrollbar {
-  width: 8px; /* Optional scrollbar width */
-}
-
-#popup-body-main::-webkit-scrollbar-thumb {
-  background-color: #6D7276; /* Scrollbar thumb color */
-  border-radius: 4px;
-}
-
-#popup-body-main::-webkit-scrollbar-track {
-  background-color: #3A3E42; /* Scrollbar track color */
-}
 
 #board-list-container {
   max-height: 53.5vh; /* Adjust as needed */
@@ -338,3 +326,4 @@ border: 1.5px solid #2594E3;
   text-overflow: ellipsis; /* Show ellipsis for overflow */
   max-width: 40vw; /* Adjust max width as per layout */
 }
+

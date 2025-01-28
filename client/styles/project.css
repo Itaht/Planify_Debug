@@ -16,8 +16,12 @@
   display: flex; /* Show the popup */
 }
 
+.create-project-container {
+  display: flex;
+}
+
 /* Main and Project Popup Content */
-#popup-content {
+#project-popup {
   background-color: #33363B;
   padding: 2vh; /* Padding using vh for responsive spacing */
   border-radius: 1.5vw; /* Border radius using vw */
@@ -31,6 +35,16 @@
   overflow: hidden;
 }
 
+#header-title {
+  font-size: calc(1.8vw) !important;
+  margin-left: 2.5vw; /* Adjust alignment */
+  margin-top: 2vh;
+  margin-bottom: 2vh;
+  letter-spacing: 1px;
+  color: white;
+  font-weight: normal;
+}
+
 #project-section {
   position: fixed;
   top: 23.3vh;
@@ -41,12 +55,11 @@
   padding: 20px;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
   border-right: 1px solid #474E55;
-  display: none;
   z-index: 2;
   }
   
   /* Create Project Button Styling */
-  #create-project-button {
+  .create-project-button {
   position: relative;
   top: -1vh;
   left: 0.2vw;
@@ -75,20 +88,20 @@ form label {
   font-size: 14px;
   }
   
-  form input,
-  form textarea {
-  width: 87%;
+  .popup-input,
+  .popup-textarea {
+  width: 85%;
   padding: 10px;
   border: 1px solid #6D7276;
   border-radius: 12px; /* Rounded corners for input and textarea */
   background-color: #3A3E42;
   color: #fff;
-  font-size: 14px;
+  font-size: calc(1.1vw);
   }
   
   /* Fixed height for textarea */
-  form textarea {
-  height: 110px;
+  .popup-textarea {
+  height: 110px !important;
   resize: none; /* Prevent textarea resizing */
   margin-bottom: 25px;
   }
@@ -123,6 +136,10 @@ form label {
   z-index: 1;
   }
   
+  .input-wrapper {
+    margin-left: 5.5vw;
+  }
+
   #cancel-button ,
   #cancel-project-button ,
   #cancel-task-button {
@@ -182,7 +199,7 @@ form label {
   margin: 0vh auto 0 auto; /* 1vh gap and centered line */
   }
 
-  #project-list-container {
+  .project-list-container {
     margin-top: 1vh;
     max-height: 52.5vh; 
     overflow-y: auto; 
@@ -225,7 +242,7 @@ form label {
   .project-button.active .checkmark {
     visibility: visible; /* Make the checkmark visible */
   }
-  .project-button .project-name {
+  .project-button  {
     flex-grow: 1; /* Ensure the text takes the remaining space */
     width: 2vw;
     overflow: hidden; /* Hide overflow text */

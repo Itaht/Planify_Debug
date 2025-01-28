@@ -10,13 +10,17 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 20%; /* 1/5 of the screen width */
-  height: 100vh; /* Full height of the screen */
+  width: 20%;
+  /* 1/5 of the screen width */
+  height: 100vh;
+  /* Full height of the screen */
   background-color: #1C2025;
   padding: 20px;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-  border-right: 1px solid #474E55; /* Right edge line color */
-  overflow-y: auto; /* Allows scrolling if content overflows */
+  border-right: 1px solid #474E55;
+  /* Right edge line color */
+  overflow-y: auto;
+  /* Allows scrolling if content overflows */
   z-index: 1;
 }
 
@@ -24,33 +28,47 @@
   position: fixed;
   top: 0vh;
   left: 0;
-  width: 20%; /* 1/5 of the screen width */
-  height: 5vh; /* Full height of the screen */
+  width: 20%;
+  /* 1/5 of the screen width */
+  height: 5vh;
+  /* Full height of the screen */
   background-color: #1C2025;
   padding: 20px;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-  border-right: 1px solid #474E55; /* Right edge line color */
-  border-bottom: 1px solid #474E55; /* Right edge line color */
+  border-right: 1px solid #474E55;
+  /* Right edge line color */
+  border-bottom: 1px solid #474E55;
+  /* Right edge line color */
   z-index: 4;
 }
 
-#projectbox {
+#project-container {
   position: fixed;
   top: 11vh;
   left: 0;
-  width: 20%; /* 1/5 of the screen width */
-  height: 6vh; /* Full height of the screen */
+  width: 20%;
+  height: 6vh;
   background-color: #1C2025;
   padding: 3.5vh 20px;
-  border-right: 1px solid #474E55; /* Right edge line color */
-  border-bottom: 1px solid #474E55; /* Right edge line color */
-  z-index: 3;
-  font-size: calc(1.3vw); 
+  border-bottom: 1px solid #474E55;
+  z-index: 2;
+  /* Ensure it's on top */
+  font-size: calc(1.3vw);
+  cursor: pointer;
+  /* Ensures it's clickable */
 }
 
-#projectbox:hover {
-background-color: #25282D;
+.projectbox {
+  z-index: 2;
+  /* Keep it above other elements */
 }
+
+.projectbox:hover {
+  background-color: #25282D;
+}
+
+/* Other styles remain unchanged... */
+
 
 #projectname {
   position: fixed;
@@ -58,24 +76,31 @@ background-color: #25282D;
   color: white;
   left: 5vw;
   z-index: 4;
-  font-size: calc(1.3vw); 
+  font-size: calc(1.3vw);
   letter-spacing: 1px;
-  white-space: nowrap; /* Prevent text wrapping */
-  overflow: hidden; /* Hide overflowing text */
-  text-overflow: ellipsis; /* Add ellipsis for overflowing text */
+  white-space: nowrap;
+  /* Prevent text wrapping */
+  overflow: hidden;
+  /* Hide overflowing text */
+  text-overflow: ellipsis;
+  /* Add ellipsis for overflowing text */
   max-width: 13vw;
 }
+
 #projectdescription {
   position: fixed;
   top: 18.25vh;
   color: #BEBEBE;
   left: 7.5vw;
   z-index: 4;
-  font-size: calc(1vw); 
+  font-size: calc(1vw);
   letter-spacing: 1px;
-  white-space: nowrap; /* Prevent text wrapping */
-  overflow: hidden; /* Hide overflowing text */
-  text-overflow: ellipsis; /* Add ellipsis for overflowing text */
+  white-space: nowrap;
+  /* Prevent text wrapping */
+  overflow: hidden;
+  /* Hide overflowing text */
+  text-overflow: ellipsis;
+  /* Add ellipsis for overflowing text */
   max-width: 11vw;
 }
 
@@ -83,13 +108,17 @@ background-color: #25282D;
   position: fixed;
   top: 87vh;
   left: 0;
-  width: 20%; /* 1/5 of the screen width */
-  height: 5vh; /* Full height of the screen */
+  width: 20%;
+  /* 1/5 of the screen width */
+  height: 5vh;
+  /* Full height of the screen */
   background-color: #1C2025;
   padding: 20px;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-  border-right: 1px solid #474E55; /* Right edge line color */
-  border-top: 1px solid #474E55; /* Right edge line color */
+  border-right: 1px solid hsl(210, 9%, 31%);
+  /* Right edge line color */
+  border-top: 1px solid #474E55;
+  /* Right edge line color */
   z-index: 10;
 }
 
@@ -107,7 +136,8 @@ background-color: #25282D;
   top: 92vh;
   left: 9vw;
   color: white;
-  font-size: calc(1.3vw); /* Dynamically adjusts font size */
+  font-size: calc(1.3vw);
+  /* Dynamically adjusts font size */
 }
 
 /* Triangle symbol base style */
@@ -119,10 +149,14 @@ background-color: #25282D;
   border-top: 1vh solid #B6CADB;
   display: inline-block;
   transform-origin: center;
-  transition: transform 0.2s ease; /* Smooth transition */  
-  position: absolute; /* Use absolute positioning */
-  top: 50%; /* Center vertically */
-  left: 2vw; /* Adjust distance from the left */
+  transition: transform 0.2s ease;
+  /* Smooth transition */
+  position: absolute;
+  /* Use absolute positioning */
+  top: 50%;
+  /* Center vertically */
+  left: 2vw;
+  /* Adjust distance from the left */
 }
 
 /* Triangle facing right */
@@ -142,9 +176,12 @@ background-color: #25282D;
   width: 10px;
   height: 10px;
   position: absolute;
-  top: 35%; /* Center vertically */
-  right: 1vw; /* Align to the right */
-  z-index: 1; /* Ensure it’s above other elements */
+  top: 35%;
+  /* Center vertically */
+  right: 1vw;
+  /* Align to the right */
+  z-index: 1;
+  /* Ensure it’s above other elements */
   display: inline-block;
   transform-origin: center;
 }
@@ -174,16 +211,20 @@ background-color: #25282D;
   display: none;
 }
 
+.hidden {
+  display: none;
+}
+
 /* Options inside the popup */
 .project-settings-option {
   padding: 4px 0px;
   padding-left: 20px;
   font-size: 12px;
-  margin: 4px ;
+  margin: 4px;
   color: white;
   font-size: 14px;
   cursor: pointer;
-  text-align: left; 
+  text-align: left;
   border-radius: 4px;
   letter-spacing: 1px;
 }
@@ -203,4 +244,9 @@ background-color: #25282D;
 
 .project-settings-option.delete:hover {
   background-color: #1B2128;
+}
+
+.section-wrapper {
+  display: block;
+  margin-top: 20px;
 }
