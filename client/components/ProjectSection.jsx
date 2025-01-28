@@ -2,9 +2,8 @@ import React, { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import '/styles/popup.css';
 import '/styles/project.css';
-import ConfirmationPopup from './ConfirmationPopup';
 
-export function ProjectPopup({ setSelectedProject }) {
+export function ProjectSection({ setSelectedProject }) {
   const [projects, setProjects] = useState([]);
   const [popupVisible, setPopupVisible] = useState(false);
   const [confirmationVisible, setConfirmationVisible] = useState(false);
@@ -14,11 +13,6 @@ export function ProjectPopup({ setSelectedProject }) {
   const resetPopupOverlay = () => {
     setPopupVisible(false);
     setNewProject({ name: '', description: '' });
-  };
-
-  const handleConfirmClose = () => {
-    setConfirmationVisible(false);
-    resetPopupOverlay();
   };
 
   const createProject = (event) => {
@@ -41,7 +35,7 @@ export function ProjectPopup({ setSelectedProject }) {
 
   const handleProjectClick = (project) => {
     setActiveProject(project);
-    setSelectedProject(project); // Update the selected project in the parent component
+    setSelectedProject(project); // Update selected project
   };
 
   return (
@@ -57,6 +51,7 @@ export function ProjectPopup({ setSelectedProject }) {
         {projects.map((project) => (
           <button
             key={project.id}
+            id={`project-button-${project.id}`}
             className={`project-button ${activeProject && activeProject.id === project.id ? 'active' : ''}`}
             onClick={() => handleProjectClick(project)}
           >
@@ -67,8 +62,6 @@ export function ProjectPopup({ setSelectedProject }) {
             {project.name}
           </button>
         ))}
-
-        {/* Dynamic line positioned at the bottom */}
         <div className="dynamic-line1" id="dynamic-line1"></div>
       </div>
 
@@ -138,17 +131,8 @@ export function ProjectPopup({ setSelectedProject }) {
           </div>
         </div>
       )}
-
-      {/* Confirmation Popup */}
-      {confirmationVisible && (
-        <ConfirmationPopup
-          isVisible={confirmationVisible}
-          onConfirm={handleConfirmClose}
-          onCancel={() => setConfirmationVisible(false)}
-        />
-      )}
     </div>
   );
 }
 
-export default ProjectPopup;
+export default ProjectSection;

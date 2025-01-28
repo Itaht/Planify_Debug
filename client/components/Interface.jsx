@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import Board from './Board';
+import BoardSection from './BoardSection';
 import Calendar from './Calendar';
 import Task from '../../Task';
 import SettingsPopup from './Settings';
-import ProjectPopup from './ProjectPopup';
+import ProjectSection from './ProjectSection';
 import ConfirmationPopup from './ConfirmationPopup';
 import TaskLabel from './TaskLabel';
 import List from './List';
@@ -14,7 +14,7 @@ const Interface = ({ user }) => {
   const [showCalendar, setShowCalendar] = useState(false);
   const [showTaskPopup, setShowTaskPopup] = useState(false);
   const [showSettingsPopup, setShowSettingsPopup] = useState(false);
-  const [showProjectPopup, setShowProjectPopup] = useState(false);
+  const [showProjectSection, setShowProjectSection] = useState(false);
   const [showConfirmationPopup, setShowConfirmationPopup] = useState(false);
   const [showLabelPopup, setShowLabelPopup] = useState(false);
 
@@ -30,14 +30,14 @@ const Interface = ({ user }) => {
 
       {/* Main Content */}
       <main className="main-content">
-    
+
         {/* Conditional Rendering for Popup Components */}
         {showCalendar && <Calendar />}
         {showTaskPopup && <Task />}
         {showSettingsPopup && <SettingsPopup />}
-        {showProjectPopup && <ProjectPopup />}
+        {showProjectSection && <ProjectSection />}
         {showConfirmationPopup && <ConfirmationPopup />}
-        {showLabelPopup && <TaskLabel />} 
+        {showLabelPopup && <TaskLabel />}
 
         {/* Task List and Member Components */}
         <List />

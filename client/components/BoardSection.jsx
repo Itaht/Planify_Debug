@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import '/styles/board.css'; 
 import ConfirmationPopup from './ConfirmationPopup'; 
 
-export function Board() {
+export function BoardSection() {
   // State management
   const [boards, setBoards] = useState([]); // State to store boards
   const [popupVisible, setPopupVisible] = useState(false); // State to control popup visibility
@@ -153,5 +153,5 @@ export function Board() {
   );
 }
 
-export default Board;
+export default BoardSection;
   
