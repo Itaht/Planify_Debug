@@ -16,7 +16,6 @@
   /* Full height of the screen */
   background-color: #1C2025;
   padding: 20px;
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
   border-right: 1px solid #474E55;
   /* Right edge line color */
   overflow-y: auto;
@@ -30,16 +29,14 @@
   left: 0;
   width: 20%;
   /* 1/5 of the screen width */
-  height: 5vh;
+  height: 3.5vh;
   /* Full height of the screen */
   background-color: #1C2025;
   padding: 20px;
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-  border-right: 1px solid #474E55;
   /* Right edge line color */
   border-bottom: 1px solid #474E55;
   /* Right edge line color */
-  z-index: 4;
+  z-index: 3;
 }
 
 #project-container {
@@ -50,8 +47,8 @@
   height: 6vh;
   background-color: #1C2025;
   padding: 3.5vh 20px;
-  border-bottom: 1px solid #474E55;
-  z-index: 2;
+  border-bottom: 1px solid #474E55; 
+  z-index: 1;
   /* Ensure it's on top */
   font-size: calc(1.3vw);
   cursor: pointer;
@@ -59,23 +56,19 @@
 }
 
 .projectbox {
-  z-index: 2;
+  z-index: 1;
   /* Keep it above other elements */
-}
-
-.projectbox:hover {
-  background-color: #25282D;
 }
 
 /* Other styles remain unchanged... */
 
 
-#projectname {
+#project-box-name {
   position: fixed;
   top: 13.75vh;
   color: white;
   left: 5vw;
-  z-index: 4;
+  z-index: 1;
   font-size: calc(1.3vw);
   letter-spacing: 1px;
   white-space: nowrap;
@@ -87,12 +80,12 @@
   max-width: 13vw;
 }
 
-#projectdescription {
+#project-box-description {
   position: fixed;
   top: 18.25vh;
   color: #BEBEBE;
   left: 7.5vw;
-  z-index: 4;
+  z-index: 1;
   font-size: calc(1vw);
   letter-spacing: 1px;
   white-space: nowrap;
@@ -115,11 +108,10 @@
   background-color: #1C2025;
   padding: 20px;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-  border-right: 1px solid hsl(210, 9%, 31%);
   /* Right edge line color */
   border-top: 1px solid #474E55;
   /* Right edge line color */
-  z-index: 10;
+  z-index: 1;;
 }
 
 #userbox img {
@@ -200,7 +192,7 @@
   border: 1px solid transparent;
   border-radius: 8px;
   padding: 4px;
-  z-index: 2000;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   gap: 2px;

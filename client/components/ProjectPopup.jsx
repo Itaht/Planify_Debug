@@ -4,21 +4,23 @@ import '/styles/popup.css';
 import '/styles/project.css';
 import ConfirmationPopup from './ConfirmationPopup';
 
-export function ProjectPopup() {
-  // State management
-  const [projects, setProjects] = useState([]); // State to store projects
-  const [popupVisible, setPopupVisible] = useState(false); // State to control popup visibility
-  const [confirmationVisible, setConfirmationVisible] = useState(false); // State for confirmation popup
-  const [newProject, setNewProject] = useState({ name: '', description: '' }); // State for new project input
-  const [activeProject, setActiveProject] = useState(null); // State to store the currently selected active project
+export function ProjectPopup({ setSelectedProject }) {
+  const [projects, setProjects] = useState([]);
+  const [popupVisible, setPopupVisible] = useState(false);
+  const [confirmationVisible, setConfirmationVisible] = useState(false);
+  const [newProject, setNewProject] = useState({ name: '', description: '' });
+  const [activeProject, setActiveProject] = useState(null);
 
-  // Function to reset and hide the popup overlay
   const resetPopupOverlay = () => {
     setPopupVisible(false);
-    setNewProject({ name: '', description: '' }); // Reset the input fields
+    setNewProject({ name: '', description: '' });
   };
 
-  // Function to create a new project
+  const handleConfirmClose = () => {
+    setConfirmationVisible(false);
+    resetPopupOverlay();
+  };
+
   const createProject = (event) => {
     event.preventDefault();
     const projectName = newProject.name.trim();
@@ -30,12 +32,16 @@ export function ProjectPopup() {
         name: projectName,
         description: projectDescription,
       };
-
       setProjects((prevProjects) => [...prevProjects, newProjectData]);
-      resetPopupOverlay(); // Close the popup and reset inputs
+      resetPopupOverlay();
     } else {
       alert('Please enter a project name.');
     }
+  };
+
+  const handleProjectClick = (project) => {
+    setActiveProject(project);
+    setSelectedProject(project); // Update the selected project in the parent component
   };
 
   return (
@@ -44,6 +50,7 @@ export function ProjectPopup() {
         <button id="create-project-button" className="create-project-button" onClick={() => setPopupVisible(true)}>
           + Create New Project
         </button>
+        <div className="dynamic-line" id="dynamic-line"></div>
       </div>
 
       <div id="project-list-container">
@@ -51,23 +58,41 @@ export function ProjectPopup() {
           <button
             key={project.id}
             className={`project-button ${activeProject && activeProject.id === project.id ? 'active' : ''}`}
-            onClick={() => setActiveProject(project)}
+            onClick={() => handleProjectClick(project)}
           >
+            {/* Checkmark/Icon */}
+            <span className="checkmark">
+              {activeProject && activeProject.id === project.id && '✔'}
+            </span>
             {project.name}
           </button>
         ))}
+
+        {/* Dynamic line positioned at the bottom */}
+        <div className="dynamic-line1" id="dynamic-line1"></div>
       </div>
 
-      {/* Project Popup Overlay */}
+      {/* Project Popup */}
       {popupVisible && (
-        <div className="project-popup-overlay" id="project-popup-overlay">
-          <div className="project-popup" id="project-popup">
-            <div className="popup-header" id="popup-header">
-              <div className="header-title" id="header-title">Create New Project</div>
-              <button className="close-popup-button" onClick={() => setPopupVisible(false)} aria-label="Close project creation popup">
-                ✖
-              </button>
-            </div>
+        <div
+          className="project-popup-overlay"
+          id="project-popup-overlay"
+          onClick={() => setConfirmationVisible(true)}
+        >
+          <div
+            className="project-popup"
+            id="project-popup"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="header-title" id="header-title">Create New Project</div>
+            <button
+              className="close-popup-button"
+              onClick={() => setConfirmationVisible(true)}
+              aria-label="Close project creation popup"
+            >
+              ✖
+            </button>
+
             <div className="input-wrapper">
               <label htmlFor="project-name" className="popup-label">Project Name</label>
               <input
@@ -91,10 +116,21 @@ export function ProjectPopup() {
                 onChange={(e) => setNewProject({ ...newProject, description: e.target.value })}
               />
               <div className="popup-buttons">
-                <button type="button" className="cancel-button" id="cancel-button" onClick={() => setPopupVisible(false)} aria-label="Cancel project creation">
+                <button
+                  type="button"
+                  className="cancel-button"
+                  id="cancel-button"
+                  onClick={() => setConfirmationVisible(true)}
+                  aria-label="Cancel project creation"
+                >
                   Cancel
                 </button>
-                <button type="submit" className="create-project-button-form" id="create-project-button-form" onClick={createProject}>
+                <button
+                  type="submit"
+                  className="create-project-button-form"
+                  id="create-project-button-form"
+                  onClick={createProject}
+                >
                   Create Project
                 </button>
               </div>
@@ -106,21 +142,10 @@ export function ProjectPopup() {
       {/* Confirmation Popup */}
       {confirmationVisible && (
         <ConfirmationPopup
-          message="Are you sure you want to delete this project?"
-          subMessage="This action cannot be undone."
-          onConfirm={() => setConfirmationVisible(false)}
-          onCancel={() => setConfirmationVisible(false)}
           isVisible={confirmationVisible}
+          onConfirm={handleConfirmClose}
+          onCancel={() => setConfirmationVisible(false)}
         />
-      )}
-
-      {/* Active Project Details Section */}
-      {activeProject && (
-        <div className="project-details">
-          <h2 id="project-topic">{activeProject.name}</h2>
-          <p id="project-topic-description">{activeProject.description || 'No description available.'}</p>
-          <button onClick={() => setConfirmationVisible(true)}>Delete Project</button>
-        </div>
       )}
     </div>
   );

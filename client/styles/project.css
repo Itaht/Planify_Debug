@@ -9,7 +9,7 @@
   display: none;
   align-items: center;
   justify-content: center;
-  z-index: 1001;
+  z-index: 1000;
 }
 
 #project-popup-overlay:not(.hidden) {
@@ -21,18 +21,19 @@
 }
 
 /* Main and Project Popup Content */
-#project-popup {
+.project-popup {
+  position: relative;
   background-color: #33363B;
-  padding: 2vh; /* Padding using vh for responsive spacing */
-  border-radius: 1.5vw; /* Border radius using vw */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  width: 50vw; /* Width using vw for responsive sizing */
-  max-height: 75vh; /* Max height in vh for responsiveness */
+  padding: 2vh 2vw; /* Remove padding to align header and buttons */
+  border-radius: 12px;
+  width: 60vw !important;
+  max-height: 80vh !important; /* Set a maximum height */
   display: flex;
   flex-direction: column;
-  color: #fff;
+  box-sizing: border-box; /* Ensure padding is accounted for in the width/height calculation */
   font-family: 'Inter', sans-serif;
-  overflow: hidden;
+  overflow: none; /* Prevent popup overflow */  
+  z-index: 1001;
 }
 
 #header-title {
@@ -47,21 +48,20 @@
 
 #project-section {
   position: fixed;
-  top: 23.3vh;
+  top: 24.5vh;
   left: 0;
   width: 20%;
   height: 5vh;
   background-color: #1C2025;
   padding: 20px;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-  border-right: 1px solid #474E55;
   z-index: 2;
   }
   
   /* Create Project Button Styling */
   .create-project-button {
   position: relative;
-  top: -1vh;
+  top: -1.5vh;
   left: 0.2vw;
   background-color: transparent;
   color: white;
@@ -76,7 +76,7 @@
   margin-bottom: 1vh;
   }
 
-  #create-project-button:hover {
+  .create-project-button:hover {
     background-color: #2594E3;
     color: white;
   }
@@ -205,7 +205,7 @@ form label {
     overflow-y: auto; 
     position: relative;
   }
-  .project-button {
+  #project-list-container .project-button {
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -221,11 +221,15 @@ form label {
     width: 100%;
     margin-bottom: 1.5vh;
     margin-top: 1.5vh;
-    overflow: hidden; /* Hide overflow text */
-    white-space: nowrap; /* Prevent text wrapping */
-    text-overflow: ellipsis; /* Show ellipsis for overflow */
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
-  .project-button:hover {
+  
+  #project-list-container .project-button:hover {
+    background-color: #2594E3;
+  }
+      .project-button:hover {
     background-color: #2594E3;
   }
   .project-button .checkmark {
@@ -261,9 +265,16 @@ form label {
     background-color: #25282D; /* Scrollbar track color */
   }
   .dynamic-line {
-    width: 100%;
+    width: 86%;
     height: 1px;  
     background-color: #474E55;
     margin: 0vh auto 0 auto; /* 1vh gap and centered line */
     position: absolute; /* Allow dynamic positioning */
   }
+.dynamic-line1 {
+  width: 100%;
+  height: 1px;  
+  margin-left: -20px;
+  background-color: #474E55;
+  position: absolute; /* Allow dynamic positioning */
+}

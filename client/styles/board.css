@@ -1,13 +1,13 @@
 /* Board Section Styling */
 .board-section {
   position: fixed;
-  top: 23.3vh;
+  top: 24.5vh;
   left: 0;
   width: 20%; /* 1/5 of the screen width */
   height: 5vh; /* Full height of the screen */
   background-color: #1C2025;
-  padding: 20px;
-  z-index: 2;
+  padding: 16px;
+  z-index: 1;
 }
 
 
@@ -41,18 +41,25 @@
   color: #3C90E2;
 }
 
+.board-list-container {
+  max-height: 52vh; /* Adjust as needed */
+  overflow-y: auto; /* Allow scrolling if content exceeds container height */
+  position: relative; /* Ensure the container's position can be adjusted */
+  top: -1vh; /* Moves the container 1vh higher */
+}
+
 /* Scrollbar for Board List Container */
-.board-section .board-list-container::-webkit-scrollbar {
+.board-list-container::-webkit-scrollbar {
   width: 6px; /* Optional scrollbar width */
   border-radius: 4px;
 }
 
-.board-section .board-list-container::-webkit-scrollbar-thumb {
+.board-list-container::-webkit-scrollbar-thumb {
   background-color: #33363B; /* Scrollbar thumb color */
   border-radius: 4px;
 }
 
-.board-section .board-list-container::-webkit-scrollbar-track {
+.board-list-container::-webkit-scrollbar-track {
   background-color: #25282D; /* Scrollbar track color */
 }
 
@@ -103,7 +110,7 @@
     display: none;
     align-items: center;
     justify-content: center;
-    z-index: 999;
+    z-index: 1000;
     }
     
     #popup-overlay:not(.hidden) {
@@ -204,7 +211,7 @@
     box-sizing: border-box; /* Ensure padding is accounted for in the width/height calculation */
     font-family: 'Inter', sans-serif;
     overflow: none; /* Prevent popup overflow */  
-    z-index: 999;
+    z-index: 1001;
   }
   
   .popup-body {
@@ -281,14 +288,6 @@ margin-left: 1vw;
 background-color: #2594E3;
 color: white;
 border: 1.5px solid #2594E3;
-}
-
-
-#board-list-container {
-  max-height: 53.5vh; /* Adjust as needed */
-  overflow-y: auto; /* Allow scrolling if content exceeds container height */
-  position: relative; /* Ensure the container's position can be adjusted */
-  top: -1vh; /* Moves the container 1vh higher */
 }
 
 #board-page {

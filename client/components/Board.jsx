@@ -67,7 +67,7 @@ export function Board() {
         </button>
       </div>
 
-      <div id="board-list-container">
+      <div id="board-list-container" className='board-list-container'>
         {boards.map((board) => (
           <button
             key={board.id}

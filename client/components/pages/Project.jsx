@@ -8,7 +8,7 @@ import SettingsPopup from '../Settings.jsx';
 import ProjectPopup from '../ProjectPopup.jsx';
 import ConfirmationPopup from '../ConfirmationPopup.jsx';
 import TaskLabel from '../TaskLabel.jsx';
-import BoardProject from '../BoardProject2.jsx';
+import BoardProject from '../BoardProject.jsx';
 import List from '../List.jsx';
 import Member from '../Member.jsx';
 import ErrorBoundary from '/ErrorBoundary.jsx';

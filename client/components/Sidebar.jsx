@@ -18,6 +18,9 @@ const Sidebar = ({ user }) => {
           />
           <span id="username">{user.username}</span>
         </div>
+        <div className='logo' id='logo'>
+          <img alt='Planify'></img>
+        </div>  
       </div>
 
       {/* Optional: Footer or additional content */}
