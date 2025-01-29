@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import '/styles/popup.css';
 import '/styles/project.css';
+import ConfirmationPopup from './ConfirmationPopup';
 
 export function ProjectSection({ setSelectedProject }) {
   const [projects, setProjects] = useState([]);
@@ -130,6 +131,17 @@ export function ProjectSection({ setSelectedProject }) {
             </div>
           </div>
         </div>
+      )}
+      {/* Confirmation Popup (Fix) */}
+      {confirmationVisible && (
+        <ConfirmationPopup
+          isVisible={confirmationVisible}
+          onConfirm={() => {
+            setConfirmationVisible(false);
+            resetPopupOverlay();
+          }}
+          onCancel={() => setConfirmationVisible(false)}
+        />
       )}
     </div>
   );

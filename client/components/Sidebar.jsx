@@ -22,8 +22,6 @@ const Sidebar = ({ user }) => {
           <img alt='Planify'></img>
         </div>  
       </div>
-
-      {/* Optional: Footer or additional content */}
     </div>
   );
 };
