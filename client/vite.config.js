@@ -8,7 +8,7 @@ export default defineConfig({
   plugins: [react()],
   envDir: '../', // Ensure this matches the location of your environment variables file
   server: {
-    allowedHosts: ["ira-fell-less-nil.trycloudflare.com"],
+    allowedHosts: ["citizen-lesser-promptly-cds.trycloudflare.com"],
     proxy: {
       '/socket': {
         target: 'wss://discord.com/api/', // Proxy Discord WebSocket API requests

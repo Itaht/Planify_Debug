@@ -244,3 +244,13 @@
   display: block;
   margin-top: 20px;
 }
+
+.please-create-project {
+  position: relative;
+  top: 22vh;
+  left: 4vw;
+  font-size: calc(1.4vw);
+  color: white;
+  letter-spacing: 1px;
+  z-index: 8;
+  }

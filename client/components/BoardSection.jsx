@@ -3,13 +3,10 @@ import { v4 as uuidv4 } from 'uuid';
 import '/styles/board.css'; 
 import ConfirmationPopup from './ConfirmationPopup'; 
 
-export function BoardSection() {
-  // State management
-  const [boards, setBoards] = useState([]); // State to store boards
-  const [popupVisible, setPopupVisible] = useState(false); // State to control popup visibility
-  const [confirmationVisible, setConfirmationVisible] = useState(false); // State for confirmation popup
-  const [newBoard, setNewBoard] = useState({ name: '', description: '' }); // State for new board input
-  const [activeBoard, setActiveBoard] = useState(null); // State to store the currently selected active board
+export function BoardSection({ projectId, boards, setBoards, activeBoard, setActiveBoard }) {
+  const [popupVisible, setPopupVisible] = useState(false);
+  const [confirmationVisible, setConfirmationVisible] = useState(false);
+  const [newBoard, setNewBoard] = useState({ name: '', description: '' });
 
   // Function to reset and hide the popup overlay
   const resetPopupOverlay = () => {
@@ -17,21 +14,20 @@ export function BoardSection() {
     setNewBoard({ name: '', description: '' }); // Reset the input fields
   };
 
-  // Function to create a new board
   const createBoard = (event) => {
-    event.preventDefault(); 
-    const boardName = newBoard.name.trim();
-    const boardDescription = newBoard.description.trim();
-
-    if (boardName) {
+    event.preventDefault();
+    if (newBoard.name.trim()) {
       const newBoardData = {
         id: uuidv4(),
-        name: boardName,
-        description: boardDescription,
+        name: newBoard.name,
+        description: newBoard.description,
       };
 
-      setBoards((prevBoards) => [...prevBoards, newBoardData]);
-      resetPopupOverlay(); // Close the popup and reset inputs
+      setBoards((prevBoards) => ({
+        ...prevBoards,
+        [projectId]: [...(prevBoards[projectId] || []), newBoardData],
+      }));
+      resetPopupOverlay();
     } else {
       alert('Please enter a board name.');
     }
@@ -42,23 +38,13 @@ export function BoardSection() {
     setActiveBoard(board);
   };
 
-  // Function to handle deletion of the active board
-  const handleDeleteBoard = () => {
-    if (activeBoard) {
-      setBoards((prevBoards) => prevBoards.filter((board) => board.id !== activeBoard.id));
-      setActiveBoard(null);
-    }
-    setConfirmationVisible(false); // Close the confirmation popup
-    resetPopupOverlay(); // Close the board popup and reset the input fields
-  };
-
   // Function to show the confirmation popup
   const handleShowConfirmation = () => {
     setConfirmationVisible(true);
   };
 
   return (
-    <div className="board-section" id="board-section">
+    <div className="board-section" id={`board-section-${projectId}`}>
       <span className="board-text" id="board-text">Boards</span>
 
       <div id="create-board-container">
@@ -153,5 +139,5 @@ export function BoardSection() {
   );
 }
 
-export default BoardSection;
+export default BoardSection;  
   
