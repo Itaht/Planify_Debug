@@ -38,6 +38,23 @@ const BoardProject = () => {
     }
   };
 
+  const deleteProject = () => {
+    if (!activeProject) return; // No project selected
+
+    const updatedProjects = projects.filter((project) => project.id !== activeProject.id);
+    setProjects(updatedProjects); // Update the project list
+
+    // Remove boards associated with this project
+    const updatedBoards = { ...boards };
+    delete updatedBoards[activeProject.id];
+    setBoards(updatedBoards);
+
+    // Reset active project and active board
+    setActiveProject(null);
+    setActiveBoard(null);
+    setSettingsVisible(false); // Close the settings popup
+  };
+
   return (
     <div id="main-container">
       {/* Project Box */}
@@ -76,7 +93,7 @@ const BoardProject = () => {
               <div className="project-settings-option" onClick={() => alert("Edit Project Clicked")}>
                 Edit Project
               </div>
-              <div className="project-settings-option delete" onClick={() => alert("Delete Project Clicked")}>
+              <div className="project-settings-option delete" onClick={deleteProject}>
                 Delete Project
               </div>
             </div>
