@@ -18,15 +18,18 @@
 
 /* Popup Content */
 #popup-content, #task-popup-content, #project-popup-content {
+  position: relative;
   background-color: #33363B;
-  padding: 2vh; /* Vertical padding using vh */
-  border-radius: 1.5vw; /* Border radius in vw */
-  width: 50vw; /* Responsive width based on viewport width */
-  max-height: 75vh; /* Max height using vh */
-  color: white;
+  padding: 2vh 2vw; /* Remove padding to align header and buttons */
+  border-radius: 12px;
+  width: 60vw !important;
+  max-height: 80vh !important; /* Set a maximum height */
   display: flex;
-  flex-direction: column; /* Ensures header and content are stacked vertically */
-  overflow-y: auto; /* Make sure it doesn't overflow */
+  flex-direction: column;
+  box-sizing: border-box; /* Ensure padding is accounted for in the width/height calculation */
+  font-family: 'Inter', sans-serif;
+  overflow: none; /* Prevent popup overflow */  
+  z-index: 999;
 }
 
 /* Popup Header */
